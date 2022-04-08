@@ -1,0 +1,91 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link href="/web/css/own_profile_detail.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper">
+		<div id="content" class="l-page">
+		{% include 'profile.head-profile.twig' %}
+			<div class="l-main-left" style="width:100%;">
+				<div class="show-avg-ratings">
+					<table style="width:100%;background-color:#FFFFFF;">
+						<tr>
+							<th>Age</th>
+							<th>1 Stars</th>
+							<th>2 Stars</th>
+							<th>3 Stars</th>
+							<th>4 Stars</th>
+							<th>5 Stars</th>
+							<th>Rating</th>
+						</tr>
+						<tr>
+							<td>Newer than 1 month</td>
+							<td>{{month1count.rate1 == null ? 0 : month1count.rate1}}</td>
+							<td>{{month1count.rate2 == null ? 0 : month1count.rate2}}</td>
+							<td>{{month1count.rate3 == null ? 0 : month1count.rate3}}</td>
+							<td>{{month1count.rate4 == null ? 0 : month1count.rate4}}</td>
+							<td>{{month1count.rate5 == null ? 0 : month1count.rate5}}</td>
+							<td>({{month1 == 0 ? '5.00' :(month1|number_format(2)) }}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+								</span>)</td>
+						</tr>
+						<tr>
+							<td>Newer than 3 month</td>
+							<td>{{month2count.rate1 == null ? 0 : month2count.rate1}}</td>
+							<td>{{month2count.rate2 == null ? 0 : month2count.rate2}}</td>
+							<td>{{month2count.rate3 == null ? 0 : month2count.rate3}}</td>
+							<td>{{month2count.rate4 == null ? 0 : month2count.rate4}}</td>
+							<td>{{month2count.rate5 == null ? 0 : month2count.rate5}}</td>
+							<td>({{month3 == 0 ? '5.00' : (month3|number_format(2))}}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+								</span>)</td>
+						</tr>
+						<tr>
+							<td>Older</td>
+							<td>{{month3count.rate1 == null ? 0 : month3count.rate1}}</td>
+							<td>{{month3count.rate2 == null ? 0 : month3count.rate2}}</td>
+							<td>{{month3count.rate3 == null ? 0 : month3count.rate3}}</td>
+							<td>{{month3count.rate4 == null ? 0 : month3count.rate4}}</td>
+							<td>{{month3count.rate5 == null ? 0 : month3count.rate5}}</td>
+							<td>({{month3older == 0 ?'5.00' : (month3older|number_format(2))}}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+								</span>)</td>
+						</tr>
+					</table>
+				</div>
+				<div class="mp-Alert mp-Alert--error">
+					<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+					<div>
+						<ul>
+							<li>
+								<b>Do not</b>
+								open links from ratings, they will contain
+								<b>phishing links</b>. Phishing links are leading to fake websites which are stealing your login data.</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="mp-Card mp-Card--rounded">
+					{% for comment in comments %}
+						<article class="user-review mp-Card-block">
+							<header class="user-review-header">
+								{{comment.created_at.diffForHumans(null, true)}}
+								<span class="mp-StarRating mp-StarRating--5 ">
+									{{ include('components.star_rating', {rating: comment.rating}) }}
+								</span>
+								{{comment.comment | escape('html')}}
+								<span style="float:right;" class="mp-text-meta">{{filter_username(comment.commenter.username)}}
+									~{{ToUserCurrency((comment.order.amount * comment.order.price),order.listing.currency)|number_format(2)}} {{ GetCurrency() }}</span>
+							</header>
+						</article>
+					{% endfor %}
+				</div>
+				<br>
+				{{ comments.links | raw}}
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
+

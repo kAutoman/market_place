@@ -1,0 +1,114 @@
+{% extends "account.master" %}
+
+{% block css %}
+<style>
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+hr, .dropdown-menu, .nav-tabs, .btn-default, .thumbnail {
+    border-color: #e8e9ee;
+}
+
+.thumbnail>img, .thumbnail a>img {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.form-field {
+		margin-bottom: 20px;
+	}
+
+
+
+
+</style>
+{% endblock %}
+
+{% block user_area %}
+	<div id="content">
+		<div style="margin-bottom: 50%;" class="mp-Card mp-Card--rounded">
+       			{% include 'account.head_normal_bar.twig' %}
+
+			<div class="mp-Card-block">
+				<form method="POST" action="{{ route('account.update.profile') }}"  enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<div class="edit-profile-block clear-fix">
+						{% if app.session.get('message') %}
+							<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+								<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+								<div>
+									{{ app.session.get('message') }}
+								</div>
+							</div>
+						{% endif %}
+
+						{% if app.session.get('error') %}
+						<div class="mp-Alert mp-Alert--error">
+							<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+							<div>
+								{{ app.session.get('error') }}
+							</div>
+						</div>
+						{% endif %}
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Profile Image</b>
+							</h3>
+							<span class="help-block">This image which will be displayed on your profile avatar. Be noted this is the smaller version</span>
+							<img style="width: 150px; height: 150px;" class="thumbnail" src="{{auth_user().avatar}}">
+							<input name="avatar_img" id="avatar_img" type="file">
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Profile Background Image</b>
+							</h3>
+							<span class="help-block">This image which will be displayed on your profile background. Be noted this is the smaller version</span>
+							<img  style="width: 60%;" class="thumbnail" src="{{auth_user().avatar_background}}">
+							<input name="avatar_background_img" id="avatar_background_img" type="file">
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Profile text</b>
+							</h3>
+							<span class="help-block">The profile text which will be displayed on your profile page.</span>
+							<textarea style="height:350px;" class="mp-Textarea {{ errors.has('bio') ? ' invalid' : '' }}" id="bio" name="bio">{{auth_user().bio}}</textarea>
+						<b>Allowed BBcode : </b> [b]hoi[/b] [i]hoi[/i][u]hoi[/u][li]hoi[/li][h1]h1ss[/h1][color=blue]hoi[/color][color=red]hoi[/color][color=white]hoi[/color]
+						</div>
+
+						<div class="form-field">
+							<button type="submit" id="confirm-profile" class="primary medium mp-Button mp-Button--primary">
+								<span>Save</span>
+							</button>
+							<a id="cancel-profile" href="/account/edit_profile" class="secondary medium mp-Button mp-Button--secondary">
+								<span>Cancel</span>
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

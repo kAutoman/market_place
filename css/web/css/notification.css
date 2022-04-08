@@ -1,0 +1,222 @@
+#page-wrapper {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
+}
+.l-footer, .l-footer-tabs, .l-page, .l-top-bar {
+    max-width: 1000px;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+.l-page {
+    padding: 20px 10px 40px;
+    flex: 1 1 auto;
+    width: 100%;
+}
+.page-header {
+    font-family: Arial;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    margin: 12px 0 32px;
+    position: relative;
+    font-style: normal;
+    font-weight: 300;
+}
+.notification-item {
+    display: block;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity .4s cubic-bezier(.55,0,.1,1);
+}
+.notification-item, .notification-item .notification-content {
+    position: relative;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.swipe-action {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 6px;
+    left: 1px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    background-color: red;
+    border-radius: 3px;
+}
+.swipe-action .swipe-label {
+    align-self: center;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+
+.empty-state-content {
+text-align:center;
+}
+
+.empty-state-content .mp-Icon.sdk-custom {
+width: 60px;
+height: 60px;
+margin-bottom: 12px;
+}
+
+.mp-svg-notification-grey {
+background: url(../images/icons.png) no-repeat;
+background-size: auto 100%;
+background-position: 54.292113% 0;
+}
+
+
+.notification-item .notification-content {
+    z-index: 1;
+    transition: transform .1s;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.mp-Listing-compact.sdk-custom {
+    display: block;
+    margin-bottom: 5px;
+    overflow: hidden;
+    padding: 8px;
+    text-decoration: none;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.14);
+    color: #2d3c4d;
+    padding-right: 26px;
+}
+.mp-Listing-compact.sdk-custom:hover {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.28);
+}
+.mp-Listing-compact-body, .mp-NotificationListItem-body {
+    display: flex;
+}
+.mp-Listing-compact-body .mp-Listing-compact-picture, .mp-Listing-compact-body .mp-NotificationListItem-picture, .mp-NotificationListItem-body .mp-Listing-compact-picture, .mp-NotificationListItem-body .mp-NotificationListItem-picture {
+    background-color: #f7f7f6;
+    background-size: cover;
+    border-radius: 3px;
+    font-size: 0;
+    height: 60px;
+    line-height: 60px;
+    margin: 0 16px 0 0;
+    text-align: center;
+    width: 60px;
+}
+.mp-Listing-compact.sdk-custom .mp-Listing-compact-picture {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    margin-right: 8px;
+}
+.mp-Listing-compact-body .mp-Listing-compact-content, .mp-Listing-compact-body .mp-NotificationListItem-content, .mp-NotificationListItem-body .mp-Listing-compact-content, .mp-NotificationListItem-body .mp-NotificationListItem-content {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    flex: 1 0 0;
+}
+.mp-Listing-compact-body .mp-Listing-compact-content .mp-Listing-compact-title, .mp-Listing-compact-body .mp-Listing-compact-content .mp-NotificationListItem-title, .mp-Listing-compact-body .mp-NotificationListItem-content .mp-Listing-compact-title, .mp-Listing-compact-body .mp-NotificationListItem-content .mp-NotificationListItem-title, .mp-NotificationListItem-body .mp-Listing-compact-content .mp-Listing-compact-title, .mp-NotificationListItem-body .mp-Listing-compact-content .mp-NotificationListItem-title, .mp-NotificationListItem-body .mp-NotificationListItem-content .mp-Listing-compact-title, .mp-NotificationListItem-body .mp-NotificationListItem-content .mp-NotificationListItem-title {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    font-size: 16px;
+    line-height: 22px;
+    margin: 0;
+    width: 100%;
+}
+.notification-message {
+    font-size: 12px;
+    line-height: 16px;
+    min-height: 48px;
+    margin-right: 20px;
+}
+.notification-item .meta-data {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    color: #818a95;
+    color: var(--mp-color-meta-text,#818a95);
+    line-height: 12px;
+}
+.notification-item .timestamp {
+    vertical-align: middle;
+}
+.remove-action {
+    position: absolute;
+    display: block;
+    top: 0;
+    margin-top: 0;
+    right: 4px;
+    padding: 8px 0 8px 8px;
+}
+.snippet-menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    right: 20px;
+}
+.mp-Spinner, .mp-Spinner:after, .mp-Spinner:before {
+    -webkit-animation: d 1s infinite ease-in-out;
+    animation: d 1s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    border-radius: 50%;
+    height: 2.5em;
+    width: 2.5em;
+}
+
+
+.unread a {
+    font-weight:bold;
+}
+
+
+.mp-Spinner {
+    -webkit-animation-delay: -.16s;
+    animation-delay: -.16s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    color: #e6e4e1;
+    font-size: 6px;
+    margin: 20px auto;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    position: relative;
+    text-indent: -9999em;
+    -webkit-transform: translate3d(0,-15px,0);
+    transform: translate3d(0,-15px,0);
+}
+.mp-Nav-dropdown-menu.sdk-custom {
+    left:unset;
+    right: 0;
+}
+.mp-Nav-dropdown-menu.sdk-custom {
+    top:unset;
+}
+.snippet-menu-toggle:hover .mp-Nav-dropdown-menu.sdk-custom {
+    display: block !important;
+}
+/* ------------------------------------------------------------------------------------------------------------------- */
+/*----------------------------------------------------- media query ---------------------------------------------------*/
+/* ------------------------------------------------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+    .notification-message {
+        font-family: Arial;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}

@@ -1,0 +1,24 @@
+/* roboto-regular - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/roboto-v20-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Roboto'), local('Roboto-Regular'),
+         url('../../fonts/roboto-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../fonts/roboto-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../fonts/roboto-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../../fonts/roboto-v20-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+/* bree-serif-regular - latin */
+@font-face {
+    font-family: 'BreeSerif';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/bree-serif-v9-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Bree Serif Regular'), local('BreeSerif-Regular'),
+         url('../../fonts/bree-serif-v9-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../fonts/bree-serif-v9-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../fonts/bree-serif-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../../fonts/bree-serif-v9-latin-regular.svg#BreeSerif') format('svg'); /* Legacy iOS */
+}

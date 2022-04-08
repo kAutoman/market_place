@@ -1,0 +1,43 @@
+{% extends "account.master" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_favourite.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+		{% include 'account.head_vendor_bar.twig' %}
+
+	{% if auth_user().comments.count != null %}
+		<section class="FavoriteSellersContainer-favorite_sellers_container">
+			<div class="list-container">
+				<div class="mp-Card mp-Card--rounded">
+					{% for comment in auth_user().comments %}
+						<article class="user-review mp-Card-block">
+							<header class="user-review-header">
+								{{comment.diffForHumans(null, true)}}
+								<span class="mp-StarRating mp-StarRating--5 ">
+									{{ include('components.star_rating', {rating: comment.rating}) }}
+								</span>{{comment.comment}}
+								<span style="float:right;" class="mp-text-meta"><a href="/profile/{{auth_user().username}}">{{auth_user().username}}</a>  {{ToUserCurrency((comment.order.price * comment.order.amount),order.listing.currency)|number_format(2)}} {{ GetCurrency() }}</span>
+							</header>
+						</article>
+					{% endfor %}
+				</div>
+
+			</div>
+		</section>
+	{% else %}
+		<section class="FavoritesContainer-favorites_container">
+			<div class="FavoritesList-list-container"></div>
+			<div class="mp-Alert mp-Alert--info-light">
+				<span class="mp-Alert-icon mp-svg-info"></span>
+				<div>
+					<span>
+						You don't have left any feedbacks
+					</span>
+				</div>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}
+

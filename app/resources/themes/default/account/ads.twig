@@ -1,0 +1,217 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_email.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+	<section style="margin-bottom: 800px;" id="content">
+		{% include 'account.head_vendor_bar.twig' %}
+		<div class="profile canvas" id="edit-email-panel">
+			<div class="mp-Card mp-Card--rounded">
+				<div class="mp-Card-block">
+					<form method="POST" action="{{route('account.ads.buyingads',listing)}}">
+						{{ csrf_field() }}
+						<div class="edit-profile-block clear-fix">
+							{% if app.session.get('message') %}
+								<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+									<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+									<div>
+										{{ app.session.get('message') }}
+									</div>
+								</div>
+							{% endif %}
+
+							{% if app.session.get('error') %}
+								<div class="mp-Alert mp-Alert--error">
+									<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+									<div>
+										{{ app.session.get('error') }}
+									</div>
+								</div>
+							{% endif %}
+							Listing :
+							<a href="{{route('listing', {'id' : listing, 'slug' : str_slug(listing.title)})}}">{{listing.title}}</a>
+							&nbsp;&nbsp; Category :
+							<a href="/category/{{listing.category.id}}">{{listing.category.name}}</a>
+							<div class="mp-Card-block">
+								<h1 class="heading">Purschase Star A+++ Ads</h1>
+							</div>
+							<div class="form-field">
+								<span class="help-block">
+									Have your listing on the frontpage by purchasing a Star +++ for your listing. It will last for 5 days. The cost for a sticky per listing is $60 USD. You must have this amount in your BTC/XMR/LTC balance to purchase a Star A+++
+									<br><b>There is only place for 10 listings on the frontpage</b>
+								</span>
+							</div>
+							<div class="form-field">
+								Currently there is
+								<button class="mp-Button mp-Button--dangerous mp-Button--xs" disabled>
+									{{count}}
+								</button>
+								place(s) available on the frontpage
+							</div>
+
+
+							<div class="form-field">
+								<h3 class="heading heading-3">
+									<b>Example Star A+++</b>
+								</h3>
+								<img src="/web/images/example3.png"/>
+							</div>
+
+							<div class="form-field">
+								<h3 class="heading heading-3">
+									<b>Ads Star A+++ Status :</b>
+									{% if listing.spotlight %}
+										<span style="color:green;">Active</span><br>
+										<span class="help-block">This ads will be over</span>
+										<button class="mp-Button mp-Button--success mp-Button--xs" disabled>
+											{{ listing.until('spotlight').days }} days {{ listing.until('spotlight').hours }} hours {{listing.until('spotlight').minutes}} min {{listing.until('spotlight').seconds}} sec
+										</button>
+									{% else %}
+										<span style="color:red;">Not active</span>
+									{% endif %}
+								</div>
+
+								<div class="form-field">
+									{% if count != 0 %}
+										<button name="stara3" value="xmr" type="submit" class="primary medium mp-Button mp-Button--primary">
+											<span>Buy with XMR</span>
+										</button>
+										<button name="stara3" value="btc" type="submit" class="primary medium mp-Button mp-Button--primary">
+											<span>Buy with BTC</span>
+										</button>
+										<button name="stara3" value="ltc" type="submit" class="primary medium mp-Button mp-Button--primary">
+											<span>Buy with LTC</span>
+										</button>
+									{% else %}
+										<button class="mp-Button mp-Button--success mp-Button--xs" disabled>
+											Sold Out
+										</button>
+									{% endif %}
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+				<hr>
+				<div class="mp-Card mp-Card--rounded">
+					<div class="mp-Card-block">
+						<form method="POST" action="{{route('account.ads.buyingads',listing)}}">
+							{{ csrf_field() }}
+							<div class="edit-profile-block clear-fix">
+								<div class="mp-Card-block">
+									<h1 class="heading">Purschase Star A++ Ads</h1>
+								</div>
+								<div class="form-field">
+									<span class="help-block">
+										Have your listing on the top of searches and categories by purchasing a Star ++ for your listing. It will last for 5 days. The cost for a Star A++ per listing is $10 USD. You must have this amount in your BTC/XMR/LTC balance to purchase a Star A++. .</span>
+								</div>
+
+								<div class="form-field">
+									<h3 class="heading heading-3">
+										<b>Example Star A++</b>
+									</h3>
+									<img src="/web/images/example1.png"/>
+								</div>
+
+								<div class="form-field">
+									<h3 class="heading heading-3">
+										<b>Ads Star A+++ Status :</b>
+										{% if listing.priority_until %}
+											<span style="color:green;">Active</span><br>
+											<span class="help-block">This ads will be over</span>
+											<button class="mp-Button mp-Button--success mp-Button--xs" disabled>
+											{{ listing.until('priority_until').days }} days {{ listing.until('priority_until').hours }} hours {{listing.until('priority_until').minutes}} min {{listing.until('priority_until').seconds}} sec
+											</button>
+										{% else %}
+											<span style="color:red;">Not active</span>
+										{% endif %}
+									</div>
+
+									<div class="form-field">
+										{% if listing.priority_until == null %}
+											<button name="stara2" value="xmr" type="submit" class="primary medium mp-Button mp-Button--primary">
+												<span>Buy with XMR</span>
+											</button>
+											<button name="stara2" value="btc" type="submit" class="primary medium mp-Button mp-Button--primary">
+												<span>Buy with BTC</span>
+											</button>
+											<button name="stara2" value="ltc" type="submit" class="primary medium mp-Button mp-Button--primary">
+												<span>Buy with LTC</span>
+											</button>
+										{% else %}
+											<button class="mp-Button mp-Button--success mp-Button--xs" disabled>
+												Already Active
+											</button>
+										{% endif %}
+
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<hr>
+					<div class="mp-Card mp-Card--rounded">
+						<div class="mp-Card-block">
+							<form method="POST" action="{{route('account.ads.buyingads',listing)}}">
+								{{ csrf_field() }}
+								<div class="edit-profile-block clear-fix">
+									<div class="mp-Card-block">
+										<h1 class="heading">Purschase Star + Ads</h1>
+									</div>
+									<div class="form-field">
+										<span class="help-block">Have your listing extra ads listed beneath in searches and categories. Each Star A+ upgrade is good for 5 days. The cost for Star A+ per listing is $5 USD. You must have this amount in your BTC/XMR/LTC balance to purchase A+.
+										</span>
+									</div>
+
+									<div class="form-field">
+										<h3 class="heading heading-3">
+											<b>Example Star A+</b>
+										</h3>
+										<img src="/web/images/example2.png"/>
+									</div>
+
+									<div class="form-field">
+										<h3 class="heading heading-3">
+											<b>Ads Star A+++ Status :</b>
+											{% if listing.bold_until %}
+												<span style="color:green;">Active</span><br>
+												<span class="help-block">This ads will be over</span>
+												<button class="mp-Button mp-Button--success mp-Button--xs" disabled>
+											{{ listing.until('bold_until').days }} days {{ listing.until('bold_until').hours }} hours {{listing.until('bold_until').minutes}} min {{listing.until('bold_until').seconds}} sec
+												</button>
+											{% else %}
+												<span style="color:red;">Not active</span>
+											{% endif %}
+
+										
+										</div>
+
+										<div class="form-field">
+												{% if listing.bold_until == null %}
+												<button name="stara1" value="xmr" type="submit" class="primary medium mp-Button mp-Button--primary">
+													<span>Buy with XMR</span>
+												</button>
+												<button name="stara1" value="btc" type="submit" class="primary medium mp-Button mp-Button--primary">
+													<span>Buy with BTC</span>
+												</button>
+												<button name="stara1" value="ltc" type="submit" class="primary medium mp-Button mp-Button--primary">
+													<span>Buy with LTC</span>
+												</button>
+											{% else %}
+												<button class="mp-Button mp-Button--success mp-Button--xs" disabled>
+													Already Active
+												</button>
+											{% endif %}
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+			{% endblock %}
+

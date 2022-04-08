@@ -1,0 +1,363 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_ads.css" rel="stylesheet">
+
+	<style>
+		hr,
+		.dropdown-menu,
+		.nav-tabs,
+		.btn-default,
+		.thumbnail {
+			border-color: #e8e9ee;
+		}
+
+		.nav-tabs {
+			border-bottom: 1px solid #ddd;
+		}
+
+		.nav {
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+		}
+
+		.nav-tabs > li {
+			float: left;
+			margin-bottom: -1px;
+		}
+
+		.nav > li {
+			position: relative;
+			display: block;
+		}
+
+		.nav > li > a {
+			position: relative;
+			display: block;
+			padding: 10px 15px;
+		}
+
+		.nav-tabs > li.active > a,
+		.nav-tabs > li.active > a:hover,
+		.nav-tabs > li.active > a:focus {
+			border-color: #e8e9ee;
+			border-bottom: 1px solid transparent;
+		}
+
+		.nav-tabs > li.active > a,
+		.nav-tabs>li.active>a:hover,
+		.nav-tabs>li.active>a:focus {
+			color: #555;
+			cursor: default;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-bottom-color: transparent;
+		}
+
+		.nav-tabs > li > a {
+			margin-right: 2px;
+			line-height: 1.42857143;
+			border: 1px solid transparent;
+			border-radius: 4px 4px 0 0;
+		}
+		.clearfix:before,
+		.clearfix:after,
+		.dl-horizontal dd:before,
+		.dl-horizontal dd:after,
+		.container:before,
+		.container:after,
+		.container-fluid:before,
+		.container-fluid:after,
+		.row:before,
+		.row:after,
+		.form-horizontal .form-group:before,
+		.form-horizontal .form-group:after,
+		.btn-toolbar:before,
+		.btn-toolbar:after,
+		.btn-group-vertical>.btn-group:before,
+		.btn-group-vertical>.btn-group:after,
+		.nav:before,
+		.nav:after,
+		.navbar:before,
+		.navbar:after,
+		.navbar-header:before,
+		.navbar-header:after,
+		.navbar-collapse:before,
+		.navbar-collapse:after,
+		.pager:before,
+		.pager:after,
+		.panel-body:before,
+		.panel-body:after,
+		.modal-footer:before,
+		.modal-footer:after {
+			display: table;
+			content: " ";
+		}
+	</style>
+{% endblock %}
+
+{% block user_area %}
+	<div id="content" class="l-page">
+		{% if app.session.get('message') %}
+			<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+				<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+				<div>
+					{{ app.session.get('message') }}
+				</div>
+			</div>
+		{% endif %}
+			{% include 'account.head_vendor_bar.twig' %}
+		<div class="mp-Card mp-Card--rounded">
+			<div class="mp-Card-block">
+				<div class="content">
+					<h2 class="pull-left" style="margin: 0;">
+						<strong>Order #{{ order.hash }}</strong>
+					</h2>
+					<h2 class="pull-right" style="margin: 0;">
+						<a class="text-info" href="/account/orders">
+							<strong>← Back to Overview</strong>
+						</a>
+					</h2><br>
+
+					<table class="table table-orders-meta">
+						<tbody>
+							<tr>
+								<td>
+									<i class="mp-Icon mp-svg-clock-grey" style="margin-left: 0;" title="Date"></i>
+									{{ order.created_at.toFormattedDateString }}&nbsp;&nbsp;
+									<i class="mp-Button-icon mp-Button-icon--left mp-svg-handshake" title="{{order.payment_type.payment_name}}"></i>
+									{{order.payment_type.payment_name}}&nbsp;&nbsp;
+									<i class="mp-Button-icon mp-Button-icon--left {{order.listing.listing_class.id == 1 ? 'mp-svg-postpackage' : 'mp-svg-digital'}} " title="Buyer"></i>
+									{{ order.listing.listing_class.name }}&nbsp;&nbsp;
+									<i class="mp-Icon mp-svg-profile style-scope mp-header" title="Buyer"></i>
+									<a href="/profile/{{ order.user.username }}">{{ order.user.username }}</a>
+								</td>
+								{% if order.status == "processing" %}
+									<td class="status  status-info ">
+										Processing
+									</td>
+								{% endif %}
+								{% if order.status == "shipped" %}
+									<td class="status  status-info ">
+										Shipped
+									</td>
+								{% endif %}
+								{% if order.status == "finalized" %}
+									<td style="background-color:green;" class="status  status-info ">
+										Finalized
+									</td>
+								{% endif %}
+								{% if order.status == "disputed" %}
+									<td style="background-color:red;" class="status  status-info ">
+										Disputed
+									</td>
+								{% endif %}
+								{% if order.status == "cancelled" %}
+									<td style="background-color:red;" class="status  status-info ">
+										Cancelled
+									</td>
+								{% endif %}
+							</tr>
+						</tbody>
+					</table>
+
+
+					<table style="width:100%" class="table table-bordered">
+						<thead>
+							<tr>
+								<th style="width: 100px;" class="text-center">Quantity</th>
+								<th>Product</th>
+								<th style="width: 150px;" class="text-right">Subtotal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="width: 100px;" rowspan="2" class="text-center">{{ order.amount  }}</td>
+								<td>
+									<p>
+										{{ order.listing.title }}
+									</p>
+									<em>{{ order.listing.description }}</em>
+								</td>
+								<td style="width: 150px;" rowspan="2" class="text-right">{{ GetCurrency() }}
+									{{ toUserCurrency(order.price,order.listing.currency)  }}</td>
+							</tr>
+							<tr>
+								<td class="text-muted">Dispatched on
+									{{ order.updated_at.toFormattedDateString }}</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="row">
+						<p class="text-info">
+							{% if order.status == "shipped" %}
+								<li>This sale will be finalized over
+									<i style="color:blue;">{{order.finalize('updated_at').days + (order.finalize('updated_at').weeks*7 )}}</i>
+									days
+									<i style="color:blue;">{{order.finalize('updated_at').hours}}</i>
+									hours
+									<i style="color:blue;">{{order.finalize('updated_at').minutes}}</i>
+									min
+									<i style="color:blue;">{{order.finalize('updated_at').seconds}}</i>
+									sec
+								</li>
+							{% endif %}
+
+							{% if order.status == "accepted" %}
+								<li>Be aware this sale will be cancelled over
+									<i style="color:blue;">{{order.elapsed('updated_at').days + (order.elapsed('updated_at').weeks*7 )}}</i>
+									days
+									<i style="color:blue;">{{order.elapsed('updated_at').hours}}</i>
+									hours
+									<i style="color:blue;">{{order.elapsed('updated_at').minutes}}</i>
+									min
+									<i style="color:blue;">{{order.elapsed('updated_at').seconds}}</i>
+									sec
+								</li>
+							{% endif %}
+
+							{% if order.status == "finalized" %}
+								Order has been
+								<b>finalized</b>
+								funds is transfered to the vendor.
+							{% endif %}
+
+							{% if order.status == "disputed" %}
+								Order has been
+								<b>disputed</b>
+								the moderator will decide where the funds will be transfered from the case.
+							{% endif %}
+							{% if order.status == "cancelled" %}
+								Order has been
+								<b>cancelled</b>
+								funds is transfered to the buyer.
+							{% endif %}
+
+							{% if order.status == "processing" %}
+								Order has been
+								<b>disputed</b>
+								the moderator will decide where the funds will be transfered from the case.
+							{% endif %}
+
+
+						</p>
+						<table class="table" style="float:right;width: 50%; margin: 0;">
+							<tbody>
+								<tr>
+									<th style="border-top: 0; padding-top: 0;" class="text-right">4% Commission
+									</th>
+									<td style="width: 150px; border-top: none; padding-top: 0;" class="text-right">USD
+										{{order.service_fee}}</td>
+								</tr>
+								<tr>
+									<th class="text-right lead">
+										<strong>Total Net Income</strong>
+									</th>
+									<td style="width: 150px;" class="text-right lead">
+										<strong>{{ GetCurrency() }}
+											{{ ToUserCurrency(((order.amount * order.price) - order.service_fee),order.listing.currency)|number_format(2) }}</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mp-Card mp-Card--rounded">
+			<div class="mp-Card-block">
+
+				<ul class="nav nav-tabs">
+					<li class="{{not app.request.query('show') == "pgp" ?  'active' : ''}}">
+						<a href="/account/orders/{{order.hash}}">Buyer Statistics</a>
+					</li>
+					<li class="{{app.request.query('show') == "pgp" ?  'active' : ''}}">
+						<a href="/account/orders/{{order.hash}}?show=pgp">Buyer PGP</a>
+					</li>
+				</ul><br><br><br>				
+
+				{% if not app.request.query('show') == "pgp" %}
+				<table class="table" style="margin: 0;width: 50%;float: left;">
+					<tbody>
+						<tr>
+							<th style="border: 0;">Total Orders</th>
+							<td style="border: 0;">{{ order.user.normal_orders.count }}</td>
+						</tr>
+						<tr>
+							<th>Disputes (%)</th>
+							<td>{{order.user.disputesBuyer.count}} ( {{(order.user.disputesBuyer.count/order.user.normal_orders.count)*100}}% )</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table" style="margin: 0;width: 50%;float: left;">
+					<tbody>
+						<tr>
+							<th style="border: 0;">Spendings</th>
+							<td style="border: 0;">USD {{order.user.getTotalPriceSpend()}}</td>
+						</tr>
+						<tr>
+							<th>Average</th>
+							<td>USD {{order.user.getAvgSpending()}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+				{% else %}
+				<textarea class="form-control" readonly="readonly" style="height:640px;" cols="50" rows="10">{{ order.user.pgp_key }}</textarea>
+				{% endif %}
+
+			</div>
+		</div>
+
+
+		<div class="mp-Card mp-Card--rounded">
+			<div class="mp-Card-block">
+				<section class="l-body-content mp-Card-block" style="margin: 50px 0; background-color: #EDECED;">
+					<div class="section description">
+						<div id="vip-description" class="">
+							<h2 class="heading heading-3">
+								<b>Shipping Address</b>
+							</h2>
+								<textarea class="form-control" readonly="readonly" style="height:440px;" cols="50" rows="10">{{order.shipping_address}}</textarea>
+						</div>
+					</div>
+				</section>
+
+				<h2 class="heading heading-3">
+					<b>Seller note</b>
+				</h2>
+
+
+				<form method="POST" action="{{ route('account.orders.update', order) }}">
+					<div class="form-field form-textarea">
+						<textarea style="height:150px;" class="mp-Textarea {{ errors.has('message') ? ' invalid' : '' }}" id="notes" name="notes" maxlength="10000" data-maxlength="10000"></textarea>
+					</div>
+
+					{{ csrf_field() }}
+					{% if order.status == 'processing' %}
+						<button type="submit" name="status" value="accept" style="margin-bottom:3px;margin-left:5px;float:right;" class="mp-Button mp-Button--primary mp-Button--lg">
+							<span>Accept Order</span>
+						</button>
+						<button type="submit" name="status" value="cancel" style="margin-bottom:3px;margin-left:5px;float:right;background-color:red;" class="mp-Button mp-Button--primary mp-Button--lg">
+							<span>Cancel or Refund</span>
+						</button>
+					{% elseif order.status == 'accepted' %}
+						<button type="submit" name="status" value="shipped" style="margin-bottom:3px;margin-left:5px;float:right;" class="mp-Button mp-Button--primary mp-Button--lg">
+							<span>Mark as Shipped</span>
+						</button>
+						<button type="submit" name="status" value="cancel" style="margin-bottom:3px;margin-left:5px;float:right;background-color:red;" class="mp-Button mp-Button--primary mp-Button--lg">
+							<span>Cancel or Refund</span>
+						</button>
+					{% endif %}
+
+				</form>
+				<a href="/account/orders" style="margin-bottom:3px;margin-left:5px;float:right;" class="mp-Button mp-Button--primary mp-Button--lg">
+					<span>Go back</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
+

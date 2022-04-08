@@ -1,0 +1,81 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_wallet.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper">
+		<div id="content" class="l-page">
+			<h1 class="page-header">Vendor Application</h1>
+			<div class="mp-Card mp-Card--rounded">
+				<div class="mp-Card-block">
+					{% if app.session.get('error') %}
+						<div class="mp-Alert mp-Alert--error">
+							<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+							<div>
+								{{ app.session.get('error')  | raw}}
+							</div>
+						</div>
+					{% endif %}
+					<div class="content">
+						<p>
+							<strong>By applying for a vendor account you will agree to the following:</strong>
+						</p>
+						<ul>
+							<li>You will operate as a venerable business (wo)man.</li>
+							<li>You will be the sole owner of this account.</li>
+							<li>You will not engage in artificially enhancing your feedback scores.</li>
+							<li>You will not have more than one vendor account.</li>
+							<li>You will not keep buyers' personal information after a transaction.</li>
+							<li>You will not ask for FE unless you have been granted permission.</li>
+							<li>You will not sell services of items as <b>CHILD PORN OR HUMAN TRAFFIC</b>, other items are allowed.</li>
+						</ul>
+						<p style="color:red;">Any violation will result in an immediate closure of your account.</p>
+						<p>
+							<strong>In addition you are expected to:</strong>
+						</p>
+						<ul>
+							<li>Charge reasonable shipping and handling costs.</li>
+							<li>Specify shipping costs and handling time in the listing.</li>
+							<li>Follow through on your return policy.</li>
+							<li>Respond to buyers' questions promptly.</li>
+							<li>Be helpful, friendly, and professional throughout a transaction.</li>
+							<li>Make sure the item is delivered to the buyer as described in the listing.</li>
+							<li>Encrypt communication between you and the buyer where possible.</li>
+						</ul>
+						<p>
+							<strong>Requirements:</strong>
+						</p>
+						<ul>
+							<li>A one-time deposit* of equivalent <b>50$</b> in XMR/LTC/BTC equivalent to be deducted from your account.</li>
+							<li>Forfeit the ability to buy any product using this account.</li>
+							<li>Provide a PGP key in your public profile.</li>
+						</ul>
+						<p>*) Will be refunded after 3 months if your account is deemed to be in good standing.</p>
+						<hr>
+						<form action="{{route('account.pay.vendor')}}" method="post">
+						{{ csrf_field() }}
+
+						<input type="checkbox" name="terms">I hereby agree to adhere to all rules and expectations and accept the requirements of being a vendor at Roman Road.
+ 								 {% if errors.has('terms') %}
+                                            <div
+                                                class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                                Please accept the rules.
+                                            </div>
+                                            {% endif %}
+						<div class="form-field">
+							<input class="mp-Button mp-Button--secondary mp-Button--lg" value="Pay with BTC" type="submit" name="paybtc">
+							<input class="mp-Button mp-Button--secondary mp-Button--lg" value="Pay with LTC" type="submit" name="payltc">
+							<input class="mp-Button mp-Button--secondary mp-Button--lg" value="Pay with XMR" type="submit" name="payxmr">
+						</div>
+						<form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
+

@@ -1,0 +1,132 @@
+{% extends "account.master" %}
+
+{% block css %}
+    <link href="{{ setting('url') }}/web/css/message.css" rel="stylesheet">
+    <style>
+        #page-wrapper {
+            margin-bottom: 0;
+        }
+    </style>
+{% endblock %}
+{% block user_area %}
+    <div class="wide-layout" id="page-wrapper">
+        {% if auth_user().trader_type == 'individual' %}
+            {% include 'account.head_vendor_bar.twig' %}
+        {% endif %}
+        <div class="l-page indexpage" id="content" style="height: 800px;margin-bottom:150px;">
+            <div style="top: 10px;" class="inbox-messages chatheader">
+                <div class="messages-left">
+                    <div class="mp-Card message-left-header">
+                        <div class="mp-Card-block">
+                            <h1>Disputes</h1>
+                        </div>
+                    </div>
+                    <div class="message-left-header-shadow">
+                        <div class="ConversationsToolsMolecule-root"></div>
+                    </div>
+                    <div class="message-left-part">
+                        <div>
+                            <ol class="ConversationsOrganism-listRoot">
+
+                                    {% for dispute in disputes  %}
+                                        <li class="ConversationsOrganism-listItem">
+                                            <div class="ConversationMolecule-root ConversationMolecule-selling">
+                                                <a href="{{route('account.dispute.decide',dispute.id)}}">
+                                                    <div class="ConversationMolecule-leftUnit">
+                                                        <div class="ConversationMolecule-thumbnailUnit">
+                                                            <div class="ThumbnailAtom-root ThumbnailAtomSizes-lg ThumbnailAtomBorderRadii-xs" style="background-image: url({{dispute.seller.avatar}});"></div>
+                                                            <div class="ConversationMolecule-thumbnailProfilePictureUnit">
+																<span class="ProfilePictureAtom-root ProfilePictureAtomSizes-sm ProfilePictureAtom-rootBordered">
+																	<span>{{dispute.seller.username|first}}</span>
+																</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ConversationMolecule-rightUnit">
+                                                        <h2 class="ConversationMolecule-title">Dispute #{{dispute.id}}</h2>
+                                                        <div class="ConversationMolecule-body">
+                                                            <div class="ConversationMolecule-meta">vendor {{dispute.seller.username}}</div>
+                                                            <div class="ConversationMolecule-meta">buyer {{dispute.buyer.username}}</div>
+                                                            <div class="ConversationMolecule-latestMessageWrapper">
+                                                                <span>{{dispute.replies.last.message | str_limit(18)}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <footer>
+                                                            <div class="ConversationMolecule-receivedDateUnit">
+                                                                <span>Status: {{dispute.resolved == 0 ?  "Unsolved" : dispute.winner == auth_user().id ? "Won" : "Lost"}}</span>
+                                                            </div>
+                                                        </footer>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatindividual part2">
+                    <div class="chatbox">
+                        <header>
+                            <div class="ConversationTopicOrganism-root">
+                                <div class="ConversationTopicOrganism-titleUnit">
+                                    <div class="ConversationTopicOrganism-backLinkUnit">
+                                        <a href="/messages/">
+                                            <span class="mp-Icon mp-Icon--lg mp-svg-arrow-left"></span>
+                                            <span class="ConversationTopicOrganism-backLinkText">back</span>
+                                        </a>
+                                    </div>
+                                    <h2 class="ConversationTopicOrganism-title">
+                                        <a href="/profile/Take">
+											<span class="ConversationTopicOrganism-profilePictureUnit">
+												<span class="ProfilePictureAtom-root ProfilePictureAtomSizes-md">
+													<span>S</span>
+												</span>
+											</span>
+                                            <span class="ConversationTopicOrganism-name">Welcome to Dispute Board</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                                <div></div>
+                            </div>
+                        </header>
+                        <article>
+                            <div class="MessagesOrganism-root">
+                                <div class="MessagesOrganism-group">
+                                    <ol class="MessagesOrganism-listRoot">
+                                        <li class="MessagesOrganism-listItem MessagesOrganism-listItem_from_otherparticipant">
+                                            <div>
+                                                <div class="MessageMolecule-root MessageMolecule-root_from_otherparticipant MessageMolecule-tail">
+                                                    Chat guidelines.<br><br><ul>
+                                                        <li>Please keep all dispute-related messages in this section, and keep it civilized.</li>
+                                                        <li><br>
+                                                            <b>Buyer:</b>
+                                                            Please give a detailed response about the reason for your dispute. "does not work" or "I am not satisfied" is not a sufficient response.</li>
+                                                        <li>
+                                                            <b>Vendor:</b>
+                                                            If the order is tracked, please give us the tracking or defend yourself</li>
+                                                        <br>
+                                                        <li>If there is no solution made between the seller and the buyer, the moderator will solve the matter based on the buyers/vendor history.</li>
+                                                        <br>
+                                                        <li>If vendor or buyer does not respond in a timely fashion of
+                                                            <b>3 days</b>, the sale will be cancelled and refunded or finalized.</li>
+                                                        </u>
+                                                        <div class="MessageMolecule-meta MessageMolecule-sender">
+                                                            <span style="color:red;font-weight:bold;">Moderator</span>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

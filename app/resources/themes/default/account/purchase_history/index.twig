@@ -1,0 +1,212 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_ads.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+
+	<section id="content">
+        {% if app.session.get('error') %}
+			<div class="mp-Alert mp-Alert--error">
+				<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+				<div>
+                    {{ app.session.get('error')}}
+				</div>
+			</div>
+        {% endif %}
+		<h2>My Orders</h2>
+		<div id="seller-panel">
+			<div class="canvas">
+				{% if orders.count != 0 %}
+					<div id="ad-listing-table" class="table ad-listing-container seller">
+						<div id="table-head-stickies" class="sticky">
+							<div id="scroll-under-top-border"></div>
+						</div>
+						<div id="ad-listing-table-body" class="table-body">
+							{% for order in orders %}
+								<div class="row ad-listing compact">
+									<div class="cells">
+										<div class="cell icon-column">
+											<div class="check">
+												<label>
+													<b>ID:
+													</b>
+													{{order.id}}</label>
+											</div>
+										</div>
+										<div class="cell">
+											<textarea class="form-control" rows="5" cols="30" style="resize: vertical;" readonly="" value="">Encrypted Address</textarea>
+										</div>
+										<div class="cell thumbnail-column">
+											<div class="thumbnail-wrapper">
+												<a href="{{ order.url }}">
+													<img src="{{order.listing.photo}}">
+												</a>
+											</div>
+										</div>
+										<div class="cell description-column">
+											<a class="title" href="{{ route('account.orders.show', order) }}">
+												<span>{{ order.listing.title }}</span>
+											</a>
+											<div class="item">
+												<label>Item</labe>
+												#{{ order.hash }}
+											</div>
+											<div class="item">
+											<label>Product Class</labe>
+											<b>{{ order.listing.listing_class.name }}</b>
+										</div>
+											<div class="item">
+												<label>Vendor</label><br><a href="/profile/{{ order.listing.user.username }}">{{ order.listing.user.username }}</a>
+											</div>
+											<div class="item">
+												<label>Shipping Method</label><br>{{ order.shipping.name  }}/{{ order.shipping.days  }}days/{{ GetCurrency() }}
+												{{ ToUserCurrency(order.shipping.price,order.listing.currency) | number_format(2)  }}
+											</div>
+											<div class="item">
+												<label>Purschased:</label><br>{{ order.created_at.toFormattedDateString }}
+											</div>
+											<div class="item">
+												<label>Latest Update:</label><br>{{ order.updated_at.toFormattedDateString }}
+											</div>
+											<div class="item">
+												<label>Quantity:</label><br><b>{{ order.amount }}
+													Item(s)</b>
+											</div>
+										</div>
+										<div class="cell position-column features-column">
+											<div class="item">
+												{% if order.status == "accepted" %}
+													<label>Auto cancel:</label><br>
+													<button class="mp-Button mp-Button--dangerous mp-Button--xs" disabled>
+														{% if order.updated_at.addDay(3)|date('Y-m-d H:i:s')  < "now"|date('Y-m-d H:i:s') %}
+															0 days / 0 hours / 0 min - 0 sec
+														{% else %}
+															{{order.autocancel('updated_at').days }}
+															days
+															{{order.autocancel('updated_at').hours}}
+															hours
+															{{order.autocancel('updated_at').minutes}}
+															min
+															{{order.autocancel('updated_at').seconds}}
+															sec
+														{% endif %}
+													</button><br>
+												{% endif %}
+												{% if order.status == "processing" %}
+													<label>Auto cancel:</label><br>
+													<button class="mp-Button mp-Button--dangerous mp-Button--xs" disabled>
+														{% if order.updated_at.addDay(3)|date('Y-m-d H:i:s')  < "now"|date('Y-m-d H:i:s') %}
+															0 days / 0 hours / 0 min - 0 sec
+														{% else %}
+															{{order.autocancel('updated_at').days}}
+															days
+															{{order.autocancel('updated_at').hours}}
+															hours
+															{{order.autocancel('updated_at').minutes}}
+															min
+															{{order.autocancel('updated_at').seconds}}
+															sec
+														{% endif %}
+													</button><br>
+												{% endif %}
+
+												{% if order.status == "shipped" %}
+													<label>Auto Finalize:</label><br>
+													<button class="mp-Button mp-Button--dangerous mp-Button--xs" disabled>
+														{% if order.updated_at.addDay(14)|date('Y-m-d H:i:s')  < "now"|date('Y-m-d H:i:s') %}
+															0 days / 0 hours / 0 min - 0 sec
+														{% else %}
+															{{order.finalize('updated_at').days + (order.finalize('updated_at').weeks*7 )}}
+															days
+															{{order.finalize('updated_at').hours}}
+															hours
+															{{order.finalize('updated_at').minutes}}
+															min
+															{{order.finalize('updated_at').seconds}}
+															sec
+														{% endif %}
+													</button><br>
+												{% endif %}
+												{% if order.status == "finalized" %}
+													<button class="mp-Button mp-Button--green mp-Button--xs" disabled>Finalized</button><br>
+												{% endif %}
+												{% if order.status == "disputed" %}
+													<button class="mp-Button mp-Button--dangerous mp-Button--xs" disabled>Disputed</button><br>
+												{% endif %}
+
+
+												<label>Payment:</label><br>
+												<span class="{{ order.currency == 'BTC' ? 'btc20' : order.currency == 'XMR' ? 'xmr20' : 'ltc20' }}"></span>
+												{{order.payment_type.payment_name}}
+											</div>
+											<div class="item">
+												<label>Total Price:</label><br>
+                                                {{ GetCurrency() }}
+												{{ ToUserCurrency((order.amount * order.listing.price),order.listing.currency)|number_format(2)  }}
+											</div>
+											<div class="item">
+												<label>Status</label><br>
+												<span style="{{order.status == "processing" ? "color:black" : order.status == "shipped" ? "color:blue;" : order.status == "cancelled" ? "color:red;" : order.status == "disputed" ? "color:red;" : "color:green;" }}">
+													{{order.status}}</span><br>
+
+											</div>
+											<div class="cta">
+												{% if order.status == "shipped" %}
+													<form action="{{ route('account.dispute.create', order.id) }}" method="post">
+														{{ csrf_field() }}
+														<button type="submit" class="mp-Button mp-Button--dangerous mp-Button--xs">
+															Create Dispute
+														</button>
+													</form>
+													<form action="{{ route('account.finalize.order', order.hash) }}" method="post">
+															{{ csrf_field() }}
+														<button type="submit" class="mp-Button mp-Button--green mp-Button--xs">
+															Finalize Order
+														</button>
+													</form>
+												{% endif %}
+												{% if order.status == "disputed" %}
+													<a href="{{ route('account.dispute.show', order.dispute.id) }}" class="mp-Button--xs mp-Button--primary">
+														See Dispute
+													</a>
+												{% endif %}
+
+												{% if order.status == "finalized" %}
+												<a href="{{ route('account.purchase-history.feedback', order) }}" class="mp-Button--xs mp-Button--primary">
+														Leave a Feedback
+												</a>
+												{% endif %}
+												<a href="{{ route('account.purchase-history.show', order) }}" class="mp-Button--xs mp-Button--primary">
+														Details
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% else  %}
+							<div class="mp-Alert mp-Alert--info-light">
+								<span class="mp-Alert-icon mp-svg-info"></span>
+								<div>
+									<span>
+										You don't have any orders
+									</span>
+								</div>
+							</div>
+
+						{% endif %}
+
+						<div class="mp-PaginationControls">
+							{{orders.links | raw}}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}
+

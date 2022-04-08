@@ -1,0 +1,176 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+<link href="{{ setting('url') }}/web/css/index.css" rel="stylesheet">
+<link href="{{ setting('url') }}/web/css/account_register.css" rel="stylesheet">
+
+
+
+<style>
+    .mp-FooterAlternative {
+        margin-top: 100px;
+}
+</style>
+{% endblock %}
+{% block navbar %}
+<header>
+    <div class="mp-Header-ribbonTop"></div>
+    <div class="mp-Header-navBar">
+        <div class="mp-Header-maxWidth">
+           <a class="mp-Header-logo" href="/" title="Marketplace">Marketplace</a>
+			<ul class="mp-Header-links">
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Community</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Help en info</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">PGP Key</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="/account/apply_vendor"  target="_blank">Becoming a Vendor</a>
+				</li>
+			</ul>
+            <ul class="mp-Header-links mp-pull-right">
+                <li class="style-scope mp-Header">
+                    <a class="mp-Button--flat" data-role="mymp-login" href="/login"><span aria-hidden="true"
+                            class="mp-Icon mp-svg-profile style-scope mp-Header"></span> <span
+                            class="mp-hide-lte-md style-scope mp-Header">Login</span></a>
+                </li>
+                <li class="style-scope mp-Header">
+                    <a class="mp-Button--flat" data-role="mymp-login" href="/register"><span aria-hidden="true"
+                            class="mp-Icon mp-svg-profile style-scope mp-Header"></span> <span
+                            class="mp-hide-lte-md style-scope mp-Header">Register</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mp-Header-ribbonBottom"></div>
+
+</header>
+{% endblock %}
+
+{% block content %}
+<div id="page-wrapper">
+    <div id="content" class="l-page wide-layout">
+        <section class="l-side-left" id="left-column" style="padding-top: 35px;">
+            <div class="mp-Card mp-Card--rounded" id="navigation">
+                <div class="mp-Card-block mp-Card-block--highlight mp-Card-block--padded-md">
+                    <div class="navigation-block">
+                        <h3 class="title heading"
+                            style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+                            <span class="main-label">Market Mirrors</span></h3>
+                      <ul class="marketmirrors">
+                            {% for url_title in load_urls() %}
+                            <li>
+                                <a href="http://{{url_title}}">{{url_title}} {% if current_website(url_title) %} <i style="color:#00CF72;font-size: 10px;">Verified<span class="svg-icon-check2"></span></i> {% endif %}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <p>Choose one of the links above if the site is loading too slow.</p>
+                    </div>
+                    <div class="handigeLinks">
+                        <div class="snippet-list">
+                            <h3 class="title heading"
+                                style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+                                Join us on Dread</h3>
+                                <li>
+                                    <a href=" http://dreadditevelidot.onion/u/RomanRoad">/u/RomanRoad<span class="mp-Button-icon mp-Button-icon--right mp-svg-logo-dread"></span></a>                       
+                                </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="l-main-right">
+        <div class="mp-Card mp-Card--rounded">
+            <div class="mp-Card-block">
+                <div id="login-tabs" class="mp-Tab-bar mp-Tab-bar--center sdk-custom">
+                    <a href="{{ setting('url') }}/login" class="mp-Tab mp-Tab">
+                        Log in
+                    </a>
+                    <a href="{{ setting('url') }}/register" class="mp-Tab mp-Tab--selected" style="width:25%">
+                        Create account
+                    </a>
+                </div>
+            </div>
+            <div class="mp-Card-block">
+                <div class="mp-Form">
+                    <div class="mp-Form-body sdk-custom">
+                        <form id="account-login-form" method="post" class="new-design-form" action="{{ route('register') }}">
+                            {{ csrf_field() }}
+                            <div class="form-squeeze form-signup">
+                                <div class="mp-Form-controlGroup controlgroup-max-width">
+                                    <label class="mp-Form-controlGroup-label" for="username">Username</label>
+                                    <input name="username" value="{{ old('username') }}" placeholder="Username" id="username" class="mp-Input {{ errors.has('username') ? ' invalid' : '' }}" type="text"
+                                        maxlength="30" >
+                                        {% if errors.has('username') %}
+                                        <div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                            {{ errors.first('username') }}
+                                         </div>
+                                        {% endif %}
+                                </div>
+                                <div class="mp-Form-controlGroup controlgroup-max-width">
+                                    <label class="mp-Form-controlGroup-label" for="password">Password</label>
+                                    <input name="password" id="password" placeholder="Password" class="mp-Input {{ errors.has('password') ? ' invalid' : '' }}" type="password" >
+                                    {% if errors.has('password') %}
+                                    <div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                        {{ errors.first('password') }}
+                                     </div>
+                                    {% endif %}
+                                </div>
+                                <div class="mp-Form-controlGroup controlgroup-max-width">
+                                    <label class="mp-Form-controlGroup-label" for="password_confirmation">Retype Password</label>
+                                    <input name="password_confirmation" placeholder="Retype password" id="password_confirmation" class="mp-Input" type="password" >
+                                </div>
+                                <div class="mp-Form-controlGroup controlgroup-max-width">
+                                    <label class="mp-Form-controlGroup-label" for="withdrawpin">Withdraw PIN(Letters allowed)</label>
+                                    <input name="withdrawpin" placeholder="Your six characters Withdraw PIN" value="{{ old('withdrawpin') }}" id="withdrawpin" class="mp-Input {{ errors.has('withdrawpin') ? ' invalid' : '' }}" type="text"
+                                        maxlength="6" >
+                                        {% if errors.has('withdrawpin') %}
+                                        <div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                            {{ errors.first('withdrawpin') }}
+                                         </div>
+                                        {% endif %}
+                                </div>
+                                 <div class="mp-Form-controlGroup">
+                                            <p class="mp-text-meta paragraphs-security">Anti-phishing protection feature
+                                            </p>
+                                            <div class="anti-phishing">{{random_website_letter("romanroad") | raw }}.xyz</div>  
+                                 </div>
+
+                                <div class="mp-Form-controlGroup">
+                                    <img src="/captcha.html"/>
+                                    <input id="captcha" type="text" placeholder="captcha" name="captcha" class="mp-Input {{ errors.has('captcha') ? ' invalid' : '' }}" tabindex="2">
+                                    {% if errors.has('captcha') %}
+                                    <div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                        {{ errors.first('captcha') }}
+                                     </div>
+                                    {% endif %}
+                                </div>
+
+
+
+                                    <div class="mp-Form-controlGroup">
+                                        <p id="terms-and-conditions" class="paragraph register-terms mp-text-meta">By registering to our Marketplace you accept the term, if you post any fake news regarding Roman Road we will ban you. </p>
+                                    </div>
+                                    <div class="mp-Form-controlGroup">
+                                        <div class="mp-Form-actions">
+                                            <input type="submit"
+                                                class=" mp-Form-actions-button mp-Form-actions-button--primary mp-Button mp-Button--primary"
+                                                value="Create account">
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+</div>
+
+{% endblock %}

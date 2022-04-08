@@ -1,0 +1,617 @@
+.mp-Icon, .mp-Chip-icon, .mp-CompoundIcon {
+    display: inline-block;
+    margin-top: -2px;
+    vertical-align: middle;
+    height: 24px;
+    width: 24px;
+}
+.btc20, .bch20, .eth20, .ltc20, .dash20, .zec20, .xmr20, .doge20 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/web/images/sprite5.png) no-repeat -320px -60px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.zec20 {
+    background-position: -420px -60px;
+}
+
+.xmr20 {
+    background-position: -440px -60px;
+}
+
+.ltc20 {
+    background-position: -380px -60px;
+}
+
+
+
+.mp-CompoundIcon {
+    position: relative;
+}
+.mp-CompoundIcon--xxl, .mp-Icon--xxl {
+    height: 64px;
+    width: 64px;
+}
+.mp-CompoundIcon--xl, .mp-Icon--xl {
+    height: 48px;
+    width: 48px;
+}
+.mp-CompoundIcon--lg, .mp-Icon--lg {
+    height: 32px;
+    width: 32px;
+}
+.mp-CompoundIcon--md, .mp-Icon--md {
+    height: 24px;
+    width: 24px;
+}
+.mp-CompoundIcon--sm, .mp-Icon--sm {
+    height: 20px;
+    width: 20px;
+}
+.mp-CompoundIcon--xs, .mp-Icon--xs {
+    height: 16px;
+    width: 16px;
+}
+.mp-CompoundIcon .mp-Chip-icon, .mp-CompoundIcon .mp-Icon {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+
+/* category */
+.mp-svg-category-1 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 0 0;
+}
+.mp-svg-category-91 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 97.14285714285714% 0;
+}
+.mp-svg-category-289 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 42.857142857142854% 0;
+}
+.mp-svg-category-239 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 37.142857142857146% 0;
+}
+.mp-svg-category-445 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 62.857142857142854% 0;
+}
+.mp-svg-category-504 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 68.57142857142857% 0;
+}
+.mp-svg-category-1032 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 2.857142857142857% 0;
+}
+.mp-svg-category-565 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 74.28571428571429% 0;
+}
+.mp-svg-category-678 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 80% 0;
+}
+.mp-svg-category-1847 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 28.571428571428573% 0;
+}
+.mp-svg-category-976 {
+    background: url(../../images/category.svg) no-repeat;
+    background-size: auto 100%;
+    background-position: 100% 0;
+}
+.mp-svg-category-cars {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 17.502668089647813% 0;
+}
+/* button icon */
+.mp-svg-messages {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 52.18783351120597% 0;
+}
+
+.mp-svg-messages-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 53.46587301587302% 0;
+}
+
+.mp-svg-notification {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 54.32230522945571% 0;
+}
+.mp-svg-notification-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 55.176093916755605% 0;
+}
+.mp-svg-profile {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 68.40981856990395% 0;
+}
+.mp-svg-ebay {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 61.53846153846154% 0;
+}
+.mp-svg-logo-dread {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 79.48717948717949% 0;
+}
+.mp-svg-logo-google {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 83.58974358974359% 0;
+}
+.mp-svg-search {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 80.36286019210246% 0;
+}
+.mp-svg-category-cars {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 17.502668089647813% 0;
+}
+
+.mp-svg-postpackage {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 47.192113% 0;
+}
+.mp-svg-saved--inverse, .mp-svg-saved-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 79.966% 0px;
+}
+
+.mp-svg-truck {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 93.5965848452508% 0;
+}
+.mp-svg-handshake {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 40.377090003557456% 0;
+}
+.mp-svg-digital {
+    background: url(../../images/digital.png) no-repeat;
+    background-size: 100%;
+    height: 25px;
+    width: 25px;
+}
+.mp-svg-browse {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 11.526147278548558% 0;
+}
+.mp-svg-arrow-large {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 4.695837780149413% 0;
+}
+.mp-svg-category-diensten {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 18.356456776947706% 0;
+}
+.mp-svg-save {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 76.09391675560299% 0;
+}
+.mp-svg-results-list {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 72.25186766275347% 0;
+}
+.mp-svg-shoppingcart {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 90.18143009605123% 0;
+}
+.mp-svg-payable {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 58.16435432230523% 0;
+}
+.mp-svg-logo-postnl {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 95.8974358974359% 0;
+}
+.mp-svg-google-play--nlnl {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 72.72727272727273% 0;
+}
+.mp-svg-app-store--nlnl {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 53.63128491620112% 0;
+}
+.mp-svg-pin-callToAction-foreground {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 62.86019210245464% 0;
+}
+.mp-svg-refresh {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 70.11739594450374% 0;
+}
+.mp-svg-filter {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 37.388829598007824% 0;
+}
+.mp-svg-sort {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 91.46211312700106% 0;
+}
+.mp-svg-results-tiles {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 73.10565635005337% 0;
+}
+.mp-svg-arrow-right-blue {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 7.257203842049093% 0;
+}
+.mp-svg-info {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 46.353610814656705% 0;
+}
+.mp-svg-arrow-left {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 5.122732123799359% 0;
+}
+.mp-svg-arrow-left-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 6.4034151547492% 0;
+}
+.mp-svg-arrow-right {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 6.830309498399147% 0;
+}
+.mp-svg-arrow-right-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 8.110992529348986% 0;
+}
+.mp-svg-checkmark-circled-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 20.917822838847385% 0;
+}
+.mp-svg-close-small-grey {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 26.894343649946638% 0;
+}
+.mp-svg-quickresponse-green {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 69.69050160085379% 0;
+}
+.mp-svg-eye-open {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 38.51554663991976% 0;
+}
+.mp-svg-eye-open-grey {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 36.71291355389541% 0;
+}
+.mp-svg-heart-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 42.93845606545713% 0;
+}
+.mp-svg-heart-grey {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 42.51156172180718% 0;
+}
+.mp-svg-website-white {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 99.1462113127001% 0;
+}
+.mp-svg-zoom-in-blue {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 100% 0;
+}
+.mp-svg-share-whatsapp {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 89.32764140875133% 0;
+}
+.mp-svg-share-facebookmessenger {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 87.62006403415155% 0;
+}
+.mp-svg-share-facebook {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 87.1931696905016% 0;
+}
+.mp-svg-share-twitter {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 88.47385272145144% 0;
+}
+.mp-svg-share-email {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 86.76627534685166% 0;
+}
+.mp-svg-alert-blue {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: .8537886872998933% 0;
+}
+.mp-svg-clock {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 27.683049147442325% 0;
+}
+.mp-svg-clock-grey {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 25.18676627534685% 0;
+}
+.mp-svg-follow {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 39.09640697260761% 0;
+}
+.mp-svg-following {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 39.5111193% 0;
+}
+
+.mp-svg-checkmark-circled-green {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 19.637139807897544% 0;
+}
+.mp-svg-phone {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 62.00640341515475% 0;
+}
+.mp-svg-bank {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 10.245464247598719% 0;
+}
+.mp-svg-verified--success {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 97.43863393810032% 0;
+}
+.mp-svg-logo-ideal {
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 87.6923076923077% 0;
+}
+.mp-svg-location-grey {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 49.19957310565635% 0;
+}
+.mp-svg-website-grey {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 98.71931696905015% 0;
+}
+.mp-svg-call {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 13.233724653148347% 0;
+}
+.mp-svg-arrow-down {
+    background: url(../../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 2.9882604055496267% 0;
+}
+.mp-pgp-image {
+    background: url(../../images/pgp.png) no-repeat;
+}
+.mp-svg-trash {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 92.5925925925926% 0;
+}
+.mp-svg-arrow-right--secondary, .mp-svg-arrow-right-grey, .mp-svg-arrow-right-grey-dark {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 8.796296296296296% 0;
+}
+.mp-svg-checkmark-thick--success, .mp-svg-checkmark-thick-green {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 25.925925925925927% 0;
+}
+.mp-svg-image {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 46.75925925925926% 0;
+}
+.mp-svg-location {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 50% 0;
+}
+.mp-svg-paying {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 60.648148148148145% 0;
+}
+.mp-svg-search-save-grey {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 82.74824473420261% 0;
+}
+.mp-svg-delete {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 32.497492477432296% 0;
+}
+.mp-svg-megaphone-grey {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 54.663991975927786% 0;
+}
+.mp-svg-flag-blue {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 40.75560013373454% 0;
+}
+.mp-svg-sell-faster {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 84.3530591775326% 0;
+}
+.mp-svg-sell-faster-white {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 86.76028084252758% 0;
+}
+.mp-svg-sell-faster-blue {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 84.7542627883651% 0;
+}
+.mp-svg-delete-white {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 33.29989969909729% 0;
+}
+.mp-svg-edit-blue {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 34.90471414242728% 0;
+}
+.mp-svg-checkmark-circled {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 22.46740220661986% 0;
+}
+.mp-svg-plus-circled-grey {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 69.5085255767302% 0;
+}
+.mp-svg-lightbulb-green {
+    background: url(../../images/icons_3.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 49.44834503510532% 0;
+}
+.mp-svg-arrow-right--action, .mp-svg-arrow-right-blue {
+    background: url(../../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 7.87037037037037% 0;
+}
+/* help icons */
+.icon-connection-red {
+    background-image: url(../../images/connection_red.svg);
+    background-size: cover;
+}
+.icon-veilig {
+    background-image: url(../../images/veilig.svg);
+    background-size: cover;
+}
+.icon-plus-circled {
+    background-image: url(../../images/plus-circled.svg);
+    background-size: cover;
+}
+.icon-minus-circled {
+    background-image: url(../../images/minus-circled.svg);
+    background-size: cover;
+}
+.icon-external-link {
+    background-image: url(../../images/external-link.svg);
+    background-size: cover;
+}
+.icon-search {
+    background-image: url(../../images/search.svg);
+    background-size: cover;
+}
+.icon-arrow-right-small {
+    background-image: url(../../images/arrow-right-small.svg);
+    background-size: cover;
+}
+
+.btc {
+    background-image: url(/web/images/bitcoin.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+.shopping-cart {
+    background-image: url(/web/images/cart.png);
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 22px;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    border-radius: 200px;
+    margin-left: 36px;
+}
+
+span.cart-qty:not(:empty) {
+    font-size: 17px;
+    background-color: #DC3545;
+    padding: .25em .4em;
+    position: relative;
+    top: -15px;
+    left: 10px;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    color: white;
+}

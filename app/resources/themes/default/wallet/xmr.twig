@@ -1,0 +1,153 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_wallet.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper">
+		<div id="content" class="l-page">
+            {% if app.session.get('error') %}
+				<div class="mp-Alert mp-Alert--error">
+					<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+					<div>
+                        {{ app.session.get('error')}}
+					</div>
+				</div>
+            {% endif %}
+            {% if app.session.get('success') %}
+				<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+					<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+					<div>
+                        {{ app.session.get('success') }}
+					</div>
+				</div>
+            {% endif %}
+			<h1 class="page-header">Monero Wallet</h1>
+
+			<div class="mp-Card mp-Card--rounded">
+				<div class="mp-Card-block">
+					<h3>
+						Monero Wallet
+					</h3>
+					<div class="content">
+						<div class="form-field">
+							<label class="form-label" for="xmraddress">Your Monero(XMR) address</label>
+							<div class="input-group ">
+								<input type="text" name="xmraddress" id="xmraddress" class="input-disabled mp-Input" value="{{ address }}" disabled>
+							</div>
+						</div>
+						<div class="form-field">
+							<div class="qrcode">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiPr3IR9-V-y--PKkW-ISLncTtUeTOVP02sIZUkA3CaEWSdLTP&s"/>
+							</div>
+							<div class="input-group verifyaddress">
+								<label class="form-label" for="xmr">QR Code and Verification Image<span class="svg-icon-check1"></span> </label>
+								<input type="text" name="btcadres" id="btcadres" class="mp-Input" value="{{ address }}" disabled>
+								<a href="/sign">Get PGP proof of address ownership here</a>
+							</div>
+						</div>
+						<div class="mp-Alert " style="background-color:#F1F1E8;">
+							<span class="mp-Alert-icon mp-svg-info"></span>
+							<div>
+								<li style="color:black;">Send moneros to the address above to fund your account. Transaction will show up as a pending balance. After 3 confirmations ( approximately 15 to 90 minutes depending on when the blocks are mined) you are deposit will show as confirmed in your account and available for spending.
+								</li>
+							</div>
+						</div>
+						<div class="form-field" style="margin-left: 25%;">
+							<table id="escrow">
+								<tr>
+									<td>Available</td>
+									<td></td>
+									<td>
+										<b>XMR</b>&nbsp;&nbsp;{{ user.xmr_balance }}</td>
+								</tr>
+								<tr>
+									<td>Escrow</td>
+									<td></td>
+									<td>
+										<b>XMR</b>&nbsp;-0.000000</td>
+								</tr>
+								<tr>
+									<td>Balance</td>
+									<td></td>
+									<td>
+										<b>XMR</b>&nbsp;&nbsp;0.000000</td>
+								</tr>
+							</table>
+						</div>
+						<form action="../withdraw/xmr" method="post">
+                            {{ csrf_field() }}
+							<fieldset>
+								<legend>Withdraw</legend>
+								<div class="form-field">
+									<div class="input-group">
+										<input type="text" name="xmraddress" placeholder="Monero Address" class="mp-Input" value="">
+									</div>
+								</div>
+
+								<div class="form-field">
+									<div class="input-group">
+										<input type="text" name="xmramount" placeholder="Monero Amount" class="mp-Input" value="">
+									</div>
+								</div>
+
+
+								<div class="form-field">
+									<div class="mp-Select">
+										<select class="" name="xmr_fee_type">
+											<option value="1">Noraml Speed ({{ xmr_fee_normal }}) XMR</option>
+										</select>
+										<label>Cost: XMR network fee selected above + 0.9%</label>
+									</div>
+								</div>
+
+								<div class="form-field">
+									<input type="checkbox" name="max" value="max"><b>Withdraw Max</b>
+								</div>
+
+								<div class="form-field">
+									<div class="input-group">
+										<input type="text" name="withdrawPIN" placeholder="Withdraw PIN" class="mp-Input" value="">
+									</div>
+								</div>
+
+
+								<div class="form-field">
+									<div class="input-group">
+										<input type="submit" name="submit" class="mp-Button mp-Button--primary mp-Button--lg" value="Send">
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<div class="show-avg-ratings">
+							<h3>Account History</h3>
+							<table style="width:100%">
+								<tr>
+									<th>ID</th>
+									<th>Type</th>
+									<th>Transaction</th>
+									<th>Amount</th>
+									<th>Status</th>
+								</tr>
+                                {% for transaction in transactions %}
+									<tr>
+										<td>{{ transaction.id }}</td>
+										<td>{{ transaction.type }}</td>
+										<td>{{ transaction.tx_id }}</td>
+										<td>{{ transaction.amount }}</td>
+										<td>{{ transaction.status }}</td>
+									</tr>
+                                {% endfor %}
+							</table>
+							<a class="mp-Button mp-Button--dangerous mp-Button--lg">
+								<span>Clear History</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
+

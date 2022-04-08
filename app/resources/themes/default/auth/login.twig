@@ -1,0 +1,237 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+<link href="{{ setting('url') }}/web/css/index.css" rel="stylesheet">
+<link href="{{ setting('url') }}/web/css/account_register.css" rel="stylesheet">
+
+
+
+<style>
+.mp-FooterAlternative {
+        margin-top: 100px;
+}
+</style>
+{% endblock %}
+{% block navbar %}
+<header>
+    <div class="mp-Header-ribbonTop"></div>
+    <div class="mp-Header-navBar">
+        <div class="mp-Header-maxWidth">
+           <a class="mp-Header-logo" href="/" title="Marketplace">Marketplace</a>
+			<ul class="mp-Header-links">
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Community</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Help en info</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">PGP Key</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="/account/apply_vendor"  target="_blank">Becoming a Vendor</a>
+				</li>
+			</ul>
+            <ul class="mp-Header-links mp-pull-right">
+                <li class="style-scope mp-Header">
+                    <a class="mp-Button--flat" data-role="mymp-login" href="/login"><span aria-hidden="true"
+                            class="mp-Icon mp-svg-profile style-scope mp-Header"></span> <span
+                            class="mp-hide-lte-md style-scope mp-Header">Login</span></a>
+                </li>
+                <li class="style-scope mp-Header">
+                    <a class="mp-Button--flat" data-role="mymp-login" href="/register"><span aria-hidden="true"
+                            class="mp-Icon mp-svg-profile style-scope mp-Header"></span> <span
+                            class="mp-hide-lte-md style-scope mp-Header">Register</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mp-Header-ribbonBottom"></div>
+
+</header>
+{% endblock %}
+
+{% block content %}
+<div id="page-wrapper">
+    <div id="content" class="l-page wide-layout">
+        <section class="l-side-left" id="left-column" style="padding-top: 10px;">
+            <div class="mp-Card mp-Card--rounded" id="navigation">
+                <div class="mp-Card-block mp-Card-block--highlight mp-Card-block--padded-md">
+                    <div class="navigation-block">
+                        <h3 class="title heading"
+                            style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+                            <span class="main-label">Market Mirrors</span></h3>
+                        <ul class="marketmirrors">
+                            {% for url_title in load_urls() %}
+                            <li>
+                                <a href="http://{{url_title}}">{{url_title}} {% if current_website(url_title) %} <i style="color:#00CF72;font-size: 10px;">Verified<span class="svg-icon-check2"></span></i> {% endif %}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <p>Choose one of the links above if the site is loading too slow.</p>
+                    </div>
+                    <div class="handigeLinks">
+                        <div class="snippet-list">
+                            <h3 class="title heading"
+                                style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+                                Join us on Dread</h3>
+                                <li>
+                                    <a href=" http://dreadditevelidot.onion/u/RomanRoad">/u/RomanRoad<span class="mp-Button-icon mp-Button-icon--right mp-svg-logo-dread"></span></a>                       
+                                </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="l-main-right">
+            <div class="mp-Card mp-Card--rounded">
+                {% if errors.has('username') or errors.has('password')  %}
+                <div class="mp-Alert mp-Alert--error">
+                    <span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+                    <div>
+                        <ul>
+                            <li>Username or password is incorrect.</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+		             {% if app.session.get('message') %}
+                          <div class="mp-Alert mp-Alert--error">
+                            <span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+							<div>
+				            {{ app.session.get('message') }}
+							</div>
+						</div>
+					{% endif %}
+
+                <div class="mp-Card-block">
+                    <div id="login-tabs" class="mp-Tab-bar mp-Tab-bar--center sdk-custom">
+                        <a href="{{ setting('url') }}/login" class="mp-Tab mp-Tab--selected" style="width:15%">
+                            Log in
+                        </a>
+                        <a href="{{ setting('url') }}/register" class="mp-Tab">
+                            Create account
+                        </a>
+                    </div>
+                </div>
+                <div class="mp-Card-block">
+                    <div class="mp-Form mp-Form--aligned">
+                        <div class="mp-Form-body sdk-custom">
+                            <div id="socialButtons">
+                                <div class="mp-Form-controlGroup centered-control-group">
+                                    <a href="#" class="mp-Button mp-Button--primary pgp-button" style="background-color:#9B59B5;" disabled>
+                                        <span class="button-text">Login with Dread<span class="mp-Button-icon mp-Button-icon--left mp-svg-logo-dread"></span></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <form id="account-login-form" class="new-design-form" method="post"
+                                action="{{ route('login') }}">
+                                {{ csrf_field() }}
+                                <fieldset class="email-registration">
+                                    <legend align="center" class="mp-text-paragraph" style="width: 200px;">Or login with
+                                        Username</legend>
+                                    <div class="form-squeeze form-login">
+                                        <div class="mp-Form-controlGroup">
+                                            <label class="mp-Form-controlGroup-label optional-label"
+                                                for="username">Username</label>
+                                            <input type="text" name="username" placeholder="Username"
+                                                class="mp-Input {{ errors.has('username') ? ' invalid' : '' }}"
+                                                value="{{ old('username') }}" tabindex="1">
+                                        </div>
+                                        <div class="mp-Form-controlGroup">
+                                            <label class="mp-Form-controlGroup-label optional-label"
+                                                for="password">Password</label>
+                                            <input id="password" type="password" placeholder="Wachtwoord"
+                                                name="password"
+                                                class="mp-Input {{ errors.has('password') ? ' invalid' : '' }}"
+                                                tabindex="2">
+
+                                            <div class="forget-password-link">
+                                                <a id="forgot-password" class="mp-TextLink"
+                                                    href="/password/reset" tabindex="3">Forget Password?</a>
+                                            </div>
+                                        </div>
+                                        <div class="mp-Form-controlGroup">
+                                            <p style="font-size:20px;font-weight:bold;" class="mp-text-meta paragraphs-security">Anti-phishing protection feature
+                                            </p>
+                                            <div class="anti-phishing">{{random_website_letter("znsomnia3pqgwone") | raw }}.onion</div>  
+                                        </div>
+                                        
+                                        <div class="mp-Form-controlGroup">
+                                            <img src="/captcha.html" />
+                                            <label class="mp-Form-controlGroup-label optional-label"
+                                                for="captcha">Captcha</label>
+                                            <input id="captcha" type="text" placeholder="captcha" name="captcha"
+                                                class="mp-Input {{ errors.has('captcha') ? ' invalid' : '' }}"
+                                                tabindex="2">
+                                            {% if errors.has('captcha') %}
+                                            <div
+                                                class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                                {{ errors.first('captcha') }}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="mp-Form-controlGroup centered-control-group last-control-group">
+                                            <button id="account-login-button"
+                                                class="l-stretchable-auto mp-Button mp-Button--primary">
+                                                <span>Inloggen</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="useful-links">
+                <div class="snippet-list">
+                    <div class="handigeLinks ads">
+                        <h3 class="heading">For the customers</h3>
+                        <ul>
+                            <li>
+                                <span class="svg-icon-block mp-svg-handshake"></span> <a class="textBlock"
+                                    href="https://www.marktplaats.nl/i/gelijkoversteken-koper/?utm_source=home&amp;utm_medium=onsite&amp;utm_campaign=CO_gelijkoversteken"><span
+                                        class="title">Escrow protection</span></a> <span class="sub_title">Avoid being
+                                    scammed on the darkweb</span>
+                            </li>
+                            <li>
+                                <span class="svg-icon-block mp-svg-shoppingcart"></span> <a class="textBlock"
+                                    href="/zakelijkegoederen?utm_source=l0&amp;utm_medium=onsite&amp;utm_campaign=CO_Sel_B_%20ZG201410"><span
+                                        class="title">Buy bulk</span></a> <span class="sub_title">Find
+                                    your good deal on here.</span>
+                            </li>
+                            <li>
+                                <span class="svg-icon-block mp-svg-category-diensten"></span> <a class="textBlock"
+                                    href="/c/diensten-en-vakmensen/c1098.html"><span class="title">Fast Support
+                                        Handling</span></a> <span class="sub_title">Get answer within 10 minutes.</span>
+                            </li>
+                            <h3 class="heading">For the vendors</h3>
+                            <li>
+                                <span class="svg-icon-block mp-svg-save"></span> <a class="textBlock"
+                                    href="/i/help/verkopen-via-marktplaats/opvallen.dot"><span class="title">Sell your
+                                        products</span></a> <span class="sub_title">Make your
+                                    advertisement stand out</span>
+                            </li>
+                            <li>
+                                <span class="svg-icon-block mp-svg-results-list"></span> <a class="textBlock"
+                                    href="http://www.marktplaatszakelijk.nl/extra/"><span class="title">Extra
+                                        ads</span></a> <span class="sub_title">Make
+                                    multiple ads stand out</span>
+                            </li>
+                            <li>
+                                <span class="svg-icon-block mp-svg-payable"></span> <a class="textBlock"
+                                    href="https://www.marktplaats.nl/i/betaalverzoeken/?utm_source=home&amp;utm_medium=onsite&amp;utm_campaign=CO_betaalverzoeken"><span
+                                        class="title">0% commission fee</span></a> <span class="sub_title">No
+                                            commission..</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

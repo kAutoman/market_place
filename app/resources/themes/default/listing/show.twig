@@ -1,0 +1,591 @@
+{% extends "layouts.app" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/product_info.css" rel="stylesheet">
+	<link href="{{ setting('url') }}/web/css/review.css" rel="stylesheet">
+
+	<style>
+		@media(min-width: 46.875em) {
+			.l-main-left {
+				min-height: 1800px;
+			}
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper" class="with-right-container">
+		<div id="content" class="l-page">
+		   {% if app.session.get('message') %}
+			<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+				<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+				<div>
+				{{ app.session.get('message') | raw }}
+				</div>
+			</div>
+			{% endif %}
+			{% if app.session.get('error') %}
+							<div class="mp-Alert mp-Alert--error">
+                            <span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+								<div>
+									{{ app.session.get('error') | raw }}
+								</div>
+							</div>
+			{% endif %}
+			<nav id="vip-breadcrumbs-pagination" class="minified">
+				<div id="search-breadcrumbs-content" class="search-breadcrumbs-content">
+					<div class="mp-Nav-breadcrumb large">
+						<a href="{{route('browse')}}" class="mp-Nav-breadcrumb-item crumb">
+							<span>Home</span>
+						</a>
+						{% for breadcrumb in breadcrumbs %}
+							<h2 class="mp-Nav-breadcrumb-item crumb">
+								<a href="/category/{{breadcrumb.id}}">
+									<span>{{ breadcrumb.name }}</span>
+								</a>
+							</h2>
+						{% endfor %}
+
+						<h2 class="mp-Nav-breadcrumb-item crumb">
+							<a href="/category/{{listing.category.id}}">
+								<span>{{ listing.category.name }}</span>
+							</a>
+						</h2>
+
+						{% if auth_check() and (listing.user_id == auth_user().id or auth_user().can('edit listing')) %}
+							<div class="mb-3">
+								<strong class="badge badge-info">
+									{{ (listing.is_published)?__('Published'):__('Unpublished') }}</strong>
+								<a class="badge badge-secondary" href="{{ route('listing.edit',listing) }}">{{ __("Edit listing") }}</a>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</nav>
+			<section class="l-main-left ">
+				<section class="listing mp-Card mp-Card--rounded">
+					<section class="l-top-content mp-Card-block">
+						<section class="header clear-fix mp-Card-block container-view-desktop">
+							<h1 id="title" class="title" title="{{listing.title}}">{{listing.title}}</h1>
+							<div class="stats">
+								<span class="stat">
+									<span class="mp-Icon mp-svg-eye-open-grey"></span>
+									<span id="view-count" class="mp-hidden">{{listing.views_count}}</span>
+									<span>{{listing.views_count}}</span>
+									<span class="sentence">
+										x views</span>
+								</span>
+								<span class="stat">
+									<span class="mp-Icon mp-svg-heart-grey"></span>
+									<span id="favorited-count" class="mp-hidden">31</span>
+									<span>{{listing.favoritesCount}}</span>
+									<span class="sentence">
+										x saved</span>
+								</span>
+								<span id="displayed-since" class="stat">
+									<span class="mp-Icon mp-svg-clock-grey"></span>
+									<span class="sentence">since</span>
+									<span>{{listing.created_at.format('d F Y')}}</span>
+								</span>
+							</div>
+							<section class="top-actions-below">
+								<form id="fav-form-top" action="{{route('listing.star', {'id' : listing, 'slug' : str_slug(listing.title)})}}" style="margin-right:10px;">
+									<button id="fav-btn-top" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+										<span class="mp-Button-icon mp-Button-icon--left mp-svg-heart-white"></span>
+										{% if listing.isFavorited() %}
+											<span class="text-label">Remove from favourites</span>
+										{% else %}
+											<span class="text-label">Add to favourites</span>
+										{% endif %}
+									</button>
+								</form>
+								<button style="color:black;" id="fav-btn-top" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn" disabled>
+									<span class="mp-Button-icon mp-Button-icon--left mp-svg-handshake"></span>
+									<span class="text-label">{{listing.payment_type.payment_name}}</span>
+								</button>
+								<button style="color:black;" id="fav-btn-top" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn" disabled>
+									<span class="mp-Button-icon mp-Button-icon--left {{listing.listing_class.id == 1 ? 'mp-svg-postpackage': 'mp-svg-digital'}}"></span>
+									<span class="text-label">{{listing.listing_class.name}}</span>
+								</button>
+
+							</section>
+						</section>
+						<section class="gallery-container">
+							<div id="vip-gallery" class="">
+								<div class="image-viewer-wrapper ">
+									<div id="vip-image-viewer" class="image-viewer">
+										<div class="image ">
+											<a href="{{listing.photo}}"><img src="{{listing.photo}}" alt="Image"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="vip-action-block">
+								<div class="vip-ad-price-container">
+									<h3>Price</h3>
+									<span class="price ">{{ToUserCurrency(listing.price,listing.currency)}} {{ GetCurrency() }}</span>
+
+									<h3>Product Info</h3>
+									<p style="font-size: 12px;">Origin Country :
+										<b>{{listing.shipped_from}}</b>
+									</p>
+									<p style="font-size: 12px;">Ships To :
+										<b>
+											{% for country in listing.countryNames() %}
+												{{country.country_short_name}},
+											{% endfor %}
+										</b>
+									</p>
+									<p style="font-size: 12px;">Sold :
+										<b>{{listing.orders.count}}</b>
+									</p>
+									<p style="font-size: 12px;">Quantity Available :
+										<b>{{listing.quantity == '-1' ? 'Unlimited' : listing.quantity}}</b>
+									</p>
+
+								</div>
+							</section>
+							<section class="header header-container title container-view-mobile">
+								<div class="header-inline-price">
+									<h1 id="title" class="title" title="{{listing.title}}">{{listing.title}}</h1>
+								</div>
+								<div class="stats">
+									<span class="stat">
+										<span class="mp-Icon mp-svg-eye-open-grey"></span>
+										<span id="view-count" class="mp-hidden">{{listing.views_count}}</span>
+										<span>{{listing.views_count}}</span>
+										<span class="sentence">
+											x views</span>
+									</span>
+									<span class="stat">
+										<span class="mp-Icon mp-svg-heart-grey"></span>
+										<span id="favorited-count" class="mp-hidden">31</span>
+										<span>{{listing.favoritesCount}}</span>
+										<span class="sentence">
+											x saved</span>
+									</span>
+									<span id="displayed-since" class="stat">
+										<span class="mp-Icon mp-svg-clock-grey"></span>
+										<span class="sentence">since</span>
+										<span>{{listing.created_at.format('d F Y')}}</span>
+									</span>
+								</div>
+								<section class="top-actions-below">
+									<form id="fav-form-topMobile" action="{{route('listing.star', {'id' : listing, 'slug' : str_slug(listing.title)})}}">
+										<button id="fav-btn-top-mobile" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+											<span class="mp-Button-icon mp-Button-icon--left mp-svg-heart-white"></span>
+										{% if listing.isFavorited() %}
+											<span class="text-label">Remove from favourites</span>
+										{% else %}
+											<span class="text-label">Add to favourites</span>
+										{% endif %}
+										</button>
+									</form>
+									<span class="mp-Button-icon mp-Button-icon--left mp-svg-handshake"></span>
+									<span class="text-label">{{listing.payment_type.payment_name}}</span>
+									<span class="mp-Button-icon mp-Button-icon--left {{listing.listing_class.id == 1 ? 'mp-svg-postpackage': 'mp-svg-digital'}}"></span>
+									<span class="text-label">{{listing.listing_class.name}}</span>
+								</section>
+							</section>
+						</section>
+
+						<section class="l-body-content mp-Card-block">
+							<div class="banner-position-mid">
+								<div id="banner-vipmid-dt" class="banner-vipmid" style="display: none;"></div>
+							</div>
+							<div class="section attributes">
+								<div id="vip-ad-attributes">
+									<h2 class="heading heading-3">Characteristics</h2>
+									<div class="attribute-tables">
+										<table class="first-column attribute-table single-value-attributes"></table>
+										<table class="attribute-table multi-value-attributes">
+											<tbody>
+												<tr>
+													<td class="name">Tags</td>
+													<td class="seperator">:</td>
+													<td class="value">
+														{% if listing.tags %}
+															{% for tag in listing.tags %}
+																{{ tag }}
+															{% endfor %}
+														{% endif %}
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="section description">
+								<div id="vip-description" class="">
+									<h2 class="heading heading-3">
+										Description
+									</h2>
+									<div id="vip-ad-description" class="wrapped">
+										{{ listing.description | escape('html') }}
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="l-body-content mp-Card-block" style="background-color:#EDECED;">
+							<div class="section description">
+								<div id="vip-description" class="">
+									<h2 class="heading heading-3">
+										Terms and Conditions of <b>{{ listing.user.username }}</b>
+									</h2>
+									<div id="vip-ad-description" class="wrapped">
+										{{ listing.user.terms_conditions | escape('html') }}
+									</div>
+								</div>
+							</div>
+						</section>
+					</section>
+					<div class="mp-Card">
+
+						<div class="mp-Card-block mp-Card-block--heading" style="padding:15px;">
+							<h3>Rating comments ({{comments.count}})</h3>
+						</div>
+						{% if comments.count == 0 %}
+							<article class="user-review mp-Card-block">
+								This product has still no ratings, are you the maybe the first person?
+							</article>
+						{% else %}
+							{% for comment in comments %}
+								<article class="user-review mp-Card-block">
+									<header class="user-review-header">
+										{{comment.created_at.diffForHumans(null, true)}}
+										<span class="mp-StarRating mp-StarRating--5 ">
+											{{ include('components.star_rating', {rating: comment.rating}) }}
+										</span>
+										{{comment.comment | escape('html')}}
+										<span style="float:right;" class="mp-text-meta">{{filter_username(comment.commenter.username)}}
+											~ {{ToUserCurrency((comment.order.price * comment.order.amount),order.listing.currency)|number_format(2)}} {{ GetCurrency() }}</span>
+									</header>
+								</article>
+							{% endfor %}
+						{% endif %}
+					</div>
+				</section>
+				<aside class="l-side-right">
+					<section class="contact-info mp-Card mp-Card--rounded">
+						<div id="vip-seller">
+							<div class="mp-Card-block mp-Card-block--custom-highlight">
+								<div class="top-info">
+									<div class="save-seller-button">
+										<div id="save-seller">
+											<form id="save-seller-form" action="{{route('listing.follow', {'id' : listing, 'slug' : str_slug(listing.title)})}}">
+												<button id="save-seller-button" class="button mp-Button mp-Button--secondary mp-Button--sm" title="Follow seller">
+													{% if auth_user().getIsFollowed(listing.user) %}
+														<span class="mp-Button-icon mp-svg-following"></span>
+													{% else %}
+														<span class="mp-Button-icon mp-svg-follow"></span>
+													{% endif %}
+												</button>
+											</form>
+										</div>
+									</div>
+									<a href="/profile/{{ listing.user.username }}">
+										<h2 class="name mp-text-header3" title="Heritage Auctions Europe">
+											{{ listing.user.username }}({{listing.user.orders.count}}) ({{listing.user.avg_rating()}}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+												<i></i>
+											</span>)
+										</h2>
+									</a>
+								</div>
+								<ul class="seller-info">
+									<li id="vip-active-since">
+										<span><b>{{ listing.user.created_at.diffForHumans(null, true)}}</b></span>
+										long active on Roman Road
+									</li>
+									<li id="vip-seller-all-ads">
+										<a id="vip-header-soi-juiceless-link" class="juiceless-link do_scroll" href="/profile/{{ listing.user.username }}/store">Our Store</a>
+									</li>
+									<br>
+									* Before ordering, Roman Road respects every Vendor Terms and Refund policy therefore If you buy something you accept automatically the terms and refund policy of vendor
+									<b>{{ listing.user.username }}</b>.
+								</ul>
+								<div class="trust-indicator-group">
+									<ul>
+										<h3>Statistics</h3>
+										{% if listing.user.markets.count != null %}
+										{% for markets in listing.user.markets %}
+								{% if markets.market_title == "Silk" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/si.png"/>
+										</div>
+										<span>Silk Road Sales:
+											<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+								{% elseif markets.market_title == "Berlus" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/ber.png"/>
+										</div>
+										<span>Berlusconi Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+								{% elseif markets.market_title == "Dream" %}
+
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/d.png"/>
+										</div>
+										<span>Dream Sales:<b>{{markets.sales}}(<b>
+													<i class="normal">{{markets.rate}}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+															<i></i>
+														</span>
+													</i>
+												</b>)</b>
+										</span>
+									</li>
+
+
+								{% elseif markets.market_title == "Empire" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/eeim.png"/>
+										</div>
+										<span>Empire Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+
+								{% elseif markets.market_title == "Cryptonia" %}
+
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/cd.png"/>
+										</div>
+										<span>Cryptonia Sales:<b>{{markets.sales}}
+												(<i class="green">{{markets.percentage}}%</i>)</b>
+										</span>
+									</li>
+
+								{% elseif markets.market_title == "Nightmare" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/nih.png"/>
+										</div>
+										<span>Nightmare Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+
+								{% elseif markets.market_title == "Apollon" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/apol.png"/>
+										</div>
+										<span>Apollon Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+
+								{% endif %}
+							{% endfor %}
+							{% else %}
+							<p>This seller has no other ratings from markets.</p>
+							{% endif %}
+									</ul>
+								</div>
+								<div>
+									<div class="seller-info-shipping-options">
+										<h3>Shipping Options</h3>
+									<form action="{{route('checkout.store', {'id' : listing})}}" method="post">
+										 {{ csrf_field() }}
+										{% for k, shipping_option in listing.shipping_options  %}
+											<input type="radio" name="shipping_option" value="{{ shipping_option.id }}">{{ shipping_option.name }}
+											{{ ToUserCurrency(shipping_option.price,listing.currency)}} {{ GetCurrency() }}<br>
+										{% endfor %}
+
+										   {% if errors.has('shipping_option') %}
+                                            <div
+                                                class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                                Please select the shipping option.
+                                            </div>
+                                            {% endif %}
+
+										<br>
+										<label>
+											<small>
+												<b>
+													Quantity :
+												</b>
+											</small>
+										</label>
+										<input name="quantity" value="1" class="form-control input-sm" size="15px">
+										 {% if errors.has('quantity') %}
+                                            <div
+                                                class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                                {{ errors.first('quantity') }}
+                                            </div>
+                                            {% endif %}
+										{% if listing.payment_type.id != 4 %}
+										{% if  listing.user.support_bitcoin == 0 and listing.user.support_monero == 0 and listing.user.support_litecoin == 0 %}
+										<a style="color:black;"href="#" title="Buy with BTC" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn" disabled>
+											There is no payment method available.
+										</a>
+										{% endif %}
+										{% if listing.user.support_bitcoin %}
+										<button name="paymentmethod" title="Buy with BTC" type="submit" value="1" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+										<span class="mp-Button-icon--vertical mp-Button-icon--left btc20"></span>
+										Purschase with {{ GetBTCPrice(listing.price,listing.currency,"yes") }} BTC
+										</button>
+										{% endif %}
+										{% if listing.user.support_litecoin %}
+										<button name="paymentmethod" title="Buy with LTC" type="submit" value="2" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+										<span class="mp-Button-icon--vertical mp-Button-icon--left ltc20"></span>
+										Purschase with {{ GetLTCPrice(listing.price,listing.currency,"yes") }} LTC
+										</button>
+										{% endif %}
+										{% if listing.user.support_monero %}
+										<button name="paymentmethod" title="Buy with XMR" type="submit" value="3" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+										<span class="mp-Button-icon--vertical mp-Button-icon--left xmr20"></span>
+										Purschase with {{ GetXMRPrice(listing.price,listing.currency,"yes") }} XMR
+										</button>
+										{% endif %}
+
+										{% else %}
+										<button name="paymentmethod" title="Buy with BTC" type="submit" value="1" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+										<span class="mp-Button-icon--vertical mp-Button-icon--left btc20"></span>
+										<small>Purschase with {{ GetBTCPrice(listing.price,listing.currency,"yes") }} BTC using Multisig 2/3</small>
+										</button>
+										{% endif %}
+
+
+
+
+									</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<section class="contact-options-mobile mp-Card-block mp-Card-block--padded-no mp-Card-block--buttons">
+							<a href="{{route('listing', {'id' : listing, 'slug' : str_slug(listing.title)})}}/message" title="Send to this vendor a message" class="mp-Button mp-Button--primary">
+								<span class="mp-Button-icon mp-Button-icon--vertical mp-svg-messages-white"></span>
+								Ask Question
+							</a>
+						</section>
+					</section>
+				</aside>
+
+				<aside class="l-side-right">
+					<div class="mp-Card">
+						<div class="user-review-summary mp-Card-block">
+							<h2>Product Ratings</h2>
+						</span>
+					</div>
+					<div class="user-review-score-summary mp-Card-block">
+						{% if comments.count == 0 %}
+							This product has still no ratings, are you the maybe the first person?
+						{% else %}
+							<table>
+								<tbody>
+									<tr>
+
+										{% set firstcount = 0 %}
+										{% set secondcount = 0 %}
+										{% set thirdcount = 0 %}
+										{% set fourthcount = 0 %}
+										{% set fithcount = 0 %}
+
+										{% for comment in comments %}
+											{% if comment.rating == 5 %}
+												{% set fithcount = fithcount + 1 %}
+											{% endif %}
+											{% if comment.rating == 4 %}
+												{% set fourthcount = fourthcount + 1 %}
+											{% endif %}
+											{% if comment.rating == 3 %}
+												{% set thirdcount = thirdcount + 1 %}
+											{% endif %}
+											{% if comment.rating == 2 %}
+												{% set secondcount = secondcount + 1 %}
+											{% endif %}
+											{% if comment.rating == 1 %}
+												{% set firstcount = firstcount + 1 %}
+											{% endif %}
+										{% endfor %}
+										<td>
+											<span class="mp-Chip mp-Chip--success">5
+												<span class="mp-Icon mp-svg-saved-white"></span>
+											</span>
+										</td>
+										<td>
+											<div class="mp-Progress mp-Progress--success mp-Progress--lg mp-Progress--rounded">
+												<div class="mp-Progress-bar mp-Progress-bar--determinate" style="width:{{ (fithcount / comments.count) * 100}}% "></div>
+											</div>
+										</td>
+										<td>4</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="mp-Chip mp-Chip--success">4
+												<span class="mp-Icon mp-svg-saved-white"></span>
+											</span>
+										</td>
+										<td>
+											<div class="mp-Progress mp-Progress--success mp-Progress--lg mp-Progress--rounded">
+												<div class="mp-Progress-bar mp-Progress-bar--determinate" style="width:{{ (fourthcount / comments.count) * 100}}%"></div>
+											</div>
+										</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="mp-Chip mp-Chip--success">3
+												<span class="mp-Icon mp-svg-saved-white"></span>
+											</span>
+										</td>
+										<td>
+											<div class="mp-Progress mp-Progress--success mp-Progress--lg mp-Progress--rounded">
+												<div class="mp-Progress-bar mp-Progress-bar--determinate" style="width:{{ (thirdcount / comments.count) * 100}}%"></div>
+											</div>
+										</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="mp-Chip mp-Chip--success">2
+												<span class="mp-Icon mp-svg-saved-white"></span>
+											</span>
+										</td>
+										<td>
+											<div class="mp-Progress mp-Progress--success mp-Progress--lg mp-Progress--rounded">
+												<div class="mp-Progress-bar mp-Progress-bar--determinate" style="width:{{ (secondcount / comments.count) * 100}}%"></div>
+											</div>
+										</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="mp-Chip mp-Chip--success">1
+												<span class="mp-Icon mp-svg-saved-white"></span>
+											</span>
+										</td>
+										<td>
+											<div class="mp-Progress mp-Progress--success mp-Progress--lg mp-Progress--rounded">
+												<div class="mp-Progress-bar mp-Progress-bar--determinate" style="width:{{ (firstcount / comments.count) * 100}}%"></div>
+											</div>
+										</td>
+										<td>0</td>
+									</tr>
+								</tbody>
+							</table>
+						{% endif %}
+					</div>
+				</div>
+			</aside>
+		</div>
+	</div>
+
+{% endblock %}
+

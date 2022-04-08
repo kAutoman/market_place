@@ -1,0 +1,117 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_ads.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+
+	<div id="content">
+		<div id="seller-panel">
+			<div class="canvas">
+			{% if orders.count == null %}
+				{% include 'account.head_vendor_bar.twig' %}
+				{% include 'account.orders.sales.navbar.twig' %}
+				<div style="margin:0;" class="mp-Alert mp-Alert--info-light">
+				<span class="mp-Alert-icon mp-svg-info"></span>
+				<div>
+					<span>
+						You don't have currently any cancelled/refunded sales
+					</span>
+				</div>
+			</div>
+			    {% else %}
+				{% include 'account.head_vendor_bar.twig' %}
+				<div id="ad-listing-table" class="table ad-listing-container seller">
+					<div id="table-head-stickies" class="sticky">
+						<div id="ad-listing-header" class="table-head ad-listing compact">
+   						 {% include 'account.orders.sales.navbar.twig' %}
+						</div>
+						<div id="scroll-under-top-border"></div>
+					</div>
+					{% for i, item in orders %}
+						<div id="ad-listing-table-body" class="table-body">
+							<div class="row ad-listing compact">
+								<div class="cells">
+									<div class="cell icon-column">
+										<div class="check">
+											<label>
+												<b>Sale:
+												</b>
+												{{item.id}}</label>
+										</div>
+									</div>
+									<div class="cell">
+										<textarea class="form-control" rows="10" cols="30"  style="resize: vertical;" readonly="" value="">{{item.shipping_address}}</textarea>																																	
+									</div>
+									<div class="cell thumbnail-column">
+										<div class="thumbnail-wrapper">
+											<a href="{{ item.url }}">
+												<img src="{{item.listing.photo}}">
+											</a>
+										</div>
+									</div>
+									<div class="cell description-column">
+										<a class="title" href="{{ route('account.orders.show', item) }}">
+											<span>{{ item.listing.title }}</span>
+										</a>
+										<div class="item">
+											<label>Item</labe>
+											#{{ item.hash }}
+										</div>
+										<div class="item">
+											<label>Product Class</labe>
+											<b>{{ item.listing.listing_class.name }}</b>
+										</div>
+										<div class="item">
+											<label>From</label><br><a href="/profile/{{ item.user.username }}">{{ item.user.username }}</a>
+										</div>
+										<div class="item">
+											<label>Shipping Method</label><br>{{ item.shipping.name  }}/{{ item.shipping.days  }}days/{{ GetCurrency() }}
+                                            {{ ToUserCurrency(item.shipping.price,item.currency) | number_format(2)  }}
+										</div>
+										<div class="item">
+											<label>Purschased:</label><br>{{ item.created_at.toFormattedDateString }}
+										</div>
+										<div class="item">
+											<label>Quantity:</label><br><b>{{ item.amount }}
+												Item</b>
+										</div>
+									</div>
+									<div class="cell position-column features-column">
+										<div class="item">
+											<button class="mp-Button mp-Button--dangerous mp-Button--xs">Cancelled/Refunded</button><br>
+											<label>Payment:</label><br>
+											<span class="{{ item.currency == 'BTC' ? 'btc20' : item.currency == 'XMR' ? 'xmr20' : 'ltc20' }}"></span>
+											{{item.payment_type.payment_name}}
+										</div>
+										<div class="item">
+											<label>Total Price:</label><br>
+                                            {{ GetCurrency() }}
+                                            {{ ToUserCurrency((item.amount * item.price),item.currency)| number_format(2)  }}
+										</div>
+										<div class="item">
+											<label>Status</label><br>
+											<span style="{{order.status == "processing" ? "color:black": item.status == "shipped" ? "color:blue" : item.status == "cancelled" ? "color:red;" : item.status == "disputed" ? "color:red;" : "color:green;" }}">{{item.status}}</span>
+										</div>
+
+										<div class="cta">
+											<a href="{{ route('account.orders.show', item) }}" class="mp-Button--xs mp-Button--primary">
+												Details
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					{{orders.links() | raw }}
+
+				</div>
+				{% endif  %}
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

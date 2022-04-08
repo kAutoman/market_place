@@ -1,0 +1,2240 @@
+html {
+	background-color: rgba(45, 60, 77, .6);
+	color: #2d3c4d;
+	box-sizing: border-box
+}
+
+*,
+:after,
+:before {
+	box-sizing: inherit
+}
+
+body {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 400
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit
+}
+
+.text-box{
+	width: 100%;
+	padding: 22px 10px 18px;
+    border: none;
+	resize: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0
+}
+
+img {
+	box-sizing: content-box
+}
+
+.pageRoot {
+	background-color: #eae9e6;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	transition: transform .25s
+}
+
+#messagingClientRoot,
+.messagingClientRoot {
+	position: absolute;
+	bottom: 0;
+	top: 57px;
+	width: 100%;
+	left: 0;
+	right: 0
+}
+
+@media screen and (min-width:1280px) {
+	#messagingClientRoot,
+	.messagingClientRoot {
+		left: 50%;
+		margin: 0 auto 0 -640px;
+		width: 1280px
+	}
+}
+
+.pageBody {
+	z-index: 50;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	min-height: 100%;
+	font-family: Arial, sans-serif;
+	color: #2d3c4d
+}
+
+#alert,
+#modal {
+	position: absolute;
+	z-index: 3000060;
+	width: 0;
+	height: 0;
+	overflow: visible
+}
+
+#modal .mp-Dialog-content {
+	position: relative
+}
+
+#modal .mp-Dialog-content .mp-Progress {
+	position: absolute;
+	top: 0;
+	left: 0
+}
+
+#alert {
+	z-index: 3000061
+}
+
+.mp-Toggle-label p a {
+	display: inline
+}
+
+.mp-sdk-svg {
+	display: block;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 100%
+}
+
+.mp-font-meta {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	line-height: 16px;
+	color: #818a95;
+	color: var(--mp-color-meta-text, #818a95)
+}
+
+.mp-font-meta,
+.mp-font-size-meta {
+	font-weight: 300;
+	font-size: 12px
+}
+
+.mp-text-header-4--light {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: 300
+}
+
+.mp-text-paragraph {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px
+}
+
+button .mp-Button-icon {
+	margin-right: 4px!important
+}
+
+button[disabled] span.mp-Button-icon {
+	opacity: .25
+}
+
+.text-link {
+	pointer-events: auto;
+	cursor: pointer;
+	color: #116db4
+}
+
+.text-link:hover {
+	text-decoration: underline
+}
+
+.text-center {
+	text-align: center
+}
+
+.upper-case {
+	text-transform: uppercase
+}
+
+.cursor-pointer {
+	cursor: pointer
+}
+
+.margin-top-0,
+.mp-Form-controlGroup.margin-top-0 {
+	margin-top: 0
+}
+
+.mp-Card .mp-Card-block.mp-Card-block--meta p {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300;
+	font-size: 12px;
+	line-height: 16px;
+	color: #818a95;
+	color: var(--mp-color-meta-text, #818a95)
+}
+
+.mp-Card .mp-Card-block.mp-Card-block--escrow-more-info {
+	border-top: 1px dotted #e6e4e1;
+	background-color: #fff;
+	min-height: 36px
+}
+
+.mp-Card .mp-Card-block.mp-Card-block--escrow-more-info a {
+	font-weight: 300;
+	font-size: 12px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0
+}
+
+.mp-Card-block--obp-theme {
+	background-color: #2d3c4d;
+	color: #fff
+}
+
+.mp-Card-block--opb-highlight {
+	text-align: center;
+	background-color: #e7ba33;
+	font-size: 14px;
+	line-height: 20px;
+	color: #fff
+}
+
+.mp-Card-block--obp-dark,
+.mp-Card-block--opb-highlight {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300
+}
+
+.mp-Card-block--obp-dark {
+	font-size: 12px;
+	line-height: 16px;
+	color: #818a95;
+	color: var(--mp-color-meta-text, #818a95);
+	background-color: #2d3c4d;
+	color: #fff
+}
+
+.mp-Card-block--obp-brand {
+	color: #fff;
+	background-color: #2d3c4d;
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 10px;
+	border-bottom: 0
+}
+
+.mp-Card-block--obp-brand>div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-items: flex-start;
+	justify-content: center
+}
+
+.mp-Card-block--obp-brand>div svg {
+	margin-top: 2px;
+	padding-left: 6px;
+	margin-right: 6px
+}
+
+.mp-Card-block--chunk {
+	display: flex;
+	justify-content: space-between;
+	background-color: #fff
+}
+
+.mp-Card-block--chunk article {
+	flex-grow: 1
+}
+
+.mp-Card-block--chunk article .meta,
+.mp-Card-block--chunk article header {
+	font-size: 12px;
+	line-height: 16px;
+	color: #818a95;
+	color: var(--mp-color-meta-text, #818a95)
+}
+
+.mp-Card-block--chunk article .meta,
+.mp-Card-block--chunk article header,
+.mp-Card-block--chunk article p {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300
+}
+
+.mp-Card-block--chunk article p {
+	font-size: 14px;
+	line-height: 20px;
+	margin: 0!important;
+	white-space: pre;
+	text-align: left
+}
+
+.mp-Card-block--chunk button {
+	width: 100%;
+	margin: 24px
+}
+
+.mp-Card-block--chunk aside {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10%
+}
+
+.mp-Card-block--chunk.actionable {
+	cursor: pointer;
+	transition: background-color .25s ease
+}
+
+.mp-Card-block--chunk.actionable:hover {
+	background-color: transparent
+}
+
+.mp-Card-block--chunk.actionable:active {
+	background-color: rgba(64, 64, 64, 0)
+}
+
+ul.step-counter {
+	list-style-type: none;
+	padding: 0;
+	margin: 0
+}
+
+ul.step-counter li {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	counter-increment: step-counter;
+	margin-bottom: 14px;
+	text-align: center
+}
+
+ul.step-counter li:before {
+	font-size: 14px;
+	line-height: 18px;
+	content: counter(step-counter);
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	line-height: 20px;
+	text-align: center;
+	margin-right: 10px
+}
+
+@media screen and (max-width:767px) {
+	.in-conversation .mp-Header {
+		display: none
+	}
+}
+
+.mp-Dialog-back {
+	padding: 8px;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%)
+}
+
+.modal-back,
+.mp-Dialog-back {
+	cursor: pointer;
+	position: absolute
+}
+
+.modal-back {
+	width: 38px;
+	height: 38px;
+	margin-top: -50px;
+	margin-left: 2px
+}
+
+.modal-back:active {
+	margin-top: -49px
+}
+
+.mp-Progress {
+	z-index: 100
+}
+
+.ContentPlaceholderMolecule-root {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	color: #737d89;
+	background-color: #f0efed
+}
+
+.ContentPlaceholderMolecule-rootInner {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	transform: translateY(-50%);
+	text-align: center
+}
+
+.ContentPlaceholderMolecule-iconUnit {
+	margin-bottom: 5px
+}
+
+.mp-svg-messages--secondary, .mp-svg-messages-grey, .mp-svg-messages-grey-dark {
+    background: url(../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 52.251142% 0;
+}
+
+.mp-svg-checkmark-thick--secondary, .mp-svg-checkmark-thick-grey, .mp-svg-checkmark-thick-grey-dark {
+    background: url(../images/icons_2.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 25.414155% 0;
+}
+
+.invalid {
+    border: 1px solid #c5283d
+}
+
+.ContentPlaceholderMolecule-text {
+	margin: 0
+}
+
+.ContentPlaceholderMolecule-link {
+	color: #737d89
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+	opacity: 0;
+	z-index: 1060;
+
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: #06D85F;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+
+.ConversationsToolsMolecule-root .ConversationsToolsMolecule-deleteSelected,
+.ConversationsToolsMolecule-root .ConversationsToolsMolecule-selectAll {
+	font-size: 14px;
+	line-height: 18px;
+	color: #116db4;
+	display: table-cell;
+	width: 50%;
+	vertical-align: middle;
+	padding: 0 7px
+}
+
+.ConversationsToolsMolecule-root .ConversationsToolsMolecule-deleteSelected>*,
+.ConversationsToolsMolecule-root .ConversationsToolsMolecule-selectAll>* {
+	cursor: pointer
+}
+
+.ConversationsToolsMolecule-root .ConversationsToolsMolecule-deleteSelected {
+	text-align: right
+}
+
+.ConversationsToolsMolecule-root .selection {
+	height: 65px;
+	background-color: #fff;
+	border-bottom: 1px solid #e6e4e1;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+.ThumbnailAtom-root {
+	background: #f0efed;
+	background-size: cover;
+	background-position: 50%;
+	display: block
+}
+
+.ThumbnailAtom-notAvailable {
+	background: #f5f4f3;
+	color: #737d89
+}
+
+.ThumbnailAtom-image {
+	height: 100%;
+	width: 100%
+}
+
+.ThumbnailAtomSizes-md {
+	width: 44px;
+	height: 44px;
+	font-size: 21px;
+	line-height: 20px
+}
+
+.ThumbnailAtomSizes-lg {
+	width: 60px;
+	height: 60px;
+	font-size: 21px;
+	line-height: 20px
+}
+
+.ThumbnailAtomBorderRadii-xxs {
+	border-radius: 3px
+}
+
+.ThumbnailAtomBorderRadii-xs {
+	border-radius: 4px
+}
+
+.ThumbnailAtomBorderRadii-none {
+	border-radius: 0
+}
+
+.MessageReadStatusAtom-root {
+	width: 22px;
+	display: flex;
+	justify-content: center
+}
+
+.MessageReadStatusAtom-root>div {
+	float: left
+}
+
+.MessageReadStatusAtom-root>div~div {
+	margin-left: -14px
+}
+
+.ProfilePictureAtom-root {
+	background: #f0efed;
+	color: #2d3c4d;
+	display: inline-block;
+	border-radius: 50%;
+	box-sizing: border-box;
+	text-align: center;
+	text-transform: uppercase;
+	border: 2px solid transparent
+}
+
+.ProfilePictureAtom-rootBordered {
+	border-color: #fff
+}
+
+.ProfilePictureAtomSizes-sm {
+	width: 28px;
+	height: 28px;
+	padding: 3px 0;
+	font-size: 21px;
+	line-height: 20px
+}
+
+.ProfilePictureAtomSizes-md {
+	width: 36px;
+	height: 36px;
+	padding: 7px 0;
+	font-size: 28px;
+	line-height: 20px
+}
+
+.BadgeAtom-root {
+	position: relative;
+	background: #116db4;
+	color: #fff;
+	border-radius: 100%;
+	width: 20px;
+	height: 20px;
+	display: block;
+	text-align: center;
+	padding-top: 2px;
+	font-size: 12px;
+	line-height: 16px
+}
+
+.ConversationMolecule-root {
+	display: block;
+	cursor: pointer;
+	text-decoration: none;
+	position: relative;
+	padding: 0;
+	background: #fff;
+	color: #2d3c4d;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1);
+	outline: 0;
+	border: 2px solid transparent
+}
+
+.ConversationMolecule-root:focus {
+	border-color: #e7f0f7
+}
+
+.ConversationMolecule-root:after,
+.ConversationMolecule-root:before {
+	content: " ";
+	display: table
+}
+
+.ConversationMolecule-root:after {
+	clear: both
+}
+
+@media screen and (min-width:1280px) {
+	.ConversationMolecule-root:hover {
+		background-color: #f0efed
+	}
+	.ConversationMolecule-root:hover .ConversationMolecule-titleBadgeUnit {
+		right: 24px
+	}
+	.ConversationMolecule-root:hover .ConversationMolecule-selectLabel,
+	.ConversationMolecule-root:hover .ConversationMolecule-trashcan {
+		display: block
+	}
+	.ConversationMolecule-root:hover.ConversationMolecule-rootOpen {
+		background-color: #e7f0f7
+	}
+}
+
+.ConversationMolecule-root .ConversationMolecule-selectLabel,
+.ConversationMolecule-root .ConversationMolecule-trashcan {
+	z-index: 1
+}
+
+.ConversationMolecule-root .ConversationMolecule-trashcan,
+.ConversationMolecule-root input {
+	cursor: pointer
+}
+
+.ConversationMolecule-root .ConversationMolecule-selectLabel {
+	cursor: pointer;
+	padding: 3px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none
+}
+
+.ConversationMolecule-root .ConversationMolecule-selectLabel:checked {
+	display: block
+}
+
+.ConversationMolecule-root .ConversationMolecule-trashcan {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: none
+}
+
+.ConversationMolecule-root footer {
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	right: 0;
+	display: flex;
+	flex-direction: row
+}
+
+.ConversationMolecule-root footer .ConversationMolecule-receivedDateUnit {
+	flex-grow: 1;
+	font-size: 12px;
+	line-height: 16px;
+	color: #737d89;
+	text-align: right;
+	text-transform: lowercase;
+	padding-left: 4px;
+	margin-top: -1px
+}
+
+.ConversationMolecule-root .ConversationMolecule-leftUnit,
+.ConversationMolecule-root .ConversationMolecule-rightUnit {
+	position: relative;
+	border: 10px solid transparent
+}
+
+.ConversationMolecule-root .ConversationMolecule-leftUnit {
+	float: left;
+	width: 60px
+}
+
+.ConversationMolecule-root .ConversationMolecule-rightUnit {
+	float: right;
+	width: 100%;
+	min-height: 94px;
+	margin-left: -80px;
+	border-left-width: 90px;
+	box-sizing: border-box
+}
+
+.ConversationMolecule-root .ConversationMolecule-rightUnit.ConversationMolecule-rightUnit--asq {
+	min-height: 70px;
+	padding-top: 8px
+}
+
+.ConversationMolecule-root .ConversationMolecule-thumbnailUnit {
+	position: relative;
+	width: 60px;
+	height: 60px
+}
+
+.ConversationMolecule-root .ConversationMolecule-thumbnailProfilePictureUnit {
+	position: absolute;
+	right: -10px;
+	bottom: 5px
+}
+
+.ConversationMolecule-root .ConversationMolecule-title {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #2d3c4d;
+	margin: 0 20px 1px 0;
+	padding: 0;
+	line-height: inherit
+}
+
+.ConversationMolecule-root .ConversationMolecule-titleBadgeUnit {
+	position: absolute;
+	top: 0;
+	right: 0
+}
+
+.ConversationMolecule-root .ConversationMolecule-body {
+	font-size: 12px;
+	line-height: 16px;
+	color: #737d89;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis
+}
+
+.ConversationMolecule-root .ConversationMolecule-body,
+.ConversationMolecule-root .ConversationMolecule-meta {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 400
+}
+
+.ConversationMolecule-root .ConversationMolecule-meta {
+	margin-right: 5px;
+	color: #2d3c4d;
+	font-weight: 700;
+	display: block;
+	margin-bottom: 1px
+}
+
+.ConversationMolecule-root .ConversationMolecule-latestMessageWrapper {
+	display: flex;
+	align-items: center
+}
+
+.ConversationMolecule-root .ConversationMolecule-latestMessageWrapper>span {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden
+}
+
+.ConversationMolecule-root .ConversationMolecule-latestMessageWrapper .ConversationMolecule-readStatusWrapper {
+	overflow: unset
+}
+
+.ConversationMolecule-root.ConversationMolecule-selling {
+	border-left: 2px solid #e7f0f7
+}
+
+.ConversationMolecule-root.ConversationMolecule-selected {
+	background-color: #e7f0f7
+}
+
+.ConversationMolecule-root.ConversationMolecule-selected .ConversationMolecule-selectLabel {
+	display: block
+}
+
+.ConversationMolecule-root.ConversationMolecule-rootOpen {
+	padding: 0;
+	background: #e7f0f7;
+	color: #2d3c4d;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1);
+	outline: 0;
+	border: 2px solid transparent
+}
+
+.ConversationMolecule-root.ConversationMolecule-rootOpen:focus {
+	border-color: #e7f0f7
+}
+
+@media screen and (min-width:480px) and (max-width:1280px) {
+	.ConversationMolecule-root.ConversationMolecule-rootOpen .ConversationMolecule-trashcan {
+		display: block
+	}
+}
+
+.NewLabelAtom-root {
+	font-size: 10px;
+	line-height: 13px;
+	font-family: "Arial", "serif";
+	font-family: var(--mp-font-accent--light, "Arial", "serif");
+	font-style: normal;
+	font-weight: 300;
+	border-radius: 6px;
+	background-color: #43aa8b;
+	color: #fff;
+	width: 40px;
+	height: 14px;
+	text-align: center
+}
+
+
+.ConversationsOrganism-listRoot {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none
+}
+
+.ConversationsOrganism-listItem:not(:last-child) {
+	border-bottom: 1px solid #e6e4e1
+}
+
+.DateHeadingMolecule-root {
+	font-size: 14px;
+	line-height: 18px;
+	color: #2d3c4d;
+	font-weight: 400;
+	text-align: center;
+	margin: 15px 0;
+	text-transform: lowercase
+}
+
+.LegalDisclaimerMolecule-root {
+	font-size: 14px;
+	line-height: 18px;
+	text-align: center;
+	color: #737d89;
+	margin: 15px 0 20px;
+	z-index: 1
+}
+
+.LegalDisclaimerMolecule-root a {
+	color: #116db4;
+	text-decoration: none;
+	display: block
+}
+
+.LegalDisclaimerMolecule-root a svg {
+	vertical-align: bottom
+}
+
+.ConversationErrorMolecule-root {
+	border: 1px solid #e6e4e1;
+	border-radius: 4px;
+	box-sizing: border-box;
+	color: #737d89;
+	padding: 10px;
+	font-size: 14px;
+	line-height: 18px
+}
+
+.ConversationErrorMolecule-rootInner {
+	display: table-row
+}
+
+.ConversationErrorMolecule-rootInner svg,
+.ConversationErrorMolecule-text {
+	display: table-cell;
+	vertical-align: middle
+}
+
+.ConversationErrorMolecule-text {
+	padding-left: 5px
+}
+
+.ConversationErrorMolecule-link {
+	color: #737d89
+}
+
+.MessagesOrganism-root {
+	padding: 10px 25px 5px;
+	background-color: #f0efed
+}
+
+.MessagesOrganism-listRoot {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none
+}
+
+.MessagesOrganism-group:not(:last-child) {
+	margin-bottom: 25px
+}
+
+.MessagesOrganism-listItem {
+	margin: 10px 0
+}
+
+.MessagesOrganism-listItem_from_me {
+	margin-left: auto;
+	text-align: right
+}
+
+.MessagesOrganism-listItem_from_otherparticipant {
+	margin-right: auto
+}
+
+
+
+.MessageMolecule-root {
+	position: relative;
+	display: inline-block;
+	border-radius: 10px;
+	word-wrap: break-word;
+	max-width: 80%
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_me {
+	padding: 10px;
+	background: #fff0c3;
+	color: #2d3c4d;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1)
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_me.MessageMolecule-tail {
+	border-bottom-right-radius: 0
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_me.MessageMolecule-tail:after {
+	content: "";
+	border-bottom: 7.5px solid #fff0c3;
+	border-left: 7.5px solid transparent;
+	border-right: 7.5px solid transparent;
+	position: absolute;
+	right: -7.5px;
+	bottom: 0;
+	width: 0;
+	height: 0
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_me.MessageMolecule-tail:before {
+	content: "";
+	width: 15px;
+	height: 3px;
+	position: absolute;
+	right: -7.5px;
+	bottom: -3px;
+	background: transparent;
+	background: linear-gradient(180deg, #dbdbdb, #eeedea)
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_otherparticipant {
+	padding: 10px;
+	background: #fff;
+	color: #2d3c4d;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1)
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_otherparticipant.MessageMolecule-tail {
+	border-bottom-left-radius: 0
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_otherparticipant.MessageMolecule-tail:after {
+	content: "";
+	border-bottom: 7.5px solid #fff;
+	border-left: 7.5px solid transparent;
+	border-right: 7.5px solid transparent;
+	position: absolute;
+	left: -7.5px;
+	bottom: 0;
+	width: 0;
+	height: 0
+}
+
+.MessageMolecule-root.MessageMolecule-root_from_otherparticipant.MessageMolecule-tail:before {
+	content: "";
+	width: 15px;
+	height: 3px;
+	position: absolute;
+	left: -7.5px;
+	bottom: -3px;
+	background: transparent;
+	background: linear-gradient(180deg, #dbdbdb, #eeedea)
+}
+
+
+.MessageMolecule-root.MessageMolecule-defaultBackground {
+	background-color: #fff
+}
+
+@media screen and (min-width:980px) {
+	.MessageMolecule-root {
+		max-width: 66%
+	}
+}
+
+@media screen and (min-width:768px) {
+	.MessageMolecule-root {
+		max-width: 100%
+	}
+}
+
+.MessageMolecule-inverted .MessageMolecule-meta {
+	color: #fff
+}
+
+.MessageMolecule-errorMessage {
+	color: #c5283d;
+	margin-top: 10px;
+	font-size: 13px;
+	line-height: 16px
+}
+
+.MessageMolecule-body {
+	white-space: pre-wrap;
+	font-size: 14px;
+	line-height: 18px;
+	text-align: left
+}
+
+.MessageMolecule-meta {
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
+	color: #818a95;
+	font-size: 12px;
+	line-height: 16px
+}
+
+.MessageMolecule-meta.MessageMolecule-sender {
+	right: 26px
+}
+
+.MessageMolecule-receivedDatePlaceholder {
+	display: inline-block;
+	width: 70px;
+	height: 13px;
+	font-size: 12px;
+	line-height: 16px
+}
+
+.MessageMolecule-readStatusWrapper {
+    position: absolute;
+    top: 0;
+}
+
+.MessageMolecule-messageActions {
+	margin-top: 4px;
+	padding: 0;
+	list-style: none
+}
+
+.MessageMolecule-messageActions li {
+	margin-top: 2px
+}
+
+.ImageMessageMolecule-root {
+	width: 200px;
+	height: 200px
+}
+
+.ImageMessageMolecule-thumbnailAirlock {
+	position: absolute;
+	top: 1%;
+	left: 1%;
+	right: 1%;
+	bottom: 1%;
+	border-radius: 10px;
+	overflow: hidden
+}
+
+.ImageMessageMolecule-thumbnail {
+	background-position: 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	transition: all .2s
+}
+
+.ImageMessageMolecule-viewTrigger {
+	display: block;
+	height: 100%;
+	cursor: pointer
+}
+
+.ImageMessageMolecule-viewTrigger:hover .ImageMessageMolecule-thumbnail {
+	transform: scale(1.025)
+}
+
+.ImageMessageMolecule-viewTrigger:after {
+	content: "";
+	position: absolute;
+	height: 22px;
+	bottom: 1%;
+	left: 1%;
+	right: 1%;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, .3));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00000000", endColorstr="#4d000000", GradientType=0)
+}
+
+
+
+
+
+.MenuTriggerAtom-root {
+	font-family: "Arial", "serif";
+	font-family: var(--mp-font-accent--light, "Arial", "serif");
+	font-style: normal;
+	font-weight: 300
+}
+
+.MenuTriggerAtom-root a {
+	display: inline-block;
+	border-radius: 50%;
+	font-size: 26px;
+	width: 26px;
+	height: 26px;
+	line-height: 10px;
+	text-align: center;
+	cursor: pointer
+}
+
+.MenuTriggerAtom-root a:hover {
+	transition: background .1s ease-in;
+	background: hsla(0, 0%, 100%, .8)
+}
+
+.MenuTriggerAtom-root a:active {
+	background: hsla(0, 0%, 100%, .5)
+}
+
+.CardMessageMolecule-root {
+	margin: -10px -10px -15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center
+}
+
+.CardMessageMolecule-root.CardMessageMolecule-withFooter {
+	margin-bottom: -28px
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-header {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	height: 40px;
+	min-height: 40px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-bottom: 0;
+	padding: 8px;
+	font-family: "Arial", "serif";
+	font-family: var(--mp-font-accent--light, "Arial", "serif");
+	font-style: normal;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 16px;
+	background: #e7f0f7
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-header .CardMessageMolecule-icon {
+	flex: 1;
+	display: inline-block;
+	padding: 4px;
+	height: 32px;
+	width: 32px;
+	max-width: 32px;
+	margin-right: 2px
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-header .CardMessageMolecule-icon .mp-Icon {
+	margin-top: 0
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-header .CardMessageMolecule-title {
+	flex: 1;
+	text-align: center
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-header .CardMessageMolecule-menu {
+	min-width: 26px;
+	padding-left: 8px
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-body {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-footer {
+	flex: 1;
+	min-height: 25px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-color: #f0efed;
+	color: #737d89;
+	text-align: center;
+	font-size: 10px;
+	line-height: 13px;
+	font-family: Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: lighter;
+	padding-right: 48px;
+	padding-left: 12px
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-footer>div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-items: flex-start;
+	justify-content: flex-start;
+	height: 25px
+}
+
+.CardMessageMolecule-root .CardMessageMolecule-footer>div .mp-Icon {
+	margin-left: 4px;
+	margin-top: -1px
+}
+
+
+.OBPTransactionSupportAtom-root {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-items: flex-start;
+	justify-content: flex-start;
+	height: 25px
+}
+
+
+.ContentEditableAtom-composer {
+	cursor: text;
+	padding: 22px 10px 18px;
+	color: #2d3c4d;
+	min-height: 64px;
+	max-height: 160px;
+	overflow-y: auto;
+	white-space: pre-wrap;
+	word-break: break-all;
+	word-break: break-word;
+	word-wrap: break-word
+}
+
+.ContentEditableAtom-composer[contenteditable=false] {
+	cursor: default
+}
+
+.ContentEditableAtom-composer:focus {
+	outline: none
+}
+
+.ContentEditableAtom-pad {
+	padding-left: 16px;
+	padding-right: 16px
+}
+
+.ContentEditableAtom-placeholder:empty:before {
+	content: attr(placeholder);
+	display: block;
+	color: #737d89
+}
+
+.MessageComposerOrganism-root {
+	min-height: 64px;
+	max-height: 200px;
+	overflow-y: auto;
+	display: table;
+	width: 100%;
+	background-color: #fff;
+	border-top: 1px solid #fff
+}
+
+.MessageComposerOrganism-send {
+	height: 64px;
+	width: 60px;
+	display: table-cell;
+	vertical-align: bottom;
+	text-align: center
+}
+
+.MessageComposerOrganism-send>div {
+	cursor: pointer;
+	height: 64px
+}
+
+.MessageComposerOrganism-send>div:active {
+	padding-top: 1px
+}
+
+.MessageComposerOrganism-send button {
+	padding: 0;
+	height: 48px;
+	width: 48px;
+	margin: 8px 8px 0 0
+}
+
+.MessageComposerOrganism-send button span {
+	display: inline-block;
+	width: 40px;
+	height: 40px
+}
+
+.mp-svg-send--inverse, .mp-svg-send-white {
+    background: url(../images/icons.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 86.334475% 0;
+}
+
+
+.AdvertisementSnippetMolecule-root {
+	display: block;
+	text-decoration: none;
+	box-sizing: border-box;
+	height: 64px;
+	padding: 0;
+	background: #fcfbfb;
+	color: #2d3c4d;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1);
+	outline: 0;
+	border: 2px solid transparent
+}
+
+.AdvertisementSnippetMolecule-root:focus {
+	border-color: #e7f0f7
+}
+
+.AdvertisementSnippetMolecule-innerContainer {
+	display: table;
+	width: 100%;
+	height: 64px
+}
+
+.AdvertisementSnippetMolecule-thumbnailUnit {
+	display: table-cell;
+	width: 1px;
+	padding: 8px
+}
+
+.AdvertisementSnippetMolecule-leftTextUnit {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	padding: 8px;
+	font-size: 16px;
+	line-height: 16px;
+	width: 90%
+}
+
+.AdvertisementSnippetMolecule-title {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300
+}
+
+.AdvertisementSnippetMolecule-rightTextUnit {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+	padding: 8px 0;
+	font-size: 16px;
+	line-height: 16px
+}
+
+.AdvertisementSnippetMolecule-locationInfo {
+	float: right;
+	color: #818a95;
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 18px
+}
+
+.AdvertisementSnippetMolecule-secondaryInfo:after,
+.AdvertisementSnippetMolecule-secondaryInfo:before {
+	content: " ";
+	display: table
+}
+
+.AdvertisementSnippetMolecule-secondaryInfo:after {
+	clear: both
+}
+
+.AdvertisementSnippetMolecule-price {
+	margin-top: 5px;
+	float: left;
+	font-family: "Arial", "serif";
+	font-family: var(--mp-font-accent, "Arial", "serif");
+	font-style: normal;
+	font-weight: 400;
+	font-weight: 700
+}
+
+.AdvertisementSnippetMolecule-distanceUnit {
+	margin-right: 50px
+}
+
+.AdvertisementSnippetMolecule-itemId {
+	margin-top: 10px;
+	display: none
+}
+
+.AdvertisementSnippetMolecule-adRemoved {
+	cursor: default
+}
+
+.AdvertisementSnippetMolecule-adRemoved .AdvertisementSnippetMolecule-leftTextUnit {
+	color: #818a95
+}
+
+.AdvertisementSnippetMolecule-adRemoved .AdvertisementSnippetMolecule-itemId {
+	display: inline-block;
+	font-size: 13px;
+	line-height: 16px
+}
+
+.AdvertisementSnippetMolecule-adRemoved .AdvertisementSnippetMolecule-rightTextUnit {
+	display: none
+}
+
+.ConversationTopicOrganism-root {
+	background: #fff;
+	width: 100%
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit {
+	height: 65px;
+	display: table;
+	border-collapse: collapse;
+	border-bottom: 1px solid #e6e4e1;
+	width: 100%
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-backLinkUnit {
+	display: none
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-backLinkUnit .ConversationTopicOrganism-backLinkText {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px
+}
+
+@media screen and (max-width:768px) {
+	.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-backLinkUnit {
+		display: table-cell;
+		vertical-align: middle;
+		width: 8%;
+		text-align: center
+	}
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-backLinkUnit a {
+	color: #2d3c4d!important;
+	display: table-cell;
+	vertical-align: middle;
+	height: 65px;
+	min-width: 40px;
+	padding-top: 7px
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit h2.ConversationTopicOrganism-title {
+	font-family: "Arial", "serif";
+	font-family: var(--mp-font-accent--light, "Arial", "serif");
+	font-style: normal;
+	font-weight: 300;
+	font-size: 21px;
+	line-height: 20px;
+	display: table-cell;
+	vertical-align: middle;
+	width: 65%;
+	padding-left: 10px
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit h2.ConversationTopicOrganism-title .ConversationTopicOrganism-profilePictureUnit {
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 5px
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit h2.ConversationTopicOrganism-title .ConversationTopicOrganism-name {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit h2.ConversationTopicOrganism-title a {
+	display: block;
+	text-decoration: none;
+	color: inherit
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-userOptionsLink {
+	max-width: 60px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+	padding-right: 10px;
+	color: #116db4
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-userOptionsLink a {
+	font-size: 28px;
+	line-height: 20px;
+	width: 30px;
+	height: 30px;
+	line-height: 50%;
+	float: right
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-userOptionsLink a:hover {
+	background-color: #e7f0f7
+}
+
+.ConversationTopicOrganism-root .ConversationTopicOrganism-titleUnit .ConversationTopicOrganism-userOptionsLink a:active {
+	background-color: #d4e4f1
+}
+
+.ConversationHeaderTouchPointMolecule-root .ConversationHeaderTouchPointMolecule-icon {
+	margin-right: -16px!important
+}
+
+.ConversationListTouchPoint-root .ConversationListTouchPoint-button {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	line-height: 16px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+.ReviewUserBanner-root:before {
+	left: 17px!important
+}
+
+.TransactionOverviewTouchPointMolecule-root {
+	text-align: center
+}
+
+.InlineComposerMenuOptionAtom-root {
+	display: table;
+	height: 46px;
+	float: left;
+	border-right: 1px solid #e6e4e1;
+	padding: 7px 12px;
+	cursor: pointer;
+	position: relative
+}
+
+.InlineComposerMenuOptionAtom-root:hover {
+	color: #116db4;
+	background: #fcfbfb
+}
+
+.InlineComposerMenuOptionAtom-root:first-of-type {
+	padding-left: 7px
+}
+
+.InlineComposerMenuOptionAtom-iconAirlock {
+	display: table-cell;
+	height: 32px;
+	width: 32px;
+	vertical-align: middle
+}
+
+.InlineComposerMenuOptionAtom-label {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 12px;
+	line-height: 16px
+}
+
+@media screen and (max-width:480px) {
+	.InlineComposerMenuOptionAtom-label {
+		display: none
+	}
+}
+
+.new-label-atom {
+	position: absolute;
+	top: 3px;
+	right: 3px
+}
+
+@media screen and (max-width:480px) {
+	.new-label-atom {
+		top: auto;
+		bottom: 0;
+		left: 50%;
+		margin-left: -20px
+	}
+}
+
+.InlineComposerMenuMolecule-root {
+	border-top: 1px solid #e6e4e1;
+	background: #fcfbfb;
+	width: 100%;
+	float: left
+}
+
+.inbox-messages {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	overflow: hidden;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .28);
+	border-radius: 3px;
+	border: 1px solid #e6e4e1;
+	background-clip: padding-box;
+	transition: bottom .5s
+}
+
+@media screen and (min-width:0) and (max-width:767px) {
+	.inbox-messages {
+		top: 0;
+		bottom: 0
+	}
+	.inbox-messages.chatheader {
+		top: 124px;
+	}
+}
+
+@media screen and (min-width:767px) {
+	.inbox-messages {
+		top: 100px;
+		bottom: -100px;
+	}
+}
+
+@media screen and (min-width:1279px) {
+	.inbox-messages {
+		top: 104px;
+		bottom: -70px;
+	}
+}
+
+.messages-left {
+	display: flex;
+	flex-direction: column;
+	-webkit-overflow-scrolling: touch;
+	width: 33%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 66%;
+	border-right: 1px solid #e6e4e1
+}
+
+.messages-left .message-left-header {
+	display: flex;
+	flex-shrink: 0;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+	height: 65px;
+	border: 1px solid #e6e4e1
+}
+
+.messages-left .message-left-header h1 {
+	font-family: "Arial", "serif";
+	font-family: var(--mp-font-accent--light, "Arial", "serif");
+	font-style: normal;
+	font-weight: 300;
+	font-size: 21px;
+	line-height: 20px
+}
+
+.messages-left .message-left-header-shadow,
+.messages-left ._2pXrXxVrJgwrHKqCIDC6wt {
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1)
+}
+
+.messages-left .message-left-part {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	border-radius: 0 0 0 5px
+}
+
+@media screen and (min-width:0) and (max-width:767px) {
+	.messages-left {
+		display: none
+	}
+}
+
+@media screen and (min-width:0) and (max-width:767px) {
+	.messages-left {
+		width: 100%;
+		right: 0;
+		display: flex
+	}
+}
+
+.chatindividual {
+	position: absolute;
+	top: 0;
+	left: 33%;
+	right: 0;
+	bottom: 0
+}
+
+@media screen and (min-width:0) and (max-width:767px) {
+	.chatindividual {
+		display: none
+	}
+}
+
+@media screen and (min-width:0) and (max-width:767px) {
+	.chatindividual.part2 {
+		width: 100%;
+		left: 0;
+        display: block;
+        margin-top:55px;
+	}
+}
+
+.chatbox {
+	display: flex;
+	flex-direction: column;
+	height: 100%
+}
+
+.chatbox>header {
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .05);
+	z-index: 1
+}
+
+.chatbox>article {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	min-height: 0;
+	background-color: #f0efed
+}
+
+
+.CannedMessagesOrganism-root {
+	border-top: 1px solid #e6e4e1;
+	background: #fcfbfb;
+	position: relative
+}
+
+.CannedMessagesOrganism-root ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 8px
+}
+
+.CannedMessagesOrganism-root ul li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px
+}
+
+.ConversationsFilterMolecule-root .ConversationsFilterMolecule-adTitle {
+	height: 65px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center
+}
+
+.ConversationsFilterMolecule-root .ConversationsFilterMolecule-participantType {
+	height: 65px
+}
+
+.SmartSuggestionsOrganism-root {
+	border-top: 1px solid #e6e4e1;
+	background: #fcfbfb
+}
+
+.SmartSuggestionsOrganism-root ul {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	margin: 0;
+	padding: 0 0 0 10px;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: 52px
+}
+
+.SmartSuggestionsOrganism-root li {
+	flex: 0 0 auto;
+	margin-right: 10px;
+	list-style-type: none
+}
+
+.AsqConversationOrganism-root {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 400px;
+	flex: 1
+}
+
+.AsqConversationOrganism-root>article {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	min-height: 0;
+	flex: 1 1 auto;
+	background-color: #f0efed
+}
+
+.AsqConversationOrganism-root>article>header {
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .05);
+	z-index: 99
+}
+
+@media screen and (min-width:768px) {
+	.AsqConversationOrganism-root {
+		min-width: 600px
+	}
+}
+
+.AsqSuggestionsMolecule-root {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+
+.AsqSuggestionsMolecule-root ul {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 0
+}
+
+.AsqSuggestionsMolecule-root ul li {
+	margin-bottom: 8px;
+	text-align: center
+}
+
+.AsqSuggestionsMolecule-root ul li:last-of-type {
+	margin-bottom: 0
+}
+
+.AsqSuggestionsMolecule-descriptionAndActions {
+	align-self: flex-end;
+	width: 80%;
+	text-align: center;
+	z-index: 100;
+	padding: 24px 0
+}
+
+.AsqSuggestionsMolecule-contextDescription {
+	font-size: .8em;
+	color: #818a95
+}
+
+.AsqSuggestionsMolecule-skyWrapper {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	margin-left: -40%;
+	width: 80%;
+	text-align: center
+}
+
+@media screen and (max-width:480px) {
+	.AsqSuggestionsMolecule-skyWrapper {
+		top: 60px
+	}
+}
+
+.ConfirmModalMolecule-root footer {
+	align-items: stretch;
+	display: flex;
+	justify-content: space-between
+}
+
+
+.OptionRowMolecule-root .OptionRowMolecule-row {
+	background-color: #fff;
+	border-top: 1px solid #e6e4e1;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	transition: background-color .25s ease
+}
+
+.OptionRowMolecule-root .OptionRowMolecule-row:hover {
+	background-color: transparent
+}
+
+.OptionRowMolecule-root .OptionRowMolecule-row:active {
+	background-color: rgba(64, 64, 64, 0)
+}
+
+.OptionRowMolecule-root .OptionRowMolecule-row.OptionRowMolecule-is-disabled {
+	opacity: .4;
+	cursor: auto
+}
+
+.OptionRowMolecule-root .OptionRowMolecule-row.OptionRowMolecule-is-invalid {
+	background-color: #fff8cf
+}
+
+.OptionRowMolecule-root .OptionRowMolecule-body {
+	flex-grow: 1;
+	width: 100%
+}
+
+.OptionRowMolecule-root .OptionRowMolecule-aside {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-left: 16px
+}
+
+.OptionHeadingMolecule-root {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--medium, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	color: #2d3c4d
+}
+
+.OptionHeadingMolecule-root.OptionHeadingMolecule-is-invalid {
+	color: #c5283d
+}
+
+.OptionHeadingMolecule-root .OptionHeadingMolecule-icon {
+	margin: 0 4px 0 -4px;
+	vertical-align: middle
+}
+
+.AlertOrganism-root footer {
+	align-items: stretch;
+	display: flex;
+	justify-content: space-between
+}
+
+
+
+.MenuMolecule-root {
+	width: auto;
+	min-width: 200px;
+	position: absolute;
+	z-index: 2;
+	border-radius: 3px
+}
+
+.MenuMolecule-root ul {
+	box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .28)
+}
+
+.MenuMolecule-root ul .iconAirlock {
+	display: inline-block;
+	height: 32px;
+	width: 32px;
+	margin-left: -5px;
+	margin-bottom: -12px;
+	margin-right: 12px
+}
+
+.TipMolecule-root {
+	width: auto;
+	min-width: 200px;
+	position: absolute;
+	z-index: 2
+}
+
+.TipMolecule-root .TipMolecule-alert {
+	border-radius: 6px;
+	cursor: pointer;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2);
+	margin: 0 10px
+}
+
+.TipMolecule-root .TipMolecule-alertTipCustomLeft:before {
+	left: 20px
+}
+
+.TipMolecule-root .TipMolecule-alertTipCustomRight:before {
+	right: 20px;
+	left: auto
+}
+
+
+.GutterAtom-root {
+	background-color: #f7f7f6;
+	box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, .1)
+}
+
+.GutterAtom-root.GutterAtom-is-xs {
+	height: 4px
+}
+
+.GutterAtom-root.GutterAtom-is-sm {
+	height: 8px
+}
+
+.GutterAtom-root.GutterAtom-is-md {
+	height: 12px
+}
+
+.GutterAtom-root.GutterAtom-is-lg {
+	height: 16px
+}
+
+.GutterAtom-root.GutterAtom-is-xl {
+	height: 20px
+}
+
+.GutterAtom-root.GutterAtom-is-xxl {
+	height: 24px
+}
+
+.GutterAtom-root.GutterAtom-is-xxxl {
+	height: 32px
+}
+
+
+.ImageComposerOrganism-root {
+	background-color: #f0efed
+}
+
+.ImageComposerOrganism-root .ImageComposerOrganism-feedbackAirlock {
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: lighter
+}
+
+.ImageComposerOrganism-root .ImageComposerOrganism-feedbackAirlock>div {
+	padding: 10px 30px
+}
+
+.ImageComposerOrganism-root .ImageComposerOrganism-feedbackAirlock.ImageComposerOrganism-error {
+	background: #c5283d;
+	color: #fff
+}
+
+.ImageComposerOrganism-root .ImageComposerOrganism-feedbackAirlock.ImageComposerOrganism-warn {
+	background: #fffbe3
+}
+
+ul.ImageComposerOrganism-images {
+	display: block;
+	list-style-type: none;
+	margin: 0 auto 60px;
+	padding: 20px 0 0;
+	text-align: left;
+	max-width: 640px;
+	min-height: 260px;
+	width: 95%
+}
+
+ul.ImageComposerOrganism-images li {
+	float: left;
+	position: relative;
+	width: 30%;
+	padding-bottom: 30%;
+	margin: 1.66%;
+	background: no-repeat 50%;
+	background-size: contain;
+	border-radius: 6px
+}
+
+ul.ImageComposerOrganism-images li .ImageComposerOrganism-remove {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	display: block;
+	background-color: #fff;
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	cursor: pointer;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1)
+}
+
+ul.ImageComposerOrganism-images li .ImageComposerOrganism-remove:hover {
+	transform: scale(1.1)
+}
+
+ul.ImageComposerOrganism-images li .ImageComposerOrganism-remove:active {
+	top: -5px
+}
+
+ul.ImageComposerOrganism-images li label {
+	position: absolute;
+	border-radius: 6px;
+	border: 2px dashed #b6bbc1;
+	background: none;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+
+ul.ImageComposerOrganism-images li label:active button {
+	margin-top: 1px
+}
+
+.ImageComposerOrganism-footer {
+	background: #fff;
+	height: 80px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px
+}
+
+.ImageComposerOrganism-image {
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1)
+}
+
+.OptionRowBodyAtom-root {
+	font-family: Helvetica, sans-serif;
+	font-family: var(--mp-font-base--light, "Helvetica", sans-serif);
+	font-style: normal;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	color: #818a95;
+	margin: 0!important;
+	padding-left: 24px;
+	text-align: left;
+	white-space: pre-wrap
+}
+
+.OptionRowBodyAtom-root.OptionRowBodyAtom-is-selected {
+	color: #2d3c4d
+}
+
+
+
+.mp-Icon-status {
+	display: inline-block;
+	position: relative
+}
+
+.mp-Icon-status .mp-Icon:nth-of-type(2) {
+	position: absolute
+}
+
+.mp-Icon-status.mp-Icon-status--lg {
+	width: 32px
+}
+
+.mp-Icon-status.mp-Icon-status--lg .mp-Icon:nth-of-type(2) {
+	right: -6px;
+	bottom: -3px
+}
+
+.mp-Icon-status.mp-Icon-status--portrait .mp-Icon:nth-of-type(2) {
+	right: -3px
+}
+
+
+
+

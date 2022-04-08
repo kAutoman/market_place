@@ -1,0 +1,180 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/product_info.css" rel="stylesheet">
+
+	<style>
+		table tr {
+			text-align: right;
+		}
+
+		table {
+			border-spacing: 10px;
+			margin: auto;
+			width: 50%;
+		}
+
+		td:nth-child(1) {
+			font-weight: bold;
+		}
+
+		td:nth-child(2) {
+			text-align: left;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper">
+		<div id="content" class="l-page">
+            {% if app.session.get('error') %}
+				<div class="mp-Alert mp-Alert--error">
+					<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+					<div>
+                        {{ app.session.get('error')}}
+					</div>
+				</div>
+            {% endif %}
+			<h1 class="page-header">Order item</h1>
+			<div class="mp-Card mp-Card--rounded">
+				<div class="mp-Card-block">
+				 {% if app.session.get('listing') != null %}
+				 <form action="{{route('placing.order')}}" method="post">
+				 	 {{ csrf_field() }}
+					<div class="content">
+						<table>
+							<tr>
+
+								<td>Item</td>
+								<td>
+									<a href="{{route('listing', {'id' : app.session.get('listing'), 'slug' : str_slug(app.session.get('listing.title'))})}}">{{ app.session.get('listing.title') }}</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Vendor</td>
+								<td>
+									<a href="/profile/{{ app.session.get('listing.user.username') }}">{{ app.session.get('listing.user.username') }}</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Shipping option</td>
+								<td>{{app.session.get('shipping_method.days')}} Days {{ app.session.get('shipping_method.name') }}
+									<span class="{{ app.session.get('payment_method') == 1 ? 'btc20' : app.session.get('payment_method') == 2 ? 'xmr20' : 'ltc20'  }}"></span>({{ ToUserCurrency(app.session.get('shipping_method.price'),app.session.get('listing.currency')) }} {{ GetCurrency() }})</td>
+							</tr>
+							<tr>
+								<td>Unit price</td>
+								<td>{{ ToUserCurrency(app.session.get('listing.price'),app.session.get('listing.currency')) }} {{ GetCurrency() }}</td>
+							</tr>
+							<tr>
+								<td>Quantity</td>
+								<td>{{ app.session.get('quantity') }}</td>
+							</tr>
+							<tr>
+								<td>Payment</td>
+								<td>{{ app.session.get('payment_method') == 1 ? 'Bitcoin (BTC)' : app.session.get('payment_method') == 2 ? 'Monero (XMR)' : 'Litecoin (LTC)'  }}<span class="{{ app.session.get('payment_method') == 1 ? 'btc20' : app.session.get('payment_method') == 2 ? 'xmr20' : 'ltc20'  }}"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>Total price</td>
+								<td>{{ ToUserCurrency(((app.session.get('listing.price') * app.session.get('quantity')) + app.session.get('shipping_method.price')),app.session.get('listing.currency'))  }} {{ GetCurrency() }}</td>
+							</tr>
+							<tr>
+								<td>Ships from</td>
+								<td>{{app.session.get('listing.shipped_from')}}</td>
+							</tr>
+							<tr>
+								<td>Escrow</td>
+								<td>{{app.session.get('listing.payment_type.id') == 1 ? 'Yes 100% Escrow' : 'No ' . app.session.get('listing.payment_type.payment_name')}}</td>
+							</tr>
+							<tr>
+								<td>Product Class</td>
+								<td>{{ app.session.get('listing.listing_class.name') }}</td>
+							</tr>
+						</table>
+
+						{% if app.session.get('address')|length > 1 %}
+						<section class="l-body-content mp-Card-block" style="margin: 50px 0; background-color: #EDECED;">
+							<div class="section description">
+								<div id="vip-description-multisig" class="multisig">
+									<h2 class="heading heading-3">
+										<b>Please send <i style="color:#EDA566;">{{ app.session.get('btc_price') }} BTC</i> ({{ ToUserCurrency(((app.session.get('listing.price') * app.session.get('quantity')) + app.session.get('shipping_method.price')),app.session.get('listing.currency'))  }} {{ GetCurrency() }}) to this address:</b>
+									</h2>
+									<div id="vip-ad-description" class="wrapped">
+                                        {{ app.session.get('address') }}
+									</div>
+								</div>
+							</div>
+						</section>
+						{% endif %}
+
+						<section class="l-body-content mp-Card-block" style="margin: 50px 0; background-color: #EDECED;">
+							<div class="section description">
+								<div id="vip-description" class="">
+									<h2 class="heading heading-3">
+										<b>Terms and Conditions of
+											<i style="color:#EDA566;">{{app.session.get('listing.user.username')}}</i>
+										</b>
+									</h2>
+									<div id="vip-ad-description" class="wrapped">
+										{{app.session.get('listing.user.terms_conditions')}}
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section class="l-body-content mp-Card-block" style="margin: 50px 0; background-color: #EDECED;">
+							<div class="section description">
+								<div id="vip-description" class="">
+									<h2 class="heading heading-3">
+										<b>Public PGP Key</b>
+									</h2>
+									<div style="word-wrap: break-word; white-space: pre-wrap; line-height: normal" id="vip-ad-description" class="wrapped">
+{{app.session.get('listing.user.pgp_key')}}
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<h2 class="heading heading-3">
+							<b>Shipping address</b>
+						</h2>
+						<div class="form-field form-textarea">
+							<textarea style="height:150px;" class="mp-Textarea {{ errors.has('shipping') ? ' invalid' : '' }}" id="shipping" name="shipping" maxlength="10000" data-maxlength="10000"></textarea>
+						</div>
+						{% if errors.has('shipping') %}
+                                            <div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                                Please add a note or a shipping address to the vendor.
+                                            </div>
+                        {% endif %}
+
+
+						<input type="checkbox" value="1" name="encryption" checked="checked" disabled><label for="encryption">The message or Shipping address will be encrypted using the PGP Key of
+						<b>{{app.session.get('listing.user.username')}}</b>.
+						</label>
+						<br>
+						<input type="checkbox" value="agremeent" name="agremeent"><label for="agreemenent">I have read and accept the vendor agreements mentioned above.
+						</label>
+						{% if errors.has('agremeent') %}
+                                            <div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+                                                You forget to accept the terms of the vendor.
+                                            </div>
+                        {% endif %}
+						<br>
+
+						<button type="submit" id="submit-button" style="margin-bottom:3px;float:right;" class="mp-Button mp-Button--primary mp-Button--lg">
+							<span>Order now</span>
+						</button>
+					</div>
+					</form>
+					{% else %}
+					<p style="height:800px;">There is currently nothing in the checkout basket.</p>
+					
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

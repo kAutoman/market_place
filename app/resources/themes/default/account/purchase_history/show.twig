@@ -1,0 +1,223 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_ads.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+	<div id="content" class="l-page">
+		{% if app.session.get('message') %}
+			<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+				<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+				<div>
+					{{ app.session.get('message') | raw }}
+				</div>
+			</div>
+		{% endif %}
+
+		<div class="mp-Card mp-Card--rounded">
+
+			<div class="mp-Card-block">
+				<div class="content">
+					<h2 class="pull-left" style="margin: 0;">
+						<strong>Order #{{ order.hash }}</strong>
+					</h2>
+					<h2 class="pull-right" style="margin: 0;">
+						<a class="text-info" href="/account/purchase-history">
+							<strong>← Back to Overview</strong>
+						</a>
+					</h2><br>
+
+					<table class="table table-orders-meta">
+						<tbody>
+							<tr>
+								<td>
+									<i class="mp-Icon mp-svg-clock-grey" title="Date"></i>
+									{{ order.created_at.toFormattedDateString }}&nbsp;&nbsp;&nbsp;
+									<i class="mp-Button-icon mp-Button-icon--left mp-svg-handshake" title="{{order.payment_type.payment_name}}"></i>
+									{{order.payment_type.payment_name}}&nbsp;&nbsp;&nbsp;
+									<i class="mp-Button-icon mp-Button-icon--left {{order.listing.listing_class.id == 1 ? 'mp-svg-postpackage' : 'mp-svg-digital'}}" title="Buyer"></i>
+									{{ order.listing.listing_class.name }}&nbsp;&nbsp;
+									<i class="mp-Icon mp-svg-profile style-scope mp-header" title="Buyer"></i>
+									<a href="/profile/{{ order.listing.user.username }}">{{ order.listing.user.username }}</a>
+								</td>
+								{% if order.status == "processing" %}
+									<td class="status  status-info ">
+										Processing
+									</td>
+								{% endif %}
+								{% if order.status == "shipped" %}
+									<td class="status  status-info ">
+										Shipped
+									</td>
+								{% endif %}
+								{% if order.status == "finalized" %}
+									<td style="background-color:green;" class="status  status-info ">
+										Finalized
+									</td>
+								{% endif %}
+								{% if order.status == "disputed" %}
+									<td style="background-color:red;" class="status  status-info ">
+										Disputed
+									</td>
+								{% endif %}
+								{% if order.status == "cancelled" %}
+									<td style="background-color:red;" class="status  status-info ">
+										Cancelled
+									</td>
+								{% endif %}
+							</tr>
+						</tbody>
+					</table>
+
+
+					<table style="width:100%" class="table table-bordered">
+						<thead>
+							<tr>
+								<th style="width: 100px;" class="text-center">Quantity</th>
+								<th>Product</th>
+								<th style="width: 150px;" class="text-right">Subtotal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="width: 100px;" rowspan="2" class="text-center">{{ order.units }}</td>
+								<td>
+									<p>
+										{{ order.listing.title }}
+									</p>
+									<em>{{ order.listing.description }}</em>
+								</td>
+								<td style="width: 150px;" rowspan="2" class="text-right">{{ GetCurrency() }}
+									{{ ToUserCurrency(order.listing.price,order.listing.currency)  }}</td>
+							</tr>
+							<tr>
+								<td class="text-muted">Dispatched on
+									{{ order.updated_at.toFormattedDateString }}</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="row">
+						<p class="text-info">
+							{% if order.status == "shipped" %}
+								<li>This sale will be finalized over
+									<i style="color:blue;">{{order.finalize('updated_at').days + (order.finalize('updated_at').weeks*7 )}}</i>
+									days
+									<i style="color:blue;">{{order.finalize('updated_at').hours}}</i>
+									hours
+									<i style="color:blue;">{{order.finalize('updated_at').minutes}}</i>
+									min
+									<i style="color:blue;">{{order.finalize('updated_at').seconds}}</i>
+									sec
+								</li>
+							{% endif %}
+
+							{% if order.status == "accepted" %}
+								<li>Be aware this sale will be cancelled over
+									<i style="color:blue;">{{order.elapsed('updated_at').days + (order.elapsed('updated_at').weeks*7 )}}</i>
+									days
+									<i style="color:blue;">{{order.elapsed('updated_at').hours}}</i>
+									hours
+									<i style="color:blue;">{{order.elapsed('updated_at').minutes}}</i>
+									min
+									<i style="color:blue;">{{order.elapsed('updated_at').seconds}}</i>
+									sec
+								</li>
+							{% endif %}
+
+							{% if order.status == "finalized" %}
+								Order has been
+								<b>finalized</b>
+								funds is transfered to the vendor.
+							{% endif %}
+
+							{% if order.status == "disputed" %}
+								Order has been
+								<b>disputed</b>
+								the moderator will decide where the funds will be transfered from the case.
+							{% endif %}
+							{% if order.status == "cancelled" %}
+								Order has been
+								<b>cancelled</b>
+								funds is transfered to the buyer.
+							{% endif %}
+
+							{% if order.status == "processing" %}
+								Order is still in
+								<b>process</b>
+								the vendor needs to accept the order within 3 days.
+							{% endif %}
+
+							{% if order.status == "shipped" %}
+								Order has been
+								<b>shipped</b>
+								autofinalize will happen after 14 days for physical products and for digital products 3 days.
+							{% endif %}
+
+
+						</p>
+						<table class="table" style="float:right;width: 50%; margin: 0;">
+							<tbody>
+								<tr>
+									<th style="border-top: 0; padding-top: 0;" class="text-right">Postage
+										{{ order.shipping.name  }}
+									</th>
+									<td style="width: 150px; border-top: none; padding-top: 0;" class="text-right">{{ GetCurrency() }}
+										{{ ToUserCurrency(order.shipping.price,order.listing.currency)  }}</td>
+								</tr>
+								<tr>
+									<th class="text-right lead">
+										<strong>Total</strong>
+									</th>
+									<td style="width: 150px;" class="text-right lead">
+										<strong>{{ GetCurrency() }}
+											{{ ToUserCurrency(order.price,order.listing.currency) }}</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+					<div class="l-body-content mp-Card-block">
+						<h2 class="heading heading-3">
+							<b>Seller note</b>
+						</h2>
+
+						<div class="form-field form-textarea">
+							<textarea style="height:150px;background-color:#F5F7FA;" readonly="readonly" class="mp-Textarea " disabled>{{order.notes}}</textarea>
+						</div>
+
+						{% if order.status == "shipped" %}
+							<form action="{{ route('account.dispute.create', order.id) }}" method="post">
+								{{ csrf_field() }}
+								<button type="submit" class="mp-Button mp-Button--primary mp-Button--xs">
+									Create Dispute
+								</button>
+							</form>
+							<form action="{{ route('account.finalize.order', order.hash) }}" method="post">
+								{{ csrf_field() }}
+								<button type="submit" class="mp-Button mp-Button--green mp-Button--xs">
+									Finalize Order
+								</button>
+							</form>
+						{% endif %}
+						{% if order.status == "finalized" %}
+							<a href="{{ route('account.purchase-history.feedback', order) }}" style="margin-bottom:3px;margin-left:5px;float:right;" class="mp-Button mp-Button--primary mp-Button--lg">
+								<span>Leave a Feedback</span>
+							</a>
+
+						{% endif %}
+
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

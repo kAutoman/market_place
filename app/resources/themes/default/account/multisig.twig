@@ -1,0 +1,71 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_email.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+	<section style="margin-bottom: 800px;" id="content">
+			{% include 'account.head_normal_bar.twig' %}
+		<div class="profile canvas" id="edit-email-panel">
+			<div class="mp-Card mp-Card--rounded">
+				<div class="mp-Card-block">
+					<form method="POST" action="" accept-charset="UTF-8">
+					{{ csrf_field() }}
+					<div class="edit-profile-block clear-fix">
+						{% if app.session.get('message') %}
+							<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+								<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+								<div>
+									{{ app.session.get('message') }}
+								</div>
+							</div>
+						{% endif %}
+
+					{% if app.session.get('error') %}
+						<div class="mp-Alert mp-Alert--error">
+							<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+							<div>
+								{{ app.session.get('error') }}
+							</div>
+						</div>
+					{% endif %}
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Bitcoin Public Key</b>
+							</h3>
+							<span class="help-block">The default public key used to generate the multisig address.</span>
+							<textarea style="height:50px;" class="mp-Textarea {{ errors.has('btcmultisig') ? ' invalid' : '' }}" id="btcmultisig" name="btcmultisig">{{auth_user().multisig_key_pub}}</textarea>
+						</div>
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Bitcoin Refund Address</b>
+							</h3>
+							<span class="help-block">The bitcoin address we will send your multisig <b>refunds</b> to in case the order is cancelled.</span>
+							<input class="mp-Input--custom-stretchable-fixed mp-Input {{ errors.has('btcrefund') ? ' invalid' : '' }}" name="btcrefund" type="text" value="{{auth_user().address_refunds}}">
+						</div>
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Bitcoin Sales Address</b>
+							</h3>
+							<span class="help-block">The bitcoin address we will send your multisig <b>sales</b> to in case the order is finalized.</span>
+							<input class="mp-Input--custom-stretchable-fixed mp-Input {{ errors.has('btcsales') ? ' invalid' : '' }}" name="btcsales" type="text" value="{{auth_user().address_sales}}">
+						</div>
+
+						<div class="form-field">
+							<button id="confirm-profile" class="primary medium mp-Button mp-Button--primary">
+								<span>Save</span>
+							</button>
+							<a id="cancel-profile" href="/account/edit_profile" class="secondary medium mp-Button mp-Button--secondary">
+								<span>Cancel</span>
+							</a>
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}
+

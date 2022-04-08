@@ -1,0 +1,269 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="{{ setting('url') }}/web/css/help.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	<header>
+		<div class="mp-Header-ribbonTop"></div>
+		<div class="mp-Header-navBar">
+			<div class="mp-Header-maxWidth">
+				<a class="mp-Header-logo" data-role="homepage" href="/" title="Marktplaats">Marketplace</a>
+				<ul class="mp-Header-links">
+					<li>
+						<a class="mp-Button--flat" href="/help" target="_blank">Help en
+														                        info</a>
+					</li>
+					<li>
+						<a class="mp-Button--flat" href="/pgp.txt" target="_blank">PGP Key</a>
+					</li>
+					<li>
+						<a class="mp-Button--flat" href="/account/apply_vendor" target="_blank">Becoming a Vendor</a>
+					</li>
+				</ul>
+				<ul class="mp-Header-links mp-pull-right">
+					{% if auth_guest() %}
+						<li class="style-scope mp-Header">
+							<a class="mp-Button--flat" href="/login">
+								<span class="mp-Icon mp-svg-profile style-scope mp-Header"></span>
+								<span class="mp-hide-lte-md style-scope mp-Header">Login</span>
+							</a>
+						</li>
+					{% else %}
+
+						<li id="loggedin-user-setting" class="mp-hide-lte-md style-scope mp-header">
+							<div class="mp-Nav-dropdown style-scope mp-header">
+								<a href="/profile/{{ auth_user().username }}" class="mp-Button mp-Button--flat mp-Button--xs mp-Nav-dropdown-toggle style-scope mp-header">
+									<span class="mp-Icon mp-svg-profile style-scope mp-header"></span>
+									<span class="mp-hide-lte-md style-scope mp-header">{{ auth_user().username }}</span>
+									<span class="mp-Icon mp-Icon--right mp-svg-arrow-down style-scope mp-header"></span>
+								</a>
+								<ul class="mp-Nav-dropdown-menu style-scope mp-header">
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/profile/{{ auth_user().username }}">My Profile</a>
+									</li>
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/account/edit_profile">My Account</a>
+									</li>
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/account/listings">My Listings</a>
+									</li>
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/account/orders">My Orders</a>
+									</li>
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/account/favorites">My Wallet</a>
+									</li>
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/account/favorites">My Favorites</a>
+									</li>
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="{{ route('logout') }}">Logout</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="style-scope mp-Header">
+							<a class="mp-button--callToAction" href="/create">
+								<span class="mp-Icon mp-svg-pin-callToAction-foreground style-scope mp-Header"></span>
+								<span class="mp-hide-lte-md style-scope mp-Header">Place ads</span>
+							</a>
+						</li>
+
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="mp-Header-ribbonBottom"></div>
+
+		<div class="invisible-in-mobile">
+			<div class="pnl-msg">
+				<div class="content">
+					<i class="icon-msg icon-veilig"></i>
+					<div class="content-msg">Saw your product you want? Just buy safe and use Escrow!&nbsp;<a href="/help/3">Read more why to use Escrow</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+{% endblock %}
+
+{% block content %}
+	<div class="mp-help-container">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<span>
+							<ol class="mp-breadcrumb" style="padding:9px;">
+								<li style="display:none;">
+									<i class="icon-arrow-right-small"></i>
+									<span style="color:#818A95;">Results for</span>
+									<span style="font-weight: bold;">""</span>
+								</li>
+							</ol>
+						</span>
+					</div>
+				</div>
+				<div class="mp-category-container">
+					<div class="col-sm-4 col-md-4 no-padding invisible-in-mobile">
+						<div class="mp-category">
+							<div class="col-md-12 no-padding">
+								<nav class="navbar navbar-default nav-categories">
+									<div class="navbar-header collapsed mp-category-title-container">
+										<div class="mp-category-title-collapse">Help and Info
+										</div>
+										<button class="navbar-toggle sm-nav-toggle" type="button">
+											<span class="sr-only">Toggle navigation</span>
+											<i class="mp-icon icon-plus-circled icon-expand"></i>
+											<i class="mp-icon icon-minus-circled icon-collapse"></i>
+										</button>
+									</div>
+									<div class="navbar-collapse mp-category-list">
+										<ul class="list-unstyled mp-ul-cat1">
+											{% for category in categories %}
+												<li class="codeNone">
+													<a href="#" class="menu-cat1">{{category.title}}</a>
+													{% if category.news.count != 0 %}
+													<button class="navbar-toggle  navbar-toggle-cate" type="button">
+														<span class="sr-only">Toggle navigation</span>
+														<i class="mp-icon icon-plus-circled icon-expand"></i>
+														<i class="mp-icon icon-minus-circled icon-collapse"></i>
+													</button>
+													{% endif %}
+													<ul class="list-unstyled mp-ul-cat2 collapse " id="account_mijn_marktplaats-collapse">
+													  {% for news in category.news %}
+														<li class="">
+															<a href="/help/{{news.id}}">{{news.title}}
+																</a>
+															<ul class="account_mijn_marktplaats-collapse list-unstyled mp-ul-cat3 collapse hidden"></ul>
+														</li>
+													  {% endfor %}
+													</ul>
+												</li>
+											{% endfor %}
+										</ul>
+									</div>
+								</nav>
+							</div>
+						</div>
+						<div class="mp-category hidden-xs">
+							<div class="mp-static-link-box-container">
+								<div class="mp-info-title">
+									<h3>Featured News</h3>
+								</div>
+								<div class="mp-category-list">
+									<ul class="list-group ul-more-info">
+									   {% for starred in news %}
+									     {% if starred.featured == 1 %}
+										<li class="list-group-item">
+											<a href="/help/{{starred.id}}" target="new">{{starred.title}}
+												<i class="mp-icon icon-external-link"></i>
+											</a>
+										</li>
+										{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="col-sm-8 col-md-8 mp-category-article-list no-padding" style="float:right;margin-bottom:30px;">
+					<form action="{{ route('help_search') }}" method="POST" enctype="application/x-www-form-urlencoded">
+					   {{ csrf_field() }}
+						<div class="input-group search-pnl">
+							<input type="text" name="searchtext" value="" class="form-control {{ errors.has('searchtext') ? ' invalid' : '' }}" placeholder="Search by keyword or subject">
+							<div class="input-group-btn">
+								<button class="mp-btn-primary btn-search hidden-xs">Search</button>
+								<button class="mp-btn-primary btn-search visible-xs" style="height: 35px; width: 40px;">
+									<i class="mp-icon icon-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+						<div class="listWrapper">
+							<ul class="listUl">
+								<li class="listItem isChat">Ask a Question :-)</li>
+							</ul>
+							<div class="col-xs-12 no-padding">
+								<div class="visible-in-mobile hide">
+									<div class="pnl-msg">
+										<div class="content">
+											<i class="icon-msg icon-veilig"></i>
+											<div class="content-msg">Saw your product you want? Just buy safe and use Escrow!&nbsp;<a href="/help/1">Read more why to use Escrow</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<span>
+							<div class="mp-pnl-top5">
+								<h3>New Articles</h3>
+							</div>
+							<span>
+
+								{% for normal_news in news %}
+									<div class="article-info">
+										<a href="/help/{{normal_news.id}}" style="width: 100% ;" class="article-title-link">
+											<span class="article-title">
+												<span style="width: 100%;" class="question-header">
+													<span title="{{normal_news.title}}">{{normal_news.title}}</span>
+												</span>
+											</span>
+											<span class="article-question"></span>
+											<span class="article-answer shortHeight">
+												<span>
+													<table border="0" cellpadding="0" cellspacing="0">
+														<tbody>
+															<tr>
+																<td>
+																	<div class="sfdc_richtext">
+																		{{normal_news.body[:50] ~ '...'}}
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</span>
+											</span>
+											<span class="mp-icon">
+												<i class="icon-arrow-right-small"></i>
+											</span>
+										</a>
+									</div>
+								{% endfor %}
+							</span>
+						</span>
+					</div>
+				</div>
+				<div class="row visible-xs">
+					<div class="mp-static-link-box-container">
+						<div class="mp-info-title">
+							<h3>Featured News</h3>
+						</div>
+						<div class="mp-category-list">
+							<ul class="list-group ul-more-info">
+									   {% for starred in news %}
+									     {% if starred.featured == 1 %}
+										<li class="list-group-item">
+											<a href="/help/{{starred.id}}" target="new">{{starred.title}}
+												<i class="mp-icon icon-external-link"></i>
+											</a>
+										</li>
+										{% endif %}
+										{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+
+{% endblock %}
+

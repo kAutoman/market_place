@@ -1,0 +1,86 @@
+{% extends "account.master" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_profile.css" rel="stylesheet">
+
+<style>
+		.content-wallets .mp-Card {
+			margin-bottom: 20px;
+		}
+</style>
+
+
+{% endblock %}
+
+{% block user_area %}
+<div class="content-wallets">
+		<h2>My Wallets</h2>
+
+				<div class="mp-Card mp-Card--rounded">
+					<div class="mp-Card-block">
+						<h3 style="color: #000; font-size: 18px; font-weight: 400; margin-bottom: 8px;">
+							Bitcoin Wallet
+						</h3>
+						<div class="content">
+							<p style="float:left;width: 75%;">
+								<u>Bitcoin (BTC)</u>
+								is a decentralized digital currency without any involvement of a bank or goverments, therefore Bitcoins is accessible for everyone which means
+								<u>everyone</u>
+								can see transactions on Blockchain. Recently Bitcoin has been targetting by the Agencies over the world because of the criminal underworld. We recommend all bitcoin users to avoid buying bitcoins from controlled Exchanges and always
+								<u>MIX</u>
+								your bitcoins!</p>
+							<div style="float:right;">
+								<a href="/account/wallet/btc" title="See your BTC wallet" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+									<span class="mp-Button-icon--vertical mp-Button-icon--left btc20"></span>
+									Go to BTC Wallet ⟶
+								</a><br>
+								Balance: {{ auth_user().btc_balance }}
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mp-Card mp-Card--rounded">
+					<div class="mp-Card-block">
+						<h3 style="color: #000; font-size: 18px; font-weight: 400; margin-bottom: 8px;">
+							Monero Wallet(recommended)
+						</h3>
+							<div class="content">
+							<div style="float:left">
+								<a href="/account/wallet/xmr" title="See your XMR wallet" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+									<span class="mp-Button-icon--vertical mp-Button-icon--left xmr20"></span>
+									Go to XMR Wallet ⟶
+								</a><br>
+								Balance: {{ auth_user().xmr_balance }}
+								</div>
+							<p style="float:right;width: 75%;">
+								<u>Monero (XMR)</u> is a decentralized digital currency focused on privacy. The transactions are also available on the internet however you can't see from who it is and where it goes from. Which means that the Monero is 100% untraceable, 
+								this suits goods for the Darknet as the Agencies are watching closely of the Darknet Markets where Monero can be a good help to increase your privacy and avoid any Agencies watchin what you are doing.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="mp-Card mp-Card--rounded">
+					<div class="mp-Card-block">
+						<h3 style="color: #000; font-size: 18px; font-weight: 400; margin-bottom: 8px;">
+							Litecoin Wallet
+						</h3>
+							<div class="content">
+							<p style="float:left;width: 75%;">
+								<u>Litcoin (LTC)</u> is a decentralized digital currency who is almost identical with Bitcoin only Litecoin is a better version of Bitcoin which uses better codes to confirm transaction much faster than Bitcoin. However be aware that same as Bitcoin, Litecoin can still be traced via Blockchain therefore always <u>MIX</u> your bitcoins up and dont buy on controlled Exchanges.
+								</p>
+							<div style="float:right;">
+								<a href="/account/wallet/ltc" title="See your LTC wallet" class="button mp-Button mp-Button--primary mp-Button--xs fav-btn">
+									<span class="mp-Button-icon--vertical mp-Button-icon--left ltc20"></span>
+									Go to LTC Wallet ⟶
+								</a><br>
+								Balance: {{ auth_user().ltc_balance }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}
+

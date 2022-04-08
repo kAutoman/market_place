@@ -1,0 +1,257 @@
+{% extends "account.master" %}
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_ads.css" rel="stylesheet">
+{% endblock %}
+
+{% block user_area %}
+	<div id="content" class="l-page">
+		{% if app.session.get('message') %}
+			<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+				<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+				<div>
+					{{ app.session.get('message') }}
+				</div>
+			</div>
+		{% endif %}
+
+		<div class="mp-Card mp-Card--rounded">
+
+			<div class="mp-Card-block">
+				<div class="content">
+					<h2 class="pull-left" style="margin: 0;">
+						<strong>Order #{{ order.id }}</strong>
+					</h2>
+					<h2 class="pull-right" style="margin: 0;">
+						<a class="text-info" href="/account/purchase-history">
+							<strong>← Back to Overview</strong>
+						</a>
+					</h2><br>
+
+
+					<table class="table table-orders-meta">
+						<tbody>
+							<tr>
+								<td>
+									<i class="mp-Icon mp-svg-clock-grey"  title="Date"></i>
+									{{ order.created_at.toFormattedDateString }}&nbsp;&nbsp;&nbsp;
+									<i class="mp-Button-icon mp-Button-icon--left mp-svg-handshake" title="{{order.payment_type.payment_name}}"></i>
+									{{order.payment_type.payment_name}}&nbsp;&nbsp;&nbsp;
+									<i class="mp-Button-icon mp-Button-icon--left {{order.listing.listing_class.id == 1 ? 'mp-svg-postpackage' : 'mp-svg-digital'}}" title="Buyer"></i>
+									{{ order.listing.listing_class.name }}&nbsp;&nbsp;
+									<i class="mp-Icon mp-svg-profile style-scope mp-header" title="Buyer"></i>
+									<a href="/profile/{{ order.listing.user.username }}">{{ order.listing.user.username }}</a>
+								</td>
+								{% if order.status == "processing" %}
+										<td class="status  status-info ">
+									Processing
+								</td>
+								{% endif %}
+								{% if order.status == "shipped" %}
+										<td class="status  status-info ">
+									Shipped
+								</td>
+								{% endif %}
+								{% if order.status == "finalized" %}
+										<td style="background-color:green;" class="status  status-info ">
+									Finalized
+								</td>
+								{% endif %}
+								{% if order.status == "disputed" %}
+										<td style="background-color:red;" class="status  status-info ">
+									Disputed
+								</td>
+								{% endif %}
+								{% if order.status == "cancelled" %}
+										<td style="background-color:red;" class="status  status-info ">
+									Cancelled
+								</td>
+								{% endif %}
+							
+							</tr>
+						</tbody>
+					</table>
+
+
+					<table style="width:100%" class="table table-bordered">
+						<thead>
+							<tr>
+								<th style="width: 100px;" class="text-center">Quantity</th>
+								<th>Product</th>
+								<th style="width: 150px;" class="text-right">Subtotal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="width: 100px;" rowspan="2" class="text-center">{{ order.units }}</td>
+								<td>
+									<p>
+										{{ order.listing.title }}
+									</p>
+									<em>{{ order.listing.description }}</em>
+								</td>
+								<td style="width: 150px;" rowspan="2" class="text-right">{{ GetCurrency() }}
+									{{ ToUserCurrency(order.price,order.listing.currency)  }}</td>
+							</tr>
+							<tr>
+								<td class="text-muted">Dispatched on
+									{{ order.updated_at.toFormattedDateString }}</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="row">
+						<p class="text-info">
+							{% if order.status == "shipped" %}
+								<li>This sale will be finalized over
+									<i style="color:blue;">{{order.finalize('updated_at').days + (order.finalize('updated_at').weeks*7 )}}</i>
+									days
+									<i style="color:blue;">{{order.finalize('updated_at').hours}}</i>
+									hours
+									<i style="color:blue;">{{order.finalize('updated_at').minutes}}</i>
+									min
+									<i style="color:blue;">{{order.finalize('updated_at').seconds}}</i>
+									sec
+								</li>
+							{% endif %}
+
+							{% if order.status == "accepted" %}
+								<li>Be aware this sale will be cancelled over
+									<i style="color:blue;">{{order.elapsed('updated_at').days + (order.elapsed('updated_at').weeks*7 )}}</i>
+									days
+									<i style="color:blue;">{{order.elapsed('updated_at').hours}}</i>
+									hours
+									<i style="color:blue;">{{order.elapsed('updated_at').minutes}}</i>
+									min
+									<i style="color:blue;">{{order.elapsed('updated_at').seconds}}</i>
+									sec
+								</li>
+							{% endif %}
+
+							{% if order.status == "finalized" %}
+								Order has been
+								<b>finalized</b>
+								funds is transfered to the vendor.
+							{% endif %}
+
+							{% if order.status == "disputed" %}
+								Order has been
+								<b>disputed</b>
+								the moderator will decide where the funds will be transfered from the case.
+							{% endif %}
+							{% if order.status == "cancelled" %}
+								Order has been
+								<b>cancelled</b>
+								funds is transfered to the buyer.
+							{% endif %}
+
+							{% if order.status == "processing" %}
+								Order has been
+								<b>disputed</b>
+								the moderator will decide where the funds will be transfered from the case.
+							{% endif %}
+
+
+						</p>
+						<table class="table" style="float:right;width: 50%; margin: 0;">
+							<tbody>
+								<tr>
+									<th style="border-top: 0; padding-top: 0;" class="text-right">Postage
+										{{ order.shipping.name  }}
+									</th>
+									<td style="width: 150px; border-top: none; padding-top: 0;" class="text-right">{{ GetCurrency() }}
+										{{ ToUserCurrency(order.shipping.price,order.listing.currency)  }}</td>
+								</tr>
+								<tr>
+									<th class="text-right lead">
+										<strong>Total</strong>
+									</th>
+									<td style="width: 150px;" class="text-right lead">
+										<strong>{{ GetCurrency() }}
+											{{ ToUserCurrency((order.amount * order.price),order.listing.currency)|number_format(2) }}</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<fieldset class="product-info" style="margin-top:10px;padding:5px;width: 100%;">
+						<div class="mp-Alert " style="background-color:#F1F1E8;">
+							<span class="mp-Alert-icon mp-svg-info"></span>
+							<div>
+								<li style="color:black;">
+									You can leave feedback for 30 days after finalizing, but once submitted it cannot be changed.
+								</li>
+							</div>
+						</div>
+						<legend>Leave a Feedback</legend>
+						{% if errors.has('rates') %}
+							<div class="mp-Alert mp-Alert--error">
+								<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+								<div>
+									<ul>
+										<li>Please choose which rating you give for this order.</li>
+									</ul>
+								</div>
+							</div>
+						{% endif %}
+
+						<form method="POST" action="{{ route('account.give.feedback', order) }}">
+							{{ csrf_field() }}
+							<p>Rate your experience with the product or the vendor</p>
+
+							
+
+							<label><input type="radio" name="rating" value="1" {% if comment != null %} {{comment.rate == 1 ? 'checked="checked" '}}  disabled{% endif %}><span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+								</span>
+							</label>
+							<label><input type="radio" name="rating" value="2" {% if comment != null %} {{comment.rate == 2 ? 'checked="checked"'}}  disabled{% endif %}><span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+									<i></i>
+								</span>
+							</label>
+							<label><input type="radio" name="rating" value="3" {% if comment != null %} {{comment.rate == 3 ? 'checked="checked"'}}  disabled{% endif %} required><span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+									<i></i>
+									<i></i>
+								</span>
+							</label>
+							<label><input type="radio" name="rating" value="4" {% if comment != null %} {{comment.rate == 4 ? 'checked="checked"'}}  disabled{% endif %}><span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+									<i></i>
+									<i></i>
+									<i></i>
+								</span>
+							</label>
+							<label><input type="radio" name="rating" value="5" {% if comment != null %} {{comment.rate == 5 ? 'checked="checked"'}}  disabled{% endif %}><span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+									<i></i>
+									<i></i>
+									<i></i>
+									<i></i>
+									<i></i>
+								</span>
+							</label>
+
+							<p>Leave a comment (optional)</p>
+							<div class="form-field form-textarea">
+								<textarea style="height:150px;{{comment != null ? 'background-color:#F5F7FA;'}}"  {% if comment != null %} readonly="readonly" {% endif %} class="mp-Textarea {{ errors.has('message') ? ' invalid' : '' }}" id="notes" name="notes" maxlength="10000" data-maxlength="10000">{% if comment != null %} {{comment.comment}} {% endif %}</textarea>
+							</div>
+							
+							{% if comment == null %} 
+							<button type="submit" style="margin-bottom:3px;margin-left:5px;float:right;" class="mp-Button mp-Button--primary mp-Button--lg">
+								<span>Submit Feedback</span>
+							</button>
+							{% endif %}
+						</form>
+
+					</fieldset>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

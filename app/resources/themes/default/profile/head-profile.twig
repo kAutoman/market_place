@@ -1,0 +1,112 @@
+<section class="l-main-top">
+				<div class="profile-head mp-Card">
+					<div class="profile-head-backdrop mp-Card-block mp-Card-block--padded-no" style="padding-bottom: 36.73469387755102%">
+						<div class="profile-head-backdrop-stretchy" style="background-image: url('{{ profile.getAvatarBackground() }}');">
+							<div class="profile-head-image">
+								<img src="{{ profile.getAvatar() }}">
+							</div>
+							<div class="profile-head-title">
+								{% if profile.is_admin == 1 %}
+									<div class="profile-head-title-name">{{ profile.username }}<br>
+										<button class="button mp-Button mp-Button--dangerous mp-Button--sm" title="Administrator of Roman Road" disabled>
+											Administrator
+										</button>
+									</div>
+								{% else %}
+									<div class="profile-head-title-name">{{ profile.username }}({{profile.averageRate() == 0 ? '5.00' : profile.averageRate() | number_format(2) }}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+											<i></i>
+										</span>)<br>
+										{% if auth_user().id != profile.id %}
+											<button id="report-seller-button" class="button mp-Button mp-Button--secondary mp-Button--sm" title="Report seller">
+												<a href="#report">
+													<span class="mp-Icon mp-svg-alert-blue"></span>Report  {{profile.trader_type == "individual" ? "Vendor" : "Buyer"}}</a>
+											</button>
+										{% endif %}
+										{% if profile.trader_type == "individual" %}
+										<button style="background-color:#eda566" class="button mp-Button mp-Button--primary mp-Button--sm" title="Vendor" disabled>
+												Vendor
+										</button>
+										{% if profile.has_fe %}
+											<button style="color:black;background-color:orange;" class="button mp-Button mp-Button--primary mp-Button--sm" title="Having only Early Finalize Rights" disabled>
+												100% FE Rights
+											</button>
+										{% else %}
+											<button style="color:black;" class="button mp-Button mp-Button--primary mp-Button--sm" title="Have only Escrow Rights" disabled>
+												100% Escrow Rights
+											</button>
+										{% endif %}
+									
+										{% if profile.on_vacation == 1 %}
+											<button style="background-color:#eda566" class="button mp-Button mp-Button--primary mp-Button--sm" title="On Vacation" disabled>
+												On Vacation
+											</button>
+										{% endif %}
+										{% else %}
+										<button style="background-color:#eda566" class="button mp-Button mp-Button--primary mp-Button--sm" title="Have only Escrow Rights" disabled>
+												Buyer
+										</button>
+										{% endif %}
+
+
+										{% if profile.banned_at != null %}
+											<button class="button mp-Button mp-Button--dangerous mp-Button--sm" title="Banned" disabled>
+												Permanent Banned
+											</button>
+										{% endif %}
+									</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="profile-head-info mp-Card-block mp-Card-block--custom-padleft">
+						<div class="user-reviews-placeholder hidden"></div>
+						<div class="profile-head-info-item">
+							<b>{{ profile.created_at.diffForHumans(null, true) }}</b>
+							long active on Roman Road&nbsp;&nbsp;&nbsp;&nbsp;
+							{% if profile.is_admin == 1 %}Last Activity on
+								<b>Impossible</b>
+								{% else %}Last Activity on
+								<b>{{ profile.last_login_at|date("d M Y") }}</b>
+							{% endif %}
+						</div>
+						{% if auth_user().id != profile.id %}
+						<div class="save-seller-button">
+							<div id="save-seller">
+								<form id="save-seller-form" action="{{route('profile.follow',profile.username)}}">
+									<button id="save-seller-button" class="button mp-Button mp-Button--secondary mp-Button--sm" title="Follow Vendor">
+										{% if auth_user().getIsFollowed(profile) %}
+										<span class="mp-Button-icon mp-svg-following"></span>&nbsp;&nbsp;&nbsp;Unfollow
+										{% else %}
+										<span class="mp-Button-icon mp-svg-follow"></span>&nbsp;&nbsp;&nbsp;Follow
+										{% endif %}
+									</button>
+								</form>
+							</div>
+						</div>
+						{% endif %}
+
+
+
+					</div>
+					<div class="mp-Card-block mp-Card-block--custom-padtop">
+						<div class="mp-Tab-bar profile-head-tab">
+							<a class="mp-Tab {{ MetaTag.get('sub_id') == 1 ? 'mp-Tab--selected' : ''}}" href="/profile/{{ profile.username }}">About us</a>
+							{% if profile.is_admin != 1 and profile.trader_type == "individual" %}
+								<a class="mp-Tab {{ MetaTag.get('sub_id') == 2 ? 'mp-Tab--selected' : ''}}" href="/profile/{{ profile.username }}/store">The Store</a>
+								<a class="mp-Tab {{ MetaTag.get('sub_id') == 3 ? 'mp-Tab--selected' : ''}}" href="/profile/{{ profile.username }}/ratings">Ratings({{profile.count_reviews()}})</a>
+							{% endif %}
+							{% if auth_user().id != profile.id %}
+								<a class="mp-Tab " href="/profile/{{ profile.username }}/sendmessage">Send message</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</section>
+			{% if app.session.get('message') %}
+			<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+				<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+				<div>
+				{{ app.session.get('message') | raw }}
+				</div>
+			</div>
+			{% endif %}

@@ -1,0 +1,45 @@
+{% extends "layouts.app" %}
+{% block css %}
+<link href="{{ setting('url') }}/web/css/account_profile.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div id="page-wrapper" class="mymp require">
+            <div class="mp-Topbar">
+                <section class="mp-Topbar-inner-wrapper">
+                    <div class="mp-Topbar-title">
+                        My Account
+                    </div>                   
+                    <div class="mp-Tab-bar has-sticky">
+                        <a href="/account/edit_profile" class="mp-Tab {{ MetaTag.get('id') == 1 ? 'is-selected' : ''}}">
+                        Account
+                        </a>
+				    	{% if auth_user().trader_type == 'individual' %}
+                        <a href="/account/vendor_settings" class="mp-Tab {{ MetaTag.get('id') == 2 ? 'is-selected' : ''}} ">
+                        Vendor Panel
+                        </a>
+                        {% endif %}
+                        <a href="/account/purchase-history" class="mp-Tab {{ MetaTag.get('id') == 6 ? 'is-selected' : ''}} ">
+                         Orders
+                        </a>
+                        {% if auth_user().trader_type == 'buyer' %}
+                        <a href="/account/disputes" class="mp-Tab {{ MetaTag.get('id') == 15 ? 'is-selected' : ''}} ">
+                         Disputes
+                        </a>
+                        <a href="/account/favorites" class="mp-Tab {{ MetaTag.get('id') == 3 ? 'is-selected' : ''}} ">
+                        Favorites
+                        </a>
+                        {% endif %}
+                        <a href="/account/wallet" class="mp-Tab {{ MetaTag.get('id') == 4 ? 'is-selected' : ''}} ">
+                        Wallet
+                        </a>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="l-page">
+                 {% block user_area %}{% endblock %}
+            </div>
+        </div>
+
+{% endblock %}

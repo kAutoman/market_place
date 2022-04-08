@@ -1,0 +1,151 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/message.css" rel="stylesheet">
+	<style>
+		#page-wrapper {
+			margin-bottom: 0;
+		}
+
+	</style>
+
+{% endblock %}
+
+{% block content %}
+	<div class="wide-layout" id="page-wrapper">
+	
+		<div class="l-page indexpage" id="content" style="height: 800px;margin-bottom:150px;">
+			<div class="mp-Alert mp-Alert--error"><span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+					<li>
+						<b>Do not</b>
+						open links from the chats, they will contain
+						<b>phishing links</b>. Phishing links are leading to fake websites which are stealing your login data.
+					</li>
+		</div>
+		 {% if inboxes | length == 0 %}
+<div class="ContentPlaceholderMolecule-root pageHeaderOffsetBorder">
+<div class="ContentPlaceholderMolecule-rootInner">
+<div class="ContentPlaceholderMolecule-iconUnit">
+<span class="mp-Icon mp-Icon--xxl mp-svg-messages--secondary"></span>
+</div><p class="ContentPlaceholderMolecule-text"> You have not yet sent or received any messages.</p>
+</div>
+</div>
+		 {% else  %}
+			<div class="inbox-messages chatheader">
+				<div class="messages-left">
+					<div class="mp-Card message-left-header">
+						<div class="mp-Card-block">
+							<h1>Messages</h1>
+						</div>
+					</div>
+					<div class="message-left-header-shadow">
+						<div class="ConversationsToolsMolecule-root"></div>
+					</div>
+					<div class="message-left-part">
+						<div>
+							<ol class="ConversationsOrganism-listRoot">
+               					 {% for k, inbox in inboxes %}
+								<li class="ConversationsOrganism-listItem">
+									<div class="ConversationMolecule-root ConversationMolecule-selling">
+										<label class="ConversationMolecule-selectLabel">
+										<input id="checkbox1" type="checkbox"></label>
+										<span class="ConversationMolecule-trashcan">
+											<span class="mp-Icon mp-Icon--md mp-svg-trash"></span>
+										</span>
+										<a href="{{  route('inbox.show', inbox.thread.conversation_id) }}">
+											<div class="ConversationMolecule-leftUnit">
+												<div class="ConversationMolecule-thumbnailUnit">
+													<div class="ThumbnailAtom-root ThumbnailAtomSizes-lg ThumbnailAtomBorderRadii-xs" style="background-image: url(&quot;{{ inbox.withUser.avatar }}&quot;);"></div>
+													<div class="ConversationMolecule-thumbnailProfilePictureUnit">
+														<span class="ProfilePictureAtom-root ProfilePictureAtomSizes-sm ProfilePictureAtom-rootBordered">
+															<span>{{ inbox.withUser.username|first }}</span>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="ConversationMolecule-rightUnit">
+												<h2 class="ConversationMolecule-title">{{ inbox.withUser.username }}</h2>
+												 {% if not inbox.thread.is_seen and inbox.thread.user_id != auth_user().id %}
+												<span class="ConversationMolecule-titleBadgeUnit">
+													<span class="BadgeAtom-root">1</span>
+												</span>
+												 {% endif %}
+												<div class="ConversationMolecule-body">
+													<div class="ConversationMolecule-meta">from {{ inbox.withUser.username }}</div>
+													<div class="ConversationMolecule-latestMessageWrapper">
+														<span>{{ inbox.thread.message  | filter_message | str_limit(18)}}</span>
+													</div>
+												</div>
+												<footer>
+													<div class="ConversationMolecule-receivedDateUnit">
+														<span>{{inbox.thread.created_at.diffForHumans()}}</span>
+													</div>
+												</footer>
+											</div>
+										</a>
+									</div>
+								</li>
+								{% endfor %}
+
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="chatindividual part2">
+					<div class="chatbox">
+						<header>
+							<div class="ConversationTopicOrganism-root">
+								<div class="ConversationTopicOrganism-titleUnit">
+									<div class="ConversationTopicOrganism-backLinkUnit">
+										<a href="/messages/">
+											<span class="mp-Icon mp-Icon--lg mp-svg-arrow-left"></span>
+											<span class="ConversationTopicOrganism-backLinkText">back</span>
+										</a>
+									</div>
+									<h2 class="ConversationTopicOrganism-title">
+										<a href="/profile/Take">
+											<span class="ConversationTopicOrganism-profilePictureUnit">
+												<span class="ProfilePictureAtom-root ProfilePictureAtomSizes-md">
+													<span>S</span>
+												</span>
+											</span>
+											<span class="ConversationTopicOrganism-name">Take <button style="float:right;" class="button mp-Button mp-Button--dangerous mp-Button--sm" title="Administrator of Roman Road" disabled="">
+											Administrator
+										</button></span>
+										</a>
+									</h2>
+								</div>
+								<div>
+								</div>
+							</div>
+						</header>
+						<article>
+							<div class="MessagesOrganism-root">
+								<div class="LegalDisclaimerMolecule-root">Roman Road staffs never ask you for your credentials. Don't Finalize Early a order if the vendor ask, if so report this conversation and he/she will get banned. </br><b>Chat histories are cleaned every 5 days</b>
+									<a target="_blank" href="/help/3" rel="noopener noreferrer">read more about rules
+										<span class="mp-Icon mp-Icon--xs mp-svg-arrow-right--action"></span>
+									</a>
+								</div>
+								<div class="MessagesOrganism-group">
+									<ol class="MessagesOrganism-listRoot">
+										<li class="MessagesOrganism-listItem MessagesOrganism-listItem_from_otherparticipant">
+											<div>
+												<div class="MessageMolecule-root MessageMolecule-root_from_otherparticipant MessageMolecule-tail">
+														Welcome to Roman Road =D<br><br> Don't scam people and don't try to spam :) for any small talk, just sent us a message via <a href="/help/4">here</a> or via profile. <br><br> Kind Regards,<br> Administrator Take 
+												</div>
+											</div>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+
+		</div>
+	</div>
+
+{% endblock %}
+

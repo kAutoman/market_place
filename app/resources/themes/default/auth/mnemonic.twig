@@ -1,0 +1,123 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+<link href="{{ setting('url') }}/web/css/index.css" rel="stylesheet">
+
+
+<style>
+   .linesOver {
+    border:2px dotted #EDA566;
+   }
+   .textFrom{
+    font-family:courier;
+    font-size: 15px;
+    padding: 8px;
+    text-align:center;
+   }
+   
+</style>
+{% endblock %}
+{% block navbar %}
+<header>
+    <div class="mp-Header-ribbonTop"></div>
+    <div class="mp-Header-navBar">
+        <div class="mp-Header-maxWidth">
+            <a class="mp-Header-logo" href="/" title="Marketplace">Marketplace</a>
+			<ul class="mp-Header-links">
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Community</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Help en info</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">PGP Key</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="/account/apply_vendor"  target="_blank">Becoming a Vendor</a>
+				</li>
+			</ul>
+        </div>
+    </div>
+
+    <div class="mp-Header-ribbonBottom"></div>
+
+</header>
+{% endblock %}
+
+{% block content %}
+<div id="page-wrapper">
+    <div id="content" class="l-page">
+        {% if errors.any()  %}
+        <div class="mp-Alert mp-Alert--error">
+            <span aria-hidden="true" class="mp-Alert-icon mp-svg-alert--inverse"></span>
+            <div>
+                <ul>
+                        <li>Mnemonic or Withdraw PIN is incorrect.</li>
+                </ul>
+            </div>
+          </div>
+          {% endif %}
+        <div class="mp-Card mp-Card--rounded">
+            <div class="mp-Card-block">
+                <div id="login-tabs" class="mp-Tab-bar mp-Tab-bar--center sdk-custom">
+                    <h3 class="mp-text-header3 sub-header">Your Mnemonic</h3>
+                </div>
+            </div>
+            <div class="mp-Card-block">
+                <div class="mp-Form mp-Form--aligned">
+                    <div class="mp-Form-body sdk-custom">
+                        <form id="account-login-form" class="new-design-form" method="post"
+                            action="{{ route('mnemonic_post') }}">
+                            {{ csrf_field() }}
+
+                            <p>Please take note of the security mnemonic and the withdraw pin below. It will be required if you lose your
+                                password OR PIN and want to recover it. This page will be displayed <b>only once</b>,
+                                and will not be accessible after. If you lose your password OR PIN, you will be asked to
+                                provide your mnemonic and username in order to perform a reset it.</p>
+
+                            <div class="form-squeeze form-login">
+                                <h4>Mmenomic Key</h4>
+                                <div class="linesOver">
+                                    <p class="textFrom">{{auth_user().mnemonic}}</p>
+                                </div>
+                                <p><b>Please copy your mnemonic in the field below to indicate that you now know it.</b></p>
+                                <div class="mp-Form-controlGroup">
+                                    <label class="mp-Form-controlGroup-label optional-label" for="Mnemonic">Mnemonic</label>
+                                    <input type="text" name="mnemonic" placeholder="Copy paste the mnemonic above " class="mp-Input {{ errors.has('mnemonic') ? ' invalid' : '' }}"  value="" tabindex="1">
+                                </div>
+
+                                <h4>Withdraw Pin</h4>
+                                <div class="linesOver">
+                                    <p class="textFrom">{{auth_user().withdrawpin}}</p>
+                                </div>
+
+                                <p><b>Please copy your Withdraw PIN in the field below to indicate that you now know it.</b></p>
+                                <div class="mp-Form-controlGroup">
+                                    <label class="mp-Form-controlGroup-label optional-label" for="Mnemonic">Withdraw PIN</label>
+                                    <input type="text" name="withdrawpin" placeholder="Copy paste the Withdraw Pin above" class="mp-Input {{ errors.has('withdrawpin') ? ' invalid' : '' }}"  value="" tabindex="1" maxlength="6">
+                                </div>
+
+                                <p>When you have noted the above mnemonic and the withdrawpin somewhere, click on the button below to be
+                                    taken to the marketplace. Remember that the login page will never ask for your
+                                    mnemonic or your PIN. Be careful. <span class="text-danger">If you lose your PIN or
+                                        2FA private key and you cannot remember your mnemonic, your account cannot be
+                                        reset and this will result in <b>loss of all your coins!</b></span></p>
+
+                            
+
+                                <div class="mp-Form-controlGroup centered-control-group last-control-group">
+                                    <button id="account-login-button"
+                                        class="l-stretchable-auto mp-Button mp-Button--primary">
+                                        <span>Continue</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

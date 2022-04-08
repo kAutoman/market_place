@@ -1,0 +1,49 @@
+{% extends "account.master" %}
+
+{% block user_area %}
+	<div id="content">
+		<div style="margin-bottom: 50%;" class="mp-Card mp-Card--rounded">
+			{% include 'account.head_normal_bar.twig' %}
+
+			<div class="mp-Card-block">
+				<form method="POST" action="{{ route('account.verify.pgp') }}" accept-charset="UTF-8">
+					{{ csrf_field() }}
+					<div class="edit-profile-block clear-fix">
+						{% if errors.any()  %}
+							<div class="mp-Alert mp-Alert--error">
+								<span aria-hidden="true" class="mp-Alert-icon mp-svg-alert--inverse"></span>
+								<div>
+									<ul>
+										<li>Code is incorrect.</li>
+									</ul>
+								</div>
+							</div>
+						{% endif %}
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>PGP Message</b>
+							</h3>
+							<span class="help-block">This account is trying to add a new public PGP key. Please confirm your new public key by decrypting the message below and inputting the message to confirm that you own this PGP key. </span>
+							<textarea style="height:300px;" class="mp-Textarea form-control" id="pgp" name="pgp" readonly="readonly">{{ app.session.get('suckmynuts') }}</textarea>
+						</div>
+
+						<div class="form-field">
+							<label>Code</label>
+							<input type="text" name="code" placeholder="Give the correct check code " class="mp-Input {{ errors.has('code') ? ' invalid' : '' }}" value="" tabindex="1">
+						</div>
+
+						<div class="form-field">
+							<button id="confirm-profile" class="primary medium mp-Button mp-Button--primary">
+								<span>Save</span>
+							</button>
+							<a id="cancel-profile" href="/account/change_pgp" class="secondary medium mp-Button mp-Button--secondary">
+								<span>Cancel</span>
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

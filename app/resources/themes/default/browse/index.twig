@@ -1,0 +1,152 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+<link href="{{ setting('url') }}/web/css/index.css" rel="stylesheet">
+<style>
+.mp-Listing-card-image {
+    height:500px;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+	<div class="wide-layout" id="page-wrapper">
+		<div class="l-page indexpage" id="content">
+			<section class="l-side-left" id="left-column">
+				<div class="mp-Card mp-Card--rounded" id="navigation">
+					<div class="mp-Card-block mp-Card-block--highlight mp-Card-block--padded-md">
+						<div class="navigation-block">
+							<h3 class="title heading" style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+								<span class="main-label">Shop by Category</span>
+							</h3>
+							<ul class="list-menu" id="navigation-categories">
+								{% for parent_category in categories %}
+									<li class="link">
+										<a href="/category/{{ parent_category.id}}">{{ parent_category.name}}</a>
+									</li>
+									<li>
+									{% endfor %}
+								</ul>
+							</div>
+
+							<br>
+							<div class="handigeLinks" id="highlights">
+								<div class="snippet-list">
+									<h3 class="title heading" style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+										Community</h3>
+									{% for featured_news in news %}
+										<li class="link">
+											<a href="/help/{{featured_news.id}}">{{featured_news.title}}</a>
+										</li>
+									{% endfor %}
+								</div>
+							</div>
+							<div class="handigeLinks" id="highlights">
+								<div class="snippet-list">
+									<h3 class="title heading" style="border-bottom: 2px solid #eda566; padding-bottom: 5px; text-align: center;">
+										Exchange</h3>
+									{% include 'category.rate.twig' %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="l-main-right">
+					<div class="feed">
+						<div class="feed-content">
+							<div class="mp-Card mp-Card--rounded" style="background-color:transparent;text-align:center;margin-bottom:20px;">
+								<span style="background-color:white;" class="feed-tab mp-Tab mp-Tab--selected">
+									<a href="#">≥Featured</a>
+								</span>
+
+								<div class="mp-Card-trevor philips">
+									{% for item in listingAds  | slice(1,10) %}
+											<article style="height: 350px;" class="mp-Listing-card feed-item">
+												<div class="mp-Listing-card-body">
+													<a class="mp-Listing-card-clickable-container" href="{{route('listing', {'id' : item, 'slug' : str_slug(item.title)})}}">
+														<figure class="mp-Listing-card-image" style="height: 250px; background-image: url('{{item.photo}}')"></figure>
+														<div class="mp-Listing-card-content">
+															<h4 class="mp-Listing-card-title">{{ str_limit(item.title, 12) }}</h4>
+															<span class="mp-Listing-card-price">
+																<span class="price-old">
+{#																	{{ToUserCurrency(item.price,item.currency)}} {{ GetCurrency() }}#}
+																	{{ToUserCurrency(item.price,'USD')}} {{ GetCurrency() }}
+																</span><br>
+																<span style="font-size: 12px;">{{item.shipped_from}}&#10230;
+																	{% for country in item.countryNames() %}
+																		{{country.country_short_name}},
+																	{% endfor %}
+																</span>
+															</span>
+															<p class="card-label">{{item.user.username}}({{item.user.orders.count}}) ({{item.user.avg_rating() == 0.0 ? '5.0' : item.user.avg_rating() }}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+																	<i></i>
+																</span>)
+															</p>
+															{% if item.payment_type_id == "1" %}
+																<p class="card-escrow">Escrow</p>
+															{% elseif item.payment_type_id == 4 %}
+																<p class="card-escrow">Multisig 2/3</p>
+															{% elseif item.payment_type_id == 2 %}
+																<p class="card-fe">No escrow</p>
+															{% else %}
+																<p class="card-fe">50% escrow</p>
+															{% endif %}
+														</div>
+													</a>
+												</div>
+											</article>
+									{% endfor %}
+								</div>
+							</div>
+							<div class="mp-Card mp-Card--rounded" style="background-color:transparent;text-align:center;">
+								<span style="background-color:white;" class="feed-tab mp-Tab mp-Tab--selected">≥Random Products</span>
+								<div
+									class="mp-Card-trevor">
+									{% for item in listingsRandom %}
+											<article class="mp-Listing-card feed-item">
+												<div class="mp-Listing-card-body">
+													<a class="mp-Listing-card-clickable-container" href="{{route('listing', {'id' : item, 'slug' : str_slug(item.title)})}}">
+														<figure class="mp-Listing-card-image" style="background-image: url('{{item.photo}}')"></figure>
+														<div class="mp-Listing-card-content">
+															<h4 class="mp-Listing-card-title">{{ str_limit(item.title, 12) }}</h4>
+															<span class="mp-Listing-card-price">
+																<span class="price-old">
+																	{{ToUserCurrency(item.price,'USD')}} {{ GetCurrency() }}
+																</span><br>
+																<span style="font-size: 12px;">{{item.shipped_from}}&#10230;
+																	{% for country in item.countryNames() %}
+																		{{country.country_short_name}},
+																	{% endfor %}
+																</span>
+															</span>
+
+															<p class="card-label">{{item.user.username}}({{item.user.orders.count}}) ({{item.user.avg_rating() == 0.0 ? '5.0' : item.user.avg_rating() }}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+																	<i></i>
+																</span>)
+															</p>
+
+															{% if item.payment_type_id == "1" %}
+																<p class="card-escrow">Escrow</p>
+															{% elseif item.payment_type_id == 4 %}
+																<p class="card-escrow">Multisig 2/3</p>
+															{% elseif item.payment_type_id == 2 %}
+																<p class="card-fe">No escrow</p>
+															{% else %}
+																<p class="card-fe">50% escrow</p>
+															{% endif %}
+														</div>
+													</a>
+												</div>
+											</article>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+
+	{% endblock %}

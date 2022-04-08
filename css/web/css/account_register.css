@@ -1,0 +1,54 @@
+  fieldset {
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    .ads li {
+        margin: 0;
+        width: 32%;
+    }
+
+    .ads .svg-icon-block {
+        margin: 0;
+    }
+
+    .marketmirrors li {
+        padding:1px;
+    }
+
+    .svg-icon-block {
+        width: 19px;
+        height: 36px;
+        display: inline-block;
+        background-size: auto 100%;
+    }
+
+.anti-phishing {
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+    font-family: sans-serif;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid #eda566;
+    line-height: 33px;
+    letter-spacing: 6px;
+    transition: transform 0.9s;
+	background:#fff;
+}
+.anti-phishing:hover {
+  -ms-transform: scale(1.5); 
+  -webkit-transform: scale(1.5); 
+  transform: scale(1.5); 
+  transition: 0.9s linear;
+  font-family:sans-serif;
+  border: 2px solid #008000;
+}
+.anti-phishing span {
+color:#eda566;
+}
+.anti-phishing:hover span {
+color:green;
+}

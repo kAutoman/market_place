@@ -1,0 +1,219 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+<link href="{{ setting('url') }}/web/css/products.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div class="mp-Page-content">
+		<div class="mp-Page-element mp-Page-element--full-width mp-Page-element--breadCrumbAndSaveSearch">
+			<div class="mp-Nav-breadcrumb">
+				<a class="mp-TextLink mp-Nav-breadcrumb-item" href="/">
+					Home
+				</a>
+				{% for breadcrumb in breadcrumbs %}
+				<a class="mp-TextLink mp-Nav-breadcrumb-item" href="/category/{{breadcrumb.id }}">{{ breadcrumb.name }}</a>
+				{% endfor %}
+				<a class="mp-TextLink mp-Nav-breadcrumb-item" href="/category/{{category_choosed.id }}">{{category_choosed.name}}</a>
+				<h1 class="mp-Nav-breadcrumb-item">{{listings.count}} results</h1>
+			</div>
+		</div>
+		<div class="mp-Page-element mp-Page-element--full-width"></div>
+		<aside class="mp-Page-element mp-Page-element--aside">
+			<div class="mp-Filters">
+				<div class="mp-Filter">
+					<p class="mp-Filter-heading mp-Filter-heading--1"><b>Shop by Category</b></p>
+					<ul class="mp-Tree-list">
+						<div class="mp-Tree-list-item">
+							{% for category in categories %}
+								<li class="mp-Level-one {{ category_choosed.id == category.id ? 'mp-Level-one--open' : category_choosed.parent_id == category.id ? 'mp-Level-one--open' : category_choosed.parent.child.id == category.id ? 'mp-Level-one--open' : ''  }}">
+									<a class="mp-TextLink category-name" href="/category/{{ category.id }}">{{ category.name}}<span class="mp-Filter-counter">({{ category_choosed.get_count(category.id)}})</span>
+									</a>
+								</li>
+								{% if category_choosed.id == category.id or category_choosed.parent_id == category.id or category_choosed.parent.child.id == category.id  %}
+									{% for child in category.child %}
+										<li class="mp-Level-two {{ category_choosed.id == child.id ? 'mp-Level-two--open' : category_choosed.parent.id == child.id ? 'mp-Level-two--open' }}">
+											<a class="mp-TextLink category-name" href="/category/{{ child.id }}">{{child.name}}<span class="mp-Filter-counter">{{ category_choosed.get_count(child.id) == 0 ? "":attribute(_context,'('~category_choosed.get_count(child.id)~')')}}</span>
+											</a>
+										</li>
+									{% if category_choosed.id == child.id or category_choosed.parent_id == child.id or category_choosed.parent.id == child.id  %}
+										{% for child2 in child.child %}
+											<li class="mp-Level-three">
+												<a class="mp-TextLink category-name" href="/category/{{ child2.id }}">{{child2.name}}<span class="mp-Filter-counter">{{ category_choosed.get_count(child2.id) == 0 ? "":attribute(_context,'('~category_choosed.get_count(child2.id)~')')}}</span>
+												</a>
+											</li>
+										{% endfor %}
+								    {% endif %}
+									{% endfor %}
+								{% endif %}
+							{% endfor %}
+
+
+						</div>
+					</ul>
+				</div>
+					<div class="mp-Filter">
+					<p class="mp-Filter-heading mp-Filter-heading--1"><b>Exchange</b></p>
+								    {% include 'category.rate.twig' %}
+				</div>
+			</div>
+		</aside>
+	
+		<div class="mp-Page-element mp-Page-element--main">
+		 <form action="/category/{{category_choosed.id}}/search" method="post" accept-charset="utf-8">
+		        {{ csrf_field() }}
+		   	 	<fieldset style="margin-bottom: 30px;">
+				<legend>Filter</legend>
+				<div class="mp-ViewControl">
+					<div class="mp-ViewControl-group">
+						<div class="mp-Select">
+							<label>Origin Country</label>
+								<select class="mp-Select-input" name="OriginCountry">								  
+									<optgroup label="Continents">
+										{% for country in countries %}
+										   {% if country.is_continent == 1 %}
+											<option value="{{country.country_short_name}}">{{country.country_name}}</option>
+										  {% endif %}
+										{% endfor %}
+									</optgroup>
+									<optgroup label="Countries">
+									{% for country in countries %}
+										   {% if country.is_continent == 0 %}
+											<option value="{{country.country_short_name}}">{{country.country_name}}</option>
+										  {% endif %}
+									{% endfor %}
+									</optgroup>
+								</select>
+						</div>
+						<div class="mp-Select">
+							<label>Ships To</label>
+							<select class="mp-Select-input" name="ShipsTo">
+									<optgroup label="Continents">
+										{% for country in countries %}
+										   {% if country.is_continent == 1 %}
+											<option value="{{country.id}}">{{country.country_name}}</option>
+										  {% endif %}
+										{% endfor %}
+									</optgroup>
+									<optgroup label="Countries">
+									{% for country in countries %}
+										   {% if country.is_continent == 0 %}
+											<option value="{{country.id}}">{{country.country_name}}</option>
+										  {% endif %}
+									{% endfor %}
+									</optgroup>
+							</select>
+						</div>
+						<div class="mp-Select">
+							<label>Escrow</label>
+							<select class="mp-Select-input" name="escrow">
+								<option value="1">Yes&nbsp;</option>
+								<option value="2">No &nbsp;</option>
+							</select>
+						</div>
+							<div class="mp-Select">
+							<label>Categories</label>
+								{{ form_select('category', categories_filter, request('category'), {'class' : 'mp-Select-input'}) }}
+						</div>	
+					</div>
+				</div>
+					<div class="mp-ViewControl">
+					<div class="mp-ViewControl-group">
+						<div style="position: relative; right: -8px; width: 30%;" class="mp-Filter-fields">
+						<label>Search Text</label>
+							<input name="title" class="mp-Input" placeholder="search by title" type="text" value="">
+						</div>
+						<div class="mp-Select">
+							<label>Product Class</label>
+							<select class="mp-Select-input" name="ListingClass">
+								<option value="1">Physical Package</option>
+								<option value="2">Digital Goods</option>
+							</select>
+						</div>
+						<div class="mp-Select">
+							<label>Sort by</label>
+							<select class="mp-Select-input" name="order">
+								<option value="1">Date (new-old)</option>
+								<option value="2">Date (old-new)</option>
+								<option value="3">Price (low-high)</option>
+								<option value="4">Price (high-low)</option>
+							</select>
+						</div>
+						<button type="submit" style="position: relative; margin-left: 10px; top: 11px;" class="mp-Button mp-Button--secondary">
+							Apply filter
+						</button>
+					</div>
+				</div>
+				</fieldset>
+			</form>
+			
+			<ul class="mp-Listings mp-Listings--list-view">
+			    {% if listings.count != 0 %}
+				{% for product in listings %}
+					<li class="mp-Listing mp-Listing--list-item">
+						<a href="{{route('listing', {'id' : product, 'slug' : str_slug(product.title)})}}" class="mp-Listing-coverLink">
+							<figure class="mp-Listing-image-container">
+								<div class="mp-Listing-image-item mp-Listing-image-item--main">
+									<img title="{{product.title}}" src="{{product.photo}}">
+								</div>
+							</figure>
+							<div class="mp-Listing-group">
+								<div class="mp-Listing-group--title-description-attributes">
+									<h3 class="mp-Listing-title">{{product.title}}</h3>
+									<p class="mp-Listing-description mp-text-paragraph">{{product.description[:40] ~ '...' | escape('html')}}</p>
+								</div>
+								<div class="mp-Listing-group--price-date-feature">
+									<span class="mp-Listing-price mp-text-price-label">{{ToUserCurrency(product.price,product.currency)}}&nbsp;{{ GetCurrency() }}</span>
+									<span class="mp-Listing-date mp-Listing-date--desktop">{{product.created_at.format('d-m-Y')}}</span>
+								</div>
+								<div class="mp-Listing-group--mobile-bottom-row">
+									<span class="mp-Listing-location">{{product.shipped_from}}&#10230;{% for country in product.countryNames() | slice(1,4) %} {{country.country_short_name}}, {% endfor %}<br></span>
+									</span>
+									<span class="mp-Listing-date mp-bottom-right">{{product.price}},{{product.created_at.format('d-m-Y')}}</span>
+								</div>
+							</div>
+						</a>
+						 <div class="mp-Listing--sellerInfo">
+                                <span class="mp-Listing-seller-name"><a href="/profile/{{ product.user.username }}">{{ product.user.username }}({{product.user.averageRate() == 0 ? '5.0' : product.user.averageRate() }}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5"><i></i></span>)</a></span>
+                                <span class="mp-Listing-location">{{product.shipped_from}}&#10230;{% for country in product.countryNames() | slice(1,4) %} {{country.country_short_name}}, {% endfor %}<br>{{product.priority_until != null ? '<b>Advertising</b>' : ''}}</span>
+                                <span class="mp-Listing-seller-link">{% if product.payment_type_id == "1" %} <p class="card-escrow">Escrow</p> {% elseif product.payment_type_id == 4 %} <p class="card-escrow">Multisig 2/3</p>{% elseif product.payment_type_id == 2 %} <p class="card-fe">No escrow</p> {% else %} <p class="card-fe">50% escrow</p> {% endif %} Sold: {{product.orders.count}}</span>
+                        </div>
+					</li>
+					{% if product.bold_until != null %}
+					<li class="mp-Listing mp-Listing--other-seller">
+                                <div class="mp-Listing-other-seller-content mp-Listing-other-seller-content--left mp-text-paragraph">Also from this vendor</div>
+                                <div class="mp-Listing-other-seller-content mp-Listing-other-seller-content--center">
+								  {% for adslisted in product.user.listings.slice(0,4) %}
+                                    <a href="{{route('listing', {'id' : adslisted, 'slug' : str_slug(adslisted.title)})}}" class="mp-Listing-other-seller-items {{product.user.listings[0] == adslisted ? 'mp-Listing-other-seller-items--default' :  ''}}">
+                                        <div class="mp-Listing-other-seller-image-container"><img src="{{adslisted.photo}}"></div>
+                                        <div class="mp-Listing-other-seller-info-container">
+                                            <h3 class="mp-TextLink">{{adslisted.title}}</h3>
+                                            <div class="mp-text-price-label">{{ToUserCurrency(adslisted.price,adslisted.currency)}} {{ GetCurrency() }}</div>
+                                        </div>
+                                    </a>
+								  {% endfor %}
+                                </div>
+                                <div class="mp-Listing-other-seller-content mp-Listing-other-seller-content--right">
+								<a class="mp-TextLink"  href="/profile/{{ product.user.username }}">View all {{ product.user.listings.count }} listings<span class="mp-Icon mp-svg-arrow-right-blue"></span>
+								</a>
+								<a class="mp-TextLink" href="/help/3">
+								<span class="mp-Icon mp-svg-info"></span>
+								<span>What is this?</span>
+								</a>
+								</div>
+                    </li>	
+					{% endif %}	
+				{% endfor %}
+				{% else %}
+					<p>There is currently no products in this category.</p>
+				{% endif %}
+			</ul>
+		<div class="mp-PaginationControls">
+                    {{listings.links | raw}}
+        </div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

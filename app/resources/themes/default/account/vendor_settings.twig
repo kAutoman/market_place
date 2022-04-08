@@ -1,0 +1,118 @@
+{% extends "account.master" %}
+
+{% block user_area %}
+	<div id="content">
+		{% include 'account.head_vendor_bar.twig' %}
+		<div style="margin-bottom: 50%;" class="mp-Card mp-Card--rounded">
+			<div class="mp-Card-block">
+				<form method="POST" action="{{ route('account.update.store') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<div class="edit-profile-block clear-fix">
+						{% if app.session.get('message') %}
+							<div id="msg-saved-seller" class="mp-Alert mp-Alert--success">
+								<span class="mp-Alert-icon mp-svg-checkmark-circled-white"></span>
+								<div>
+									{{ app.session.get('message') }}
+								</div>
+							</div>
+						{% endif %}
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Terms and Conditions</b>
+							</h3>
+							<span class="help-block">Your store's T&C.</span>
+							<textarea style="height:150px;" class="mp-Textarea " id="terms" name="terms">{{auth_user().terms_conditions}}</textarea>
+						</div>
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Holiday Mode</b>
+							</h3>
+							<span class="help-block">Holiday mode marks all your listings as unavailable for as long as you're away.</span>
+							<div class="mp-Select ">
+								<select class="" name="holiday">
+									<option value="0" {{ auth_user().on_vacation == 0 ? 'selected="selected"' : ''}}>No</option>
+									<option value="1" {{ auth_user().on_vacation == 1 ? 'selected="selected"' : ''}}>Yes</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Accept Bitcoin</b>
+							</h3>
+							<span class="help-block">Old but gold..</span>
+							<div class="mp-Select ">
+								<select class="" name="bitcoin">
+									<option value="0" {{ auth_user().support_bitcoin == 0 ? 'selected="selected"' : ''}}>No</option>
+									<option value="1" {{ auth_user().support_bitcoin == 1 ? 'selected="selected"' : ''}}>Yes</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Accept Monero</b>
+							</h3>
+							<span class="help-block">Recommended payment method</span>
+							<div class="mp-Select ">
+								<select class="" name="monero">
+									<option value="0" {{ auth_user().support_monero == 0 ? 'selected="selected"' : ''}}>No</option>
+									<option value="1" {{ auth_user().support_monero == 1 ? 'selected="selected"' : ''}}>Yes</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Accept Litecoin</b>
+							</h3>
+							<span class="help-block">Much faster than Bitcoin</span>
+							<div class="mp-Select ">
+								<select class="" name="litecoin">
+									<option value="0" {{ auth_user().support_litecoin == 0 ? 'selected="selected"' : ''}}>No</option>
+									<option value="1" {{ auth_user().support_litecoin == 1 ? 'selected="selected"' : ''}}>Yes</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>Bitcoin Multsig 2/3</b>
+							</h3>
+							<span class="help-block">You can upload your key for the Multisig 2/3 </span>
+							<div style="padding: 15px;background-color: #d9edf7;text-align:center;">
+								<a href="/account/multisig">click here to enable Multisig 2/3</a>
+							</div>
+						</div>
+
+						<div class="form-field">
+							<h3 class="heading heading-3">
+								<b>FE Permission :
+									{% if auth_user().has_fe != 1 %}
+										<span style="color:red;">Disabled</span>
+									{% else %}
+										<span style="color:green;">Enabled</span>
+									{% endif %}
+								</b>
+							</h3>
+							<span class="help-block">You currently do not have permission to require FE on your listings
+								<a href="/help/9">Request FE Permission</a>
+							</span>
+						</div>
+
+						<div class="form-field">
+							<button id="confirm-profile" class="primary medium mp-Button mp-Button--primary">
+								<span>Save</span>
+							</button>
+							<a id="cancel-profile" href="/account/edit_profile" class="secondary medium mp-Button mp-Button--secondary">
+								<span>Cancel</span>
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

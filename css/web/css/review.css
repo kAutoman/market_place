@@ -1,0 +1,138 @@
+.user-review-summary {
+    padding-bottom: 32px;
+    padding-top: 32px
+}
+
+.user-review-summary .user-review-summary-score {
+    margin-left: -4px
+}
+
+.user-review-summary h2 {
+    margin-bottom: 8px;
+    margin-top: 0
+}
+
+.user-review-score-summary table {
+    width: 100%
+}
+
+.user-review-score-summary td {
+    border: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: center
+}
+
+.user-review-score-summary td:first-child {
+    text-align: right;
+    width: 10%
+}
+
+.user-review-score-summary td:nth-child(2) {
+    width: 48%;
+}
+
+.user-review-score-summary td:nth-child(3) {
+    padding: 8px;
+    text-align: left;
+    width: 10%
+}
+
+.user-review-score-summary .mp-Chip {
+    padding: 0 8px
+}
+
+@media (max-width:768px) {
+    .user-review-score-summary td:nth-child(2) {
+        width: 60%
+    }
+    .user-review-score-summary td:first-child,
+    .user-review-score-summary td:nth-child(3) {
+        width: 20%
+    }
+}
+
+.user-review-characteristics-aggregate .mp-Tabs-panel {
+    padding-top: 12px;
+    padding-bottom: 16px
+}
+
+.user-review-characteristics-aggregate .mp-Tabs-panel .mp-text-meta {
+    font-family: Roboto, sans-serif;
+    font-family: var(--mp-font-base--light, "Roboto", sans-serif);
+    font-style: normal;
+    font-weight: 300;
+    color: #818a95;
+    color: var(--mp-color-meta-text, #818a95);
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 0;
+    padding-bottom: 12px
+}
+
+.user-review-header {
+    padding: 0
+}
+
+.user-review-header h3 {
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between
+}
+
+.user-review-header .mp-text-meta {
+    font-family: Roboto, sans-serif;
+    font-family: var(--mp-font-base--light, "Roboto", sans-serif);
+    font-style: normal;
+    font-weight: 300;
+    color: #818a95;
+    color: var(--mp-color-meta-text, #818a95);
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 0
+}
+
+.user-review-core {
+    margin-top: 16px
+}
+
+.user-review-core-score {
+    margin-left: -4px
+}
+
+.user-review-core-characteristics {
+    margin-top: -13px;
+}
+
+.user-review-core-characteristics .mp-Chip--action {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.user-review-extended {
+    margin-top: 16px;
+    overflow-wrap: break-word
+}
+
+.user-review-extended aside {
+    background-color: #f0efed;
+    margin-top: 24px;
+    padding: 16px;
+    position: relative
+}
+
+.user-review-extended aside:before {
+    border-color: transparent transparent #f0efed;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    content: "";
+    height: 0;
+    left: 20px;
+    position: absolute;
+    top: -20px;
+    width: 0;
+    z-index: 3000010
+}

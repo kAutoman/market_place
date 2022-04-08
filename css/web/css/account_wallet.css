@@ -1,0 +1,67 @@
+table {
+    width: 50%;
+    text-align: left;
+    border-collapse: collapse;
+
+}
+
+#escrow tr:nth-child(2) {
+    border-bottom: 1px solid gray;
+}
+
+#escrow td:nth-child(1) {
+    font-weight: bold;
+}
+
+#escrow td:nth-child(3) {
+    padding-left:200px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+#page-wrapper {
+    margin-bottom: 0;
+}
+ .show-avg-ratings th{
+ padding: 10px;
+background-color: #0B2A8A;
+color: white;
+}
+
+ .show-avg-ratings td{
+     text-align:center;
+}
+
+.qrcode {
+    display:inline-block;width:200px;height:200px;background-color:#F0F0F0;
+}
+
+.qrcode img {
+    height: 185px; width: 185px; display: block; margin: auto; padding-top: 7px;
+}
+
+.input-disabled {
+width:50%;background-color: #F0F0F0;
+}
+
+.verifyaddress {
+    padding-top: 50px; display: inline-block; position: absolute; top: 220px; right: 25px;
+}
+
+.verifyaddress input {
+width:100%;height:45px;background-color: #F0F0F0;font-weight: bold; white-space: nowrap;	
+}
+
+fieldset {
+    margin-left: 22%;  padding: 30px; width: 50%;
+}
+
+.svg-icon-check1 {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    background: url(../images/check1.png) no-repeat;
+}
+

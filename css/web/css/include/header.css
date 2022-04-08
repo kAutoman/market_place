@@ -1,0 +1,559 @@
+body {
+    margin: 0;
+    font-family: Helvetica, Arial;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #F0EFED;
+    position: relative;
+}
+
+
+.mp-Header-help {
+    border: 0 none;
+    border-bottom: 1px solid #A6784B;
+    background-color: #F2B479;
+    border-radius: 0;
+}
+.mp-Header-Fixed {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 3000011;
+}
+.mp-Header-ribbonTop {
+    height: 5px;
+    background-color: #eda566;
+}
+.mp-Header-navBar {
+    background-color: #fff;
+    color: #116db4;
+    padding: 9px 16px;
+}
+.mp-Header-maxWidth {
+    display:table;
+    margin: 0 auto;
+    max-width: 980px;
+    min-width: 288px;
+    width:100%;
+}
+.mp-Header-logo {
+    float: left;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    height: 33px;
+    width: 170px;
+    margin: 2px 8px 3px -30px;
+    background: url(../../images/logo.png) no-repeat;
+    background-size: auto 100%;
+    background-position: 5.8% 0;
+}
+.mp-Header-links {
+    display: block;
+    float: left;
+    height: 32px;
+    white-space: nowrap;
+    list-style-type: none;
+    margin: 0 0 0 6px;
+    padding: 0;
+}
+.mp-Header-links .mp-Nav-dropdown .mp-Button--flat span {
+    font-family: Helvetica, Arial;
+}  
+.mp-Nav-dropdown-menu>li>a, .mp-Nav-dropdown-menu>li>label, .mp-Nav-pills>li>a, .mp-Nav-pills>li>label {
+    background-color: transparent;
+    border-bottom: 1px solid #f7f7f6;
+    cursor: pointer;
+    display: block;
+    padding: 11px 16px;
+}
+.mp-Nav-dropdown-menu>li>a:focus, .mp-Nav-dropdown-menu>li>a:hover, .mp-Nav-pills>li>a:focus, .mp-Nav-pills>li>a:hover {
+    background-color: #e7f0f7;
+    border-bottom: 1px solid #e7f0f7;
+    color: #1589e3;
+}
+.mp-pull-right {
+    float: right;
+}
+.mp-Header-links>li {
+    float: left;
+    margin-left: 0;
+    list-style: none;
+}
+.mp-Header-links>li>a { 
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    border-radius: 3px;
+    display: block;
+    font-size: 12px;
+    line-height: 18px;
+    outline: 0;
+    overflow: hidden;
+    text-decoration: none;
+    border: 0;
+    padding: 8px 5px 0;
+    height:100%;
+}
+.mp-Header-ribbonBottom {
+    height: 2px;
+    background-color: #f7f7f6;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,.14);
+}
+
+.mp-Header-searchBar.mp-Header {
+    background: #f7f7f6;
+    padding: 15px 16px;
+}
+.mp-SearchForm {
+    width: 100%;
+    margin:0px;
+}
+.mp-SearchFieldset-standard.mp-Header {
+    float: left;
+    width: 25%;
+}
+
+
+.mp-SearchFieldset-standard.mp-Header .mp-SearchForm-query.mp-Header {
+    float: left;
+    width: 100%;
+}
+.mp-SearchFieldset-advanced.mp-Header {
+    width:100%;
+    transition: max-height .2s ease-out;
+    float: left;
+}
+.mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-category.mp-Header {
+    float: left;
+    margin-top: 8px;
+    width: 100%;
+}
+.mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-postcode.mp-Header {
+    float: left;
+    margin-top: 8px;
+    width: 30%;
+}
+.mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-postcode.mp-Header .mp-Input.mp-Header {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-distance.mp-Header {
+    float: left;
+    margin-top: 8px;
+    width: 70%;
+}
+.mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-distance.mp-Header .mp-Select.mp-Header select.mp-Header {
+    border-bottom-left-radius: 0;
+    border-left: 0px;
+    border-top-left-radius: 0;
+}
+.mp-SearchForm-search.mp-Header {
+    color: #116db4;
+    border-left: 0;
+    border-radius: 0 3px 3px 0;
+    min-height: 35px;
+    line-height: 23px;
+    padding: 5px;
+    font-family: Helvetica, Arial;
+    font-size:13px;
+    font-weight: 300;
+}
+.mp-SearchForm-options.mp-Header {
+    overflow: hidden;
+    float: right;
+}
+.mp-Header--expandSearchBar .mp-SearchForm-options.mp-Header {
+    max-height: 60px;
+    transition: max-height .2s ease-out;
+}
+.mp-SearchForm-options.mp-Header label.mp-Header {
+    color: #818a95;
+    display: block;
+    padding: 8px 0 0 8px;
+    cursor: pointer;
+    outline: 0;
+}
+.mp-SearchForm-options.mp-Header input.mp-Header, .mp-Header-0 .mp-SearchForm-options.mp-Header label.mp-Header {
+    color: #818a95;
+    margin: 0 4px 0 2px;
+    cursor: pointer;
+    outline: 0;
+}
+.mp-autocomplete-0 .mp-Input.mp-autocomplete {
+    border-radius: 3px 0 0 3px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+}
+.mp-Header-skirt-content {
+    background: #f7f7f6;
+    display: none;
+    margin-top: -10px;
+    position: relative;
+}
+.mp-Header-skirt-content-cover {
+    display: flex;
+    position: relative;
+}
+.mp-Header-maxWidth:after {
+    clear: both;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-link {
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown {
+    background: #f7f7f6;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,.14);
+    color: initial;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    margin-left: -50px;
+    max-height: 500px;
+    overflow: hidden;
+    padding: 10px 50px;
+    position: absolute;
+    top: 41px;
+    transition: visibility .3s;
+    visibility: hidden;
+    width: 1080px;
+    z-index: 5000010;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown:after {
+    background: linear-gradient(180deg,hsla(40,10%,94%,0),#f7f7f6 50%);
+    content: "";
+    height: 65px;
+    left: 0;
+    position: absolute;
+    top: 455px;
+    width: 100%;
+}
+.mp-Header-skirt-content-link:hover .mp-Header-skirt-content-dropdown {
+    visibility: visible;
+}
+.mp-Header-skirt-content .mp-Header-skirt-header {
+    border-bottom: 1px solid #b6bbc1;
+    margin-top: 12px;
+    padding: 8px 0;
+}
+.mp-Header-skirt-content .mp-Header-skirt-header a {
+    font-family: Helvetica, Arial;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 12px;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-link {
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+.mp-Header-skirt-content-link .mp-TextLink {
+    font-family: Helvetica, Arial;
+    font-size:14px;
+    color: #116db4;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-link:hover {
+    box-shadow: inset 0 -2px 0 #116db4;
+    color: #116db4;
+    cursor: pointer;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-list-container {
+    margin-bottom: 12px;
+    overflow-y: auto;
+}
+.mp-List, .mp-List-wrapper ul {
+    list-style-type: none;
+    padding: 0;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul {
+    padding: 0;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul.mp-List, .mp-List-wrapper .mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul {
+    -webkit-column-count: 3;
+    column-count: 3;
+    position: relative;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul li {
+    list-style: none;
+    margin-bottom: 0;
+    overflow: hidden;
+    padding: 4px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul.mp-Header-skirt-sub-link li {
+    width: 100%;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul.mp-List li, .mp-List-wrapper .mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul li {
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid-column;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown .mp-List-wrapper ul li .mp-Header-skirt-sub-header, .mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul.mp-List li .mp-Header-skirt-sub-header, .mp-List-wrapper .mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul li .mp-Header-skirt-sub-header {
+    font-family: Helvetica, Arial;
+    color: #116db4;
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-left: 10px;
+}
+.mp-Header-skirt-content .mp-Header-skirt-content-dropdown ul a {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+/* simple header */
+#header {
+    display: block;
+    position: relative;
+    z-index: 10000;
+}
+#header-content {
+    border-top: 5px #EDA566 solid;
+    font-size: 14px;
+    line-height: 0.9em;
+    padding: 5px 12px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.14);
+    background-color: white;
+}
+#header-content-wrapper {
+    max-width: 980px;
+    margin: 0 auto;
+}
+#header-links-wrapper {
+    position: relative;
+}
+#header-logo-svg {
+    position: relative;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+}
+#header-logo-svg:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#header-logo-svg img {
+    height:auto;
+}
+#page-messages .mp-Header-links.mp-pull-right>li>a>.mp-Button-badge>span {
+    padding-left:6px;
+}
+/* logged in */
+#loggedin-user-setting:hover .mp-Nav-dropdown-menu {
+    display: block !important;
+}
+/* ------------------------------------------------------------------------------------------------------------------- */
+/*----------------------------------------------------- media query ---------------------------------------------------*/
+/* ------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 345px) {
+    .mp-Header-links .mp-hide-custom--messages {
+        display: none!important;
+    }    
+}
+@media (min-width: 480px) {
+    .optional-label {
+        display: block;
+    }
+    .sub-header {
+        display: block;
+        text-align: center;
+        margin-top: 24px;
+    }
+}
+@media (max-width: 767px){
+    header[data-expanded=false]~main {
+        margin-top: 236px;
+    }
+    .header-illu{
+        display:none;
+    }
+    .mp-Header-links:not(.mp-pull-right) {
+        display: none;
+        list-style-type: none;
+        margin: 0 0 0 6px;
+        overflow: hidden;
+        padding: 0;
+    }
+    .mp-show-md {
+        display: none!important;
+    }
+    .mp-Header--expandSearchBar .mp-SearchFieldset-advanced.mp-Header {
+        max-height: 96px;
+        transition: max-height .3s ease-out;
+    }
+}
+@media (min-width: 768px){
+    .mp-Header {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+    .mp-hide-gte-md {
+        display: none!important;
+    }
+    .mp-Input.mp-Header, .mp-Header-0 .mp-Select.mp-Header select.mp-Header {
+        font-size: 13px;
+        font-weight: 400;
+    }
+    .mp-Form-actions-button--primary {
+        float: right;
+    }
+    .mp-SearchForm-search.mp-Header {
+        width: 5%;
+    }
+    .mp-SearchFieldset-standard.mp-Header {
+        width: 21%;
+    }
+    .mp-SearchFieldset-advanced.mp-Header {
+        max-height: 100%;
+        transition: max-height 0 ease-out;
+        width: 55%;
+    }
+    .mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-category.mp-Header {
+        margin-top: 0;
+        width: 47%;
+    }
+    .mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-category.mp-Header .mp-Select.mp-Header select.mp-Header {
+        border-left: 0;
+        border-radius: 0;
+        border-right: 0;
+    }
+    .mp-Select.mp-Header select.mp-Header {
+        font-size: 13px;
+        font-weight: 400;
+    }
+    .mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-postcode.mp-Header {
+        margin-top: 0;
+        width: 19%;
+    }
+    .mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-postcode.mp-Header .mp-Input.mp-Header {
+        border-radius: 0;
+    }
+    .mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-distance.mp-Header {
+        margin-top: 0;
+        width: 34%;
+    }
+    .mp-SearchFieldset-advanced.mp-Header .mp-SearchForm-distance.mp-Header .mp-Select.mp-Header select.mp-Header {
+        border-radius: 0;
+    }
+    .mp-SearchForm-options {
+        display: none;
+    }
+}
+@media (max-width: 991px) {
+    .mp-hide-lte-md {
+        display: none!important;
+    }
+}
+@media (min-width: 992px){
+    .mp-Header-navBar, .mp-Header-searchBar {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+    .mp-Header .mp-button--callToAction {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .mp-Header .mp-Icon {
+        margin-left: -6px;
+    }
+    .mp-Badge {
+        left: -12px;
+    }
+    .mp-Header-skirt-content {
+        display: block;
+    }
+
+
+}
+
+.cryptocurrency>li {
+    float: left;
+    margin-left: 15px;
+    list-style: none;
+}
+
+.cryptocurrency {
+    margin: 0 -40px 0 6px
+}
+
+.cryptocurrency>li>a {
+    padding: 0; 
+    height: 50px;
+}
+
+
+.header-illu {
+    float: right;
+    height: 35px;
+    padding: 2px 8px;
+    margin: 0 10px;
+    width: 30%;
+}
+
+.dropdown-exchange {
+    overflow: hidden;
+    border:1px solid black;
+}
+
+.dropdown-exchange .dropbtn {
+    font-size: 15px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 9px 16px;
+    background-color: white;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-exchange-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-exchange-content a {
+    margin-top:-5px;
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-exchange:hover .dropbtn {
+    background-color: #555;
+    color: white;
+}
+
+.dropdown-exchange-content a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.dropdown-exchange:hover .dropdown-exchange-content {
+    display: block;
+}
+
+.fa-caret-down{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Caret_down_font_awesome.svg/512px-Caret_down_font_awesome.svg.png");
+    background-size:100% 100% ;
+}

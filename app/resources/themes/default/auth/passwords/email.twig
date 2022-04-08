@@ -1,0 +1,106 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+	<link href="{{ setting('url') }}/web/css/account_reset.css" rel="stylesheet">
+{% endblock %}
+{% block navbar %}
+	<header>
+		<div class="mp-Header-ribbonTop"></div>
+		<div class="mp-Header-navBar">
+			<div class="mp-Header-maxWidth">
+				<a class="mp-Header-logo" href="/" title="Marketplace">Marketplace</a>
+			<ul class="mp-Header-links">
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Community</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">Help en info</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="#"  target="_blank">PGP Key</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="/account/apply_vendor"  target="_blank">Becoming a Vendor</a>
+				</li>
+			</ul>
+				<ul class="mp-Header-links mp-pull-right">
+					<li class="style-scope mp-Header">
+						<a class="mp-Button--flat" data-role="mymp-login" href="/login">
+							<span aria-hidden="true" class="mp-Icon mp-svg-profile style-scope mp-Header"></span>
+							<span class="mp-hide-lte-md style-scope mp-Header">Login</span>
+						</a>
+					</li>
+					<li class="style-scope mp-Header">
+						<a class="mp-Button--flat" data-role="mymp-login" href="/register">
+							<span aria-hidden="true" class="mp-Icon mp-svg-profile style-scope mp-Header"></span>
+							<span class="mp-hide-lte-md style-scope mp-Header">Register</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="mp-Header-ribbonBottom"></div>
+
+	</header>
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper">
+		<div id="content" class="l-page wide-layout">
+			<section id="content">
+				<h1 class="page-header mp-text-header1">Reset Password</h1>
+				<div class="forgot-password-block mp-Card mp-Card--rounded" id="forgot-password-block">
+					<div class="mp-Card-block message-block">
+						{% if errors.has('username') or errors.has('password')  %}
+							<div class="mp-Alert mp-Alert--error">
+								<span class="mp-Alert-icon mp-svg-alert--inverse"></span>
+								<div>
+									<ul>
+										<li>Username or mnemonic is incorrect.</li>
+									</ul>
+								</div>
+							</div>
+						{% endif %}
+						<h2 class="mp-text-header2 sub-header">Please give your username and the mnemonic to reset your account.</h2>
+
+						<div class="mp-Form">
+							<div class="mp-Form-body sdk-custom">
+								<form id="forgot-password-form" method="post" action="{{ route('verify_password') }}">
+                                      {{ csrf_field() }}
+									<div id="forgot-password-form-field-container">
+										<div class="mp-Form-controlGroup">
+											<label class="mp-Form-controlGroup-label" for="new-password">Username</label>
+											<input id="new-password" type="text" name="username" class="mp-Input" tabindex="1">
+										</div>
+									</div>
+									<div id="forgot-password-form-field-container">
+										<div class="mp-Form-controlGroup">
+											<label class="mp-Form-controlGroup-label" for="new-password">Mnemonic</label>
+											<input id="new-password" type="text" name="mnemonic" class="mp-Input" tabindex="1">
+										</div>
+									</div>
+									<div id="forgot-password-form-field-container">
+										<img src="/captcha.html"/>
+										<label class="mp-Form-controlGroup-label optional-label" for="captcha">Captcha</label>
+										<input id="captcha" type="text" placeholder="captcha" name="captcha" class="mp-Input {{ errors.has('captcha') ? ' invalid' : '' }}" tabindex="2">
+										{% if errors.has('captcha') %}
+											<div class="mp-Form-controlGroup-validationMessage mp-Form-controlGroup-validationMessage--error">
+												{{ errors.first('captcha') }}
+											</div>
+										{% endif %}
+									</div>
+								</div>
+								<div class="mp-Form-controlGroup">
+									<input id="forgot-password-button" type="submit" class="mp-Button mp-Button--primary mp-Button--lg" value="Recover now">
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>{% endblock %}
+

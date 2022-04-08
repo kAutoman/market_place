@@ -1,0 +1,20 @@
+		<div class="mp-Tab-bar">
+			<a style="color:#00CED1;" href="/account/orders" class="mp-Tab {{ MetaTag.get('sub_id') == 11 ? 'is-selected' : ''}}">
+				Processing Orders({{processing}})
+			</a>
+			<a style="color:#FF6700;" href="/account/orders/state/1"  class="mp-Tab {{ MetaTag.get('sub_id') == 12 ? 'is-selected' : ''}}">
+				Accepted Orders({{accepted}})
+			</a>
+			<a style="color:blue;" href="/account/orders/state/2" class="mp-Tab {{ MetaTag.get('sub_id') == 13 ? 'is-selected' : ''}}">
+				Shipped Orders({{shipped}})
+			</a>
+			<a style="color:green;" href="/account/orders/state/3"  class="mp-Tab {{ MetaTag.get('sub_id') == 16 ? 'is-selected' : ''}}">
+				Finalized Orders({{finalized}})
+			</a>
+			<a style="color:#FF1717;" href="/account/orders/state/4"  class="mp-Tab {{ MetaTag.get('sub_id') == 15 ? 'is-selected' : ''}}">
+				Disputed Orders({{disputed}})
+			</a>
+			<a style="color:red;" href="/account/orders/state/5"  class="mp-Tab {{ MetaTag.get('sub_id') == 14 ? 'is-selected' : ''}}">
+				Cancelled Orders({{cancelled }}) 
+			</a>
+		</div>

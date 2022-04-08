@@ -1,0 +1,159 @@
+{% extends "layouts.app" %}
+
+{% block css %}
+<link href="/web/css/own_profile_detail.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div id="page-wrapper">
+		<div id="content" class="l-page">
+			{% include 'profile.head-profile.twig' %}
+			<div class="l-main-left">
+				<div class="mp-Card mp-Card--rounded">
+					<div class="mp-Card-block">
+						<h3 class="heading">About us</h3>
+						<div class="dealer-description">
+							{{ profile.bio | convert_encoding('UTF-8', 'HTML-ENTITIES') | bbc2html | xss_clean | striptags('<b>,<i>,<u>,<ul>,<li>,<span>,<h1>') | raw | nl2br }}
+						</div>
+					</div>
+				</div>
+				<div style="margin-top:20px;" class="mp-Card mp-Card--rounded">
+					<div class="mp-Card-block">
+						<h3 class="heading">PGP Key of
+							{{ profile.username }}
+						</h3>
+						<div class="dealer-description">
+							<pre style="word-wrap: break-word; white-space: pre-wrap; line-height: normal;">{{profile.pgp_key}}</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+			<aside class="l-side-right">
+			{% if profile.trader_type == "individual" %}
+				<div class="contact-info mp-Card mp-Card--rounded">
+					<div class="mp-Card-block seller-info">
+						Vendor Information
+					</div>
+					<div class="mp-Card-block mp-Card-block">
+						<ul class="sales">
+							{% if listing.user.markets.count != null %}
+							{% for markets in profile.markets %}
+								{% if markets.market_title == "Silk" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/si.png"/>
+										</div>
+										<span>Silk Road Sales:
+											<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+								{% elseif markets.market_title == "Berlus" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/ber.png"/>
+										</div>
+										<span>Berlusconi Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+								{% elseif markets.market_title == "Dream" %}
+
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/d.png"/>
+										</div>
+										<span>Dream Sales:<b>{{markets.sales}}(<b>
+													<i class="normal">{{markets.rate}}<span class="mp-StarRating mp-StarRating--xs mp-StarRating--5">
+															<i></i>
+														</span>
+													</i>
+												</b>)</b>
+										</span>
+									</li>
+
+
+								{% elseif markets.market_title == "Empire" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/eeim.png"/>
+										</div>
+										<span>Empire Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+
+								{% elseif markets.market_title == "Cryptonia" %}
+
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/cd.png"/>
+										</div>
+										<span>Cryptonia Sales:<b>{{markets.sales}}
+												(<i class="green">{{markets.percentage}}%</i>)</b>
+										</span>
+									</li>
+
+								{% elseif markets.market_title == "Nightmare" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/nih.png"/>
+										</div>
+										<span>Nightmare Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+
+								{% elseif markets.market_title == "Apollon" %}
+									<li>
+										<div class="mp-CompoundIcon mp-CompoundIcon--lg">
+											<img style="height: 32px; width: 32px;" src="/web/images/apol.png"/>
+										</div>
+										<span>Apollon Sales:<b>
+												<i class="green">{{ markets.positive}}</i>/<i class="normal">{{ markets.neutral}}</i>/<i class="red">{{ markets.negatives}}</i>
+											</b>
+										</span>
+									</li>
+
+								{% endif %}
+							{% endfor %}
+							{% else %}
+							<p>This seller has no other ratings from markets</p>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+				{% endif %}
+
+
+				<div class="contact-info mp-Card mp-Card--rounded">
+					<div class="mp-Card-block seller-info">
+						General information
+					</div>
+					<div class="mp-Card-block mp-Card-block">
+						<ul>
+						 {% if profile.trader_type == "individual" %}
+							<li>
+								<span>Disputes:<b>won:<i class="green">{{profile.countDisputeWin()}}</i>/lost:<i class="red">{{profile.countDisputeLoss()}}</i>
+									</b>
+								</span>
+							</li>
+						{% else %}
+						<li>
+								<span>Disputes:<b>won:<i class="green">{{profile.countBuyerDisputeWin()}}</i>/lost:<i class="red">{{profile.countBuyerDisputeLoss()}}</i>
+									</b>
+								</span>
+							</li>
+						{% endif %}
+						</ul>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</div>
+{% endblock %}
+

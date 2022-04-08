@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>≥ {{ MetaTag.get('title') }}</title>
+
+    <link href="{{ setting('url') }}/web/images/icon.png" rel="shortcut icon">
+    <link href="{{ setting('url') }}/web/css/style.css" rel="stylesheet">
+
+    {% block css %}{% endblock %}
+
+</head>
+<body>
+
+    {% block navbar %}
+
+    {% include 'layouts.navbar.twig' %}
+    
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    {% include 'layouts.footer.twig' %}
+    {% endblock %}
+
+</body>
+
+</html>

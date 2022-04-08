@@ -1,0 +1,163 @@
+<header>
+	<div class="mp-Header-ribbonTop"></div>
+	<div class="mp-Header-navBar">
+		<div class="mp-Header-maxWidth">
+			<a class="mp-Header-logo" href="/" title="Marketplace">Marketplace</a>
+			<ul class="mp-Header-links">
+				<li>
+					<a class="mp-Button--flat" href="/help"  target="_blank">Help en info</a>
+				</li>
+				<li>
+					<a class="mp-Button--flat" href="/pgp.txt"  target="_blank">PGP Key</a>
+				</li>
+				{% if auth_user().trader_type != 'individual' %}
+                <li>
+					<a class="mp-Button--flat" href="/account/apply_vendor"  target="_blank">Becoming a Vendor</a>
+				</li>
+                {% endif %}
+				<li>
+					<a class="mp-Button--flat" href="/help"  target="_blank">BTC Multisig</a>
+				</li>
+			</ul>
+			<ul class="mp-Header-links mp-pull-right">
+				<li class="mp-hide-custom--messages style-scope mp-Header">
+					<a class="mp-Button--flat" href="/inbox" title="Berichten">
+						<div class="mp-Button-badge style-scope mp-Header">
+							<span class="mp-Icon mp-svg-messages style-scope mp-Header"></span>
+							<i class="mp-Badge mp-Badge--callToAction style-scope mp-badge">{{auth_user().unread_messages}}</i>
+							<span class="mp-hide-lte-md style-scope mp-Header">Messages</span>
+						</div>
+					</a>
+				</li>
+				<li class="style-scope mp-Header">
+					<a class="mp-Button--flat" href="/notifications" title="Meldingen">
+						<div class="mp-Button-badge style-scope mp-Header">
+							<span class="mp-Icon mp-svg-notification style-scope mp-Header"></span>
+							<i class="mp-Badge mp-Badge--callToAction style-scope mp-badge">{{ auth_user().unreadNotifications.count }}</i>
+							<span class="mp-hide-lte-md style-scope mp-Header">Notifications</span>
+						</div>
+					</a>
+				</li>
+				{% if auth_guest() %}
+					<li class="style-scope mp-Header">
+						<a class="mp-Button--flat" href="/login">
+							<span class="mp-Icon mp-svg-profile style-scope mp-Header"></span>
+							<span class="mp-hide-lte-md style-scope mp-Header">Login</span>
+						</a>
+					</li>
+				{% else %}
+
+					<li id="loggedin-user-setting" class="mp-hide-lte-md style-scope mp-header">
+						<div class="mp-Nav-dropdown style-scope mp-header">
+							<a href="/profile/{{ auth_user().username }}" class="mp-Button mp-Button--flat mp-Button--xs mp-Nav-dropdown-toggle style-scope mp-header">
+								<span class="mp-Icon mp-svg-profile style-scope mp-header"></span>
+								<span class="mp-hide-lte-md style-scope mp-header">{{ auth_user().username }}</span>
+								<span class="mp-Icon mp-Icon--right mp-svg-arrow-down style-scope mp-header"></span>
+							</a>
+							<ul class="mp-Nav-dropdown-menu style-scope mp-header">
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/profile/{{ auth_user().username }}">My Profile</a>
+								</li>
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/account/edit_profile">My Account</a>
+								</li>
+								{% if auth_user().trader_type == 'individual' %}
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/account/listings">My Listings</a>
+								</li>
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/account/orders">My Sales</a>
+								</li>
+								{% endif %}
+                                {% if auth_user().is_admin == 1 %}
+									<li class="style-scope mp-header">
+										<a class="style-scope mp-header" href="/account/disputes/moderator">Unresolved Disputes</a>
+									</li>
+                                {% endif %}
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/account/purchase-history">My Orders</a>
+								</li>							
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/account/wallet">My Wallet</a>
+								</li>
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="/account/favorites">My Favorites</a>
+								</li>
+								<li class="style-scope mp-header">
+									<a class="style-scope mp-header" href="{{ route('logout') }}">Logout</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+					<li class="style-scope mp-Header">
+						<a style="background-color: #116db4; color: white;" class="mp-button--callToAction" href="{{route('listing.creat')}}">
+							<span class="mp-Icon mp-svg-pin-callToAction-foreground style-scope mp-Header"></span>
+							<span class="mp-hide-lte-md style-scope mp-Header">Place listing</span>
+						</a>
+					</li>
+
+				{% endif %}
+
+			</ul>
+		</div>
+	</div>
+	<div class="mp-Header-searchBar style-scope mp-Header">
+		<div class="mp-Header-maxWidth style-scope mp-Header">
+
+			<form style="display: contents;" action="/category/2/search" method="post" accept-charset="utf-8">
+					        {{ csrf_field() }}
+				<button class="mp-Button mp-Button--secondary mp-Button--xs mp-SearchForm-search style-scope mp-Header" type="submit">
+					<span class="mp-Icon mp-svg-search style-scope mp-Header"></span>
+					<span class="mp-show-md style-scope mp-Header"></span>
+				</button>
+				<div class="mp-SearchFieldset-standard style-scope mp-Header">
+					<div class="mp-SearchForm-query style-scope mp-Header">
+						<input class="mp-Input style-scope" placeholder="Search.."  name="title" type="text">
+					</div>
+				</div>
+			</form>
+
+			<div class="dropdown-exchange mp-Header-links mp-pull-right">
+				<button class="dropbtn">{{ GetCurrency() }}
+					<i class="fa fa-caret-down">&nbsp;&nbsp;</i>
+				</button>
+				<div class="dropdown-exchange-content">
+					<a href="/exchanges/USD">USD</a>
+					<a href="/exchanges/EUR">EUR</a>
+					<a href="/exchanges/GBP">GBP</a>
+					<a href="/exchanges/CAD">CAD</a>
+					<a href="/exchanges/AUD">AUD</a>
+					<a href="/exchanges/BRL">BRL</a>
+					<a href="/exchanges/DKK">DKK</a>
+					<a href="/exchanges/NOK">NOK</a>
+					<a href="/exchanges/SEK">SEK</a>
+					<a href="/exchanges/TRY">TRY</a>
+					<a href="/exchanges/CNY">CNY</a>
+					<a href="/exchanges/HKD">HKD</a>
+					<a href="/exchanges/RUB">RUB</a>
+					<a href="/exchanges/INR">INR</a>
+					<a href="/exchanges/JPY">JPY</a>
+				</div>
+			</div>
+
+			<ul class="mp-Header-links mp-pull-right cryptocurrency">
+				<li></li>
+				<li><a href="/account/wallet/btc">BTC<br><span class="btc20"></span>{{auth_guest() ? '∞' : auth_user().btc_balance}}<small>({{ GetBTCPrice(auth_user().btc_balance,GetCurrency()) }})</small></a><li>
+				<li><a href="/account/wallet/xmr">XMR<br><span class="xmr20"></span>{{auth_guest() ? '∞' : auth_user().xmr_balance}}<small>({{ GetLTCPrice(auth_user().xmr_balance,GetCurrency()) }})</small></a><li>
+				<li><a href="/account/wallet/ltc">LTC<br><span class="ltc20"></span>{{auth_guest() ? '∞' : auth_user().ltc_balance}}<small>({{ GetXMRPrice(auth_user().ltc_balance,GetCurrency()) }})</small></a><li>
+				</ul>
+
+			<div style="margin:0" class="header-illu mp-Alert mp-Alert--info-light"><span class="mp-Alert-icon mp-svg-info"></span>
+                <div><span> <a href="/help/5">Learn how to use Bitcoin Multisig</a> </span></div>
+            </div>
+
+
+
+
+				
+		</div>
+	</div>
+
+</header>
+
