@@ -12,7 +12,7 @@ class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -29,7 +29,7 @@ class CategoriesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function create(FormBuilder $formBuilder)
     {
@@ -44,7 +44,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param  Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -53,20 +53,23 @@ class CategoriesController extends Controller
         $data['slug'] = str_slug($request->get('name'));
         $data['order'] = $request->get('order', 1);
         $data['parent_id'] = $request->get('parent_id');
+        $data['pricing_models'] = $request->input('pricing_models');
+
         $category = Category::create( $data );
 		
-		$pricing_models = $request->input('pricing_models');
-		if($pricing_models && is_array($pricing_models)) {
-			$category->pricing_models()->sync($pricing_models);
-		}
-		$this->save_languages();
+//		$pricing_models = $request->input('pricing_models');
+//		if($pricing_models && is_array($pricing_models)) {
+//		    dd($category);
+//			$category->pricing_models()->sync($pricing_models);
+//		}
+//		$this->save_languages();
 
         return redirect()->route('panel.categories.index');
     }
 
     /**
      * Show the specified resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function show()
     {
@@ -75,7 +78,7 @@ class CategoriesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function edit($id, FormBuilder $formBuilder)
     {
@@ -94,7 +97,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      * @param  Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -102,17 +105,17 @@ class CategoriesController extends Controller
         $category->fill($request->all());
         $category->save();
 		
-		$pricing_models = $request->input('pricing_models');
-		if($pricing_models && is_array($pricing_models)) {
-			$category->pricing_models()->sync($pricing_models);
-		}
+//		$pricing_models = $request->input('pricing_models');
+//		if($pricing_models && is_array($pricing_models)) {
+//			$category->pricing_models()->sync($pricing_models);
+//		}
 //		$this->save_languages();
         return redirect()->route('panel.categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
