@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="abe43f64-7580-4a8b-a524-1f6cdc516257" name="Default" comment="" />
+    <list default="true" id="abe43f64-7580-4a8b-a524-1f6cdc516257" name="Default" comment="c">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +35,9 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -178,11 +201,13 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1XR0jVNSrTiFUi6Hsmn2FSG3oEG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -256,12 +281,35 @@
       <workItem from="1648530529188" duration="895000" />
       <workItem from="1649333139785" duration="1056000" />
       <workItem from="1649334247254" duration="781000" />
-      <workItem from="1649431664213" duration="12941000" />
+      <workItem from="1649431664213" duration="17983000" />
     </task>
+    <task id="LOCAL-00001" summary="c">
+      <created>1649451516811</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649451516812</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="c" />
+    <option name="LAST_COMMIT_MESSAGE" value="c" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="5" key="#Plugins" timestamp="1649334210103">
@@ -292,17 +340,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="19" key="editAsTableFormatDialogDimension/0.0.1366.728@0.0.1366.728" timestamp="1648530153645" />
-    <state x="390" y="97" width="636" height="592" key="find.popup" timestamp="1649444616883">
+    <state x="390" y="97" width="636" height="592" key="find.popup" timestamp="1649448157828">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="97" width="636" height="592" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1649444616883" />
+    <state x="390" y="97" width="636" height="592" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1649448157828" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1649436719632">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1649436719632" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1649446560176">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1649447144456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1649446560176" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1649447144456" />
   </component>
 </project>

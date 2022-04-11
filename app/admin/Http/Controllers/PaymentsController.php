@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PaymentProvider;
+use App\Models\ServerCredentials;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -17,7 +18,7 @@ class PaymentsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -32,12 +33,12 @@ class PaymentsController extends Controller
             }
         }*/
 
-        $payment_providers = PaymentProvider::get();
+        $payment_providers = ServerCredentials::get();
 		$enabled_provider_count = $payment_providers->filter(function ($value, $key) {
 			return $value->is_enabled;
 		})->count();
 		
-		Setting::set('payments_enabled', ($enabled_provider_count > 0));
+//		Setting::set('payments_enabled', ($enabled_provider_count > 0));
 //		Setting::save();
 		
         $data['payment_providers'] = $payment_providers;
