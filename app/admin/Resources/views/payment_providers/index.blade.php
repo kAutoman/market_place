@@ -14,7 +14,7 @@
 @endphp
 @section('content')
     <h2>Payment Providers
-        <a href="{{route('panel.payments.create')}}?offline=1" class="btn btn-link btn-xs"><i class="mdi mdi-plus"></i> Add offline payments</a>
+{{--        <a href="{{route('panel.payments.create')}}?offline=1" class="btn btn-link btn-xs"><i class="mdi mdi-plus"></i> Add offline payments</a>--}}
     </h2>
 
     <div class="row mb-5 pb-5">

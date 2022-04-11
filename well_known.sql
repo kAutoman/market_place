@@ -11,7 +11,7 @@
  Target Server Version : 100422
  File Encoding         : 65001
 
- Date: 09/04/2022 04:57:33
+ Date: 11/04/2022 16:58:13
 */
 
 SET NAMES utf8mb4;
@@ -51,65 +51,71 @@ CREATE TABLE `categories`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `pricing_models` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `categories_parent_id_foreign`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (4, 0, 1, 'Weaponry', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (5, 0, 1, 'Counterfeit items', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (6, 0, 1, 'Apparel', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (7, 0, 1, 'Art', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (8, 0, 1, 'Books', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (9, 0, 1, 'Computer equipment', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (10, 0, 1, 'Custom orders', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (11, 0, 1, 'Electronics', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (12, 0, 1, 'Erotica', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (13, 0, 1, 'Drug parahernalia', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (15, 2, 1, 'Henk', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (16, 2, 1, 'Test 1', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (17, 2, 1, 'Test 2', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (18, 2, 1, 'Test 3', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (19, 2, 1, 'Test 3', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (20, 3, 1, 'Testa 1', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (21, 3, 1, 'Testa 2', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (22, 3, 1, 'Testa 3', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (23, 3, 1, 'Testa 3', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (25, 4, 1, 'Testb 2', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (26, 4, 1, 'Testb 3', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (27, 4, 1, 'Testb 3', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (28, 5, 1, 'Testa 1c', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (29, 54, 1, 'Testa 2c', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (30, 5, 1, 'Testa 3c', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (31, 5, 1, 'Testa 3c', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (32, 6, 1, 'Testa 1d', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (33, 6, 1, 'Testa 2d', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (34, 6, 1, 'Testa 3d', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (35, 6, 1, 'Testa 3d', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (36, 7, 1, 'Testa 1e', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (37, 7, 1, 'Testa 2e', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (38, 7, 1, 'Testa 3e', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (39, 7, 1, 'Testa 3e', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (40, 12, 2, 'Automan', NULL, '2022-04-08 16:37:20', NULL, NULL);
-INSERT INTO `categories` VALUES (41, 8, 1, 'Testa 2f', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (42, 8, 1, 'Testa 3f', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (43, 8, 1, 'Testa 3f', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (44, 9, 1, 'Testa 1g', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (45, 9, 1, 'Testa 2g', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (46, 9, 1, 'Testa 3g', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (47, 9, 1, 'Testa 3g', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (48, 10, 1, 'Testa 1h', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (49, 10, 1, 'Testa 2h', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (50, 10, 1, 'Testa 3h', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (51, 10, 1, 'Testa 3h', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (52, 11, 1, 'Testa 1i', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (53, 12, 1, 'Testa 2j', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (54, 13, 1, 'Testa 3k', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (56, 15, 1, 'Fuckyou9', NULL, NULL, NULL, NULL);
-INSERT INTO `categories` VALUES (57, 23, 1, 'Vladimir Yashin', '2022-04-08 16:53:03', '2022-04-08 16:53:03', NULL, 'vladimir-yashin');
-INSERT INTO `categories` VALUES (58, 23, 1, 'Vladimir Yashin', '2022-04-08 16:53:52', '2022-04-08 16:53:52', NULL, 'vladimir-yashin');
+INSERT INTO `categories` VALUES (4, 0, 1, 'Weaponry', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (5, 0, 1, 'Counterfeit items', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (6, 0, 1, 'Apparel', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (7, 0, 1, 'Art', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (8, 0, 1, 'Books', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (9, 0, 1, 'Computer equipment', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (10, 0, 1, 'Custom orders', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (11, 0, 1, 'Electronics', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (12, 0, 1, 'Erotica', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (13, 0, 1, 'Drug parahernalia', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (15, 2, 1, 'Henk', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (16, 2, 1, 'Test 1', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (17, 2, 1, 'Test 2', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (18, 2, 1, 'Test 3', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (19, 2, 1, 'Test 3', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (20, 3, 1, 'Testa 1', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (21, 3, 1, 'Testa 2', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (22, 3, 1, 'Testa 3', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (23, 3, 1, 'Testa 3', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (25, 4, 1, 'Testb 00', NULL, '2022-04-10 23:44:18', NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (26, 4, 1, 'Testb 3', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (27, 4, 1, 'Testb 300', NULL, '2022-04-10 23:44:27', NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (28, 5, 1, 'Testa 1c', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (29, 54, 1, 'Testa 2c', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (30, 5, 1, 'Testa 3c', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (31, 5, 1, 'Testa 3c', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (32, 6, 1, 'Testa 1d', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (33, 6, 1, 'Testa 2d', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (34, 6, 1, 'Testa 3d', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (35, 6, 1, 'Testa 3d', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (36, 7, 1, 'Testa 1e', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (37, 7, 1, 'Testa 2e', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (38, 7, 1, 'Testa 3e', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (39, 7, 1, 'Testa 3e', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (40, 12, 2, 'Automan', NULL, '2022-04-08 16:37:20', NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (41, 8, 1, 'Testa 2f', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (42, 8, 1, 'Testa 3f', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (43, 8, 1, 'Testa 3f', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (44, 9, 1, 'Testa 1g', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (45, 9, 1, 'Testa 2g', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (46, 9, 1, 'Testa 3g', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (47, 9, 1, 'Testa 3g', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (48, 10, 1, 'Testa 1h', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (49, 10, 1, 'Testa 2h', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (50, 10, 1, 'Testa 3h', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (51, 10, 1, 'Testa 3h', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (52, 11, 1, 'Testa 1i', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (53, 12, 1, 'Testa 2j', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (54, 13, 1, 'Testa 3k', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (56, 15, 1, 'Fuckyou9', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `categories` VALUES (57, 23, 1, 'Vladimir Yashin', '2022-04-08 16:53:03', '2022-04-08 16:53:03', NULL, 'vladimir-yashin', NULL);
+INSERT INTO `categories` VALUES (58, 23, 1, 'Vladimir Yashin', '2022-04-08 16:53:52', '2022-04-08 16:53:52', NULL, 'vladimir-yashin', NULL);
+INSERT INTO `categories` VALUES (59, 6, 1, 'new_category', '2022-04-11 03:43:37', '2022-04-11 03:43:37', NULL, 'new-category', NULL);
+INSERT INTO `categories` VALUES (60, 37, 1, 'Vladimir Yashin', '2022-04-11 03:44:33', '2022-04-11 03:44:33', NULL, 'vladimir-yashin', NULL);
+INSERT INTO `categories` VALUES (61, 5, 1, 'Vladimir Yashin', '2022-04-11 04:30:32', '2022-04-11 04:30:32', NULL, 'vladimir-yashin', NULL);
+INSERT INTO `categories` VALUES (62, 5, 1, 'Vladimir Yashin', '2022-04-11 04:31:09', '2022-04-11 04:31:09', NULL, 'vladimir-yashin', NULL);
+INSERT INTO `categories` VALUES (63, 5, 1, 'Vladimir Yashin', '2022-04-11 04:35:40', '2022-04-11 04:35:40', NULL, 'vladimir-yashin', NULL);
 
 -- ----------------------------
 -- Table structure for comments
@@ -661,7 +667,7 @@ CREATE TABLE `ltm_translations`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ltm_translations
@@ -713,6 +719,9 @@ INSERT INTO `ltm_translations` VALUES (44, 0, 'en', '_json', 'Vladimir Yashin', 
 INSERT INTO `ltm_translations` VALUES (45, 0, 'en', '_json', 'Automan', NULL, '2022-04-08 16:53:05', '2022-04-08 16:53:05');
 INSERT INTO `ltm_translations` VALUES (46, 0, 'en', '_json', 'wqd', NULL, '2022-04-08 17:52:17', '2022-04-08 17:52:17');
 INSERT INTO `ltm_translations` VALUES (47, 0, 'en', '_json', '_plural', NULL, '2022-04-08 17:52:17', '2022-04-08 17:52:17');
+INSERT INTO `ltm_translations` VALUES (48, 0, 'en', '_json', 'Testb 00', NULL, '2022-04-11 03:44:33', '2022-04-11 03:44:33');
+INSERT INTO `ltm_translations` VALUES (49, 0, 'en', '_json', 'Testb 300', NULL, '2022-04-11 03:44:33', '2022-04-11 03:44:33');
+INSERT INTO `ltm_translations` VALUES (50, 0, 'en', '_json', 'new_category', NULL, '2022-04-11 03:44:33', '2022-04-11 03:44:33');
 
 -- ----------------------------
 -- Table structure for messages
@@ -1123,15 +1132,18 @@ CREATE TABLE `server_credentials`  (
   `password` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `host` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `port` int(15) NOT NULL,
+  `logo` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `is_enabled` int(2) NOT NULL DEFAULT 1,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of server_credentials
 -- ----------------------------
-INSERT INTO `server_credentials` VALUES (1, 1, 'user', 'pass', '1270.0.0.1', 18332);
-INSERT INTO `server_credentials` VALUES (2, 2, 'user', 'pass', '127.0.0.1', 19332);
-INSERT INTO `server_credentials` VALUES (3, 3, 'user', 'pass', '127.0.0.1', 28083);
+INSERT INTO `server_credentials` VALUES (1, 1, 'root', 'test', '127.0.0.1', 18332, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkTVOILDJ9tcRtPDPBZkMc_cBfr0YZ9v4obQ&usqp=CAU', 1, '2022-04-11 07:57:43');
+INSERT INTO `server_credentials` VALUES (2, 2, 'user', 'pass', '127.0.0.1', 19332, 'data:image/jpeg;base64,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', 1, NULL);
+INSERT INTO `server_credentials` VALUES (3, 3, 'user', 'pass', '127.0.0.1', 28083, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZcv3WqH8jokMG7MlUGSrdTwpOCL5q4mjg3A&usqp=CAU', 1, NULL);
 
 -- ----------------------------
 -- Table structure for settings
@@ -1296,7 +1308,7 @@ INSERT INTO `users` VALUES (47, NULL, 'newuser', NULL, NULL, 'buyer', '/web/imag
 INSERT INTO `users` VALUES (48, NULL, 'hi99', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, 'asodas', 0.0161584, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2020-01-27 20:29:52', '2020-01-28 04:29:52', '2020-01-28 05:13:10', NULL, NULL, 0, 0, 1, 'name fiction entry hunt bomb special egg detect cereal symptom lunch reveal', NULL, NULL, 0);
 INSERT INTO `users` VALUES (49, NULL, 'newdemos', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '963852', 0, 0, 0, NULL, NULL, NULL, '18JERgZHtoAnRxPoeYnaaCcnbgPX6T3yWt', '18JERgZHtoAnRxPoeYnaaCcnbgPX6T3yWt', '18JERgZHtoAnRxPoeYnaaCcnbgPX6T3yWt', 'USD', 0, '2020-01-27 20:30:21', '2020-01-28 04:30:21', '2020-01-28 04:59:54', NULL, NULL, 0, 0, 1, 'physical boss traffic grid relax employ nut hour result cable loop focus', NULL, NULL, 0);
 INSERT INTO `users` VALUES (50, NULL, 'codeless', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '181050', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-03-19 06:45:26', '2022-03-19 15:43:44', '2022-03-19 15:45:26', NULL, NULL, 0, 0, 0, 'police daughter couch school armor game matter lucky behind seed vague solution', NULL, NULL, 0);
-INSERT INTO `users` VALUES (51, NULL, 'admin', NULL, NULL, 'admin', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 1, '181050', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-04-08 19:42:20', '2022-03-19 22:33:24', '2022-04-08 19:42:20', NULL, NULL, 0, 0, 1, 'sure notable domain latin identify hockey strategy aspect stool rookie orange green', NULL, NULL, 0);
+INSERT INTO `users` VALUES (51, NULL, 'admin', NULL, NULL, 'admin', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 1, '181050', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-04-11 07:42:03', '2022-03-19 22:33:24', '2022-04-11 07:42:03', NULL, NULL, 0, 0, 1, 'sure notable domain latin identify hockey strategy aspect stool rookie orange green', NULL, NULL, 0);
 INSERT INTO `users` VALUES (52, NULL, 'KENGERP', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123456', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-03-19 22:07:29', '2022-03-20 07:05:33', '2022-03-20 07:07:29', NULL, NULL, 0, 0, 0, 'farm void arm company ride top gasp chuckle swift radar topic syrup', NULL, NULL, 0);
 INSERT INTO `users` VALUES (53, NULL, 'antilian', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123456', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, NULL, '2022-03-20 07:20:04', '2022-03-20 07:20:04', NULL, NULL, 0, 0, 0, 'endless blue cluster depth engage minimum verb object chalk love ritual critic', NULL, NULL, 0);
 INSERT INTO `users` VALUES (54, NULL, 'Admin68', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, 'D12345', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, NULL, '2022-03-20 15:45:36', '2022-03-20 15:45:36', NULL, NULL, 0, 0, 0, 'olive fury shed giraffe grunt century dinner add foam market embark sound', NULL, NULL, 0);
@@ -1316,7 +1328,7 @@ INSERT INTO `users` VALUES (67, NULL, 'Kadmin', NULL, NULL, 'individual', '/web/
 INSERT INTO `users` VALUES (68, NULL, 'kautoman99923@gmail.com', NULL, NULL, 'individual', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, 'BG2WjK', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, NULL, '2022-03-28 07:09:26', '2022-03-28 07:09:26', NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0);
 INSERT INTO `users` VALUES (69, NULL, 'root1234@gmail.com', NULL, NULL, 'individual', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123123', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, NULL, '2022-03-28 10:12:03', '2022-03-28 10:12:03', NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0);
 INSERT INTO `users` VALUES (70, NULL, 'test@test.com', NULL, NULL, 'individual', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123123', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, NULL, '2022-04-07 20:10:20', '2022-04-07 20:10:20', NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0);
-INSERT INTO `users` VALUES (71, NULL, 'json@test.com', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123123', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-04-07 20:11:39', '2022-04-07 20:11:39', '2022-04-07 20:11:53', NULL, NULL, 0, 0, 1, 'move into violin cruel machine recipe december spirit chat gaze melt between', NULL, NULL, 0);
+INSERT INTO `users` VALUES (71, NULL, 'json@test.com', NULL, NULL, 'buyer', '/web/images/noavatar.png', '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123123', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-04-11 03:42:36', '2022-04-07 20:11:39', '2022-04-11 03:42:36', NULL, NULL, 0, 0, 1, 'move into violin cruel machine recipe december spirit chat gaze melt between', NULL, NULL, 0);
 INSERT INTO `users` VALUES (72, NULL, 'adam', NULL, NULL, 'buyer', NULL, '$2y$10$.92CWICxXxWDw.9maSgKUu/.xnrH25wULYaTLGy/p.xkTMZhYbyhS', 'en', 0, 0, '123123', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'USD', 0, '2022-04-08 19:39:03', '2022-04-07 21:53:01', '2022-04-08 19:39:15', NULL, NULL, 0, 0, 1, 'solar guard must visa tape museum arrow flat fashion jealous system maple', NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

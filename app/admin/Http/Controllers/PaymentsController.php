@@ -99,9 +99,9 @@ class PaymentsController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($payment_provider, FormBuilder $formBuilder)
+    public function edit($id, FormBuilder $formBuilder)
     {
-		$payment_provider = PaymentProvider::find($payment_provider);
+		$payment_provider = ServerCredentials::find($id);
 		
 		$data = [];
 		$data['payment_provider'] = $payment_provider;
@@ -116,55 +116,28 @@ class PaymentsController extends Controller
     /**
      * Update the specified resource in storage.
      * @param  Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id, Request $request)
     {
-        $payment_provider = PaymentProvider::find($id);
+        $payment_provider = ServerCredentials::find($id);
 
-		if($payment_provider->required_keys) {
-			foreach($payment_provider->required_keys as $required_key) {
-				$value = $request->input($required_key);
-				if($payment_provider->secret_keys && in_array($required_key, $payment_provider->secret_keys)) {
-					$value = \Crypt::encryptString($value);
-				}
-				$payment_provider->extra_attributes[$required_key] = $value;
-			}
-        }
-		$payment_provider->name = $request->input('name');
-		$payment_provider->display_name = $request->input('display_name');
-        $payment_provider->icon = $request->input('icon');
-        $payment_provider->description = $request->input('description');
-        $payment_provider->payment_instructions = $request->input('payment_instructions');
-        $payment_provider->is_enabled = $request->input('is_enabled');
+		$payment_provider->username = $request->input('username');
+		$payment_provider->password = $request->input('password');
+        $payment_provider->host = $request->input('host');
+        $payment_provider->port = $request->input('port');
         $payment_provider->save();
-		
-		if($payment_provider->key == 'stripe') {
-			if($request->input('secret_key'))
-				Setting::set('stripe_secret_key', Crypt::encryptString($request->input('secret_key')));				
-			
-			if($request->input('publishable_key'))
-				Setting::set('stripe_publishable_key', $request->input('publishable_key'));
-			Setting::save();
-		}		
-		if($payment_provider->key == 'paypal_split') {
-			Setting::set('paypal_enabled', $request->input('is_enabled'));
-			Setting::save();
-		}
-		
 
         return redirect()->route('panel.payments.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($listing)
     {
         $listing->delete();
-
-
         return redirect()->route('panel.listings.index');
     }
 }
