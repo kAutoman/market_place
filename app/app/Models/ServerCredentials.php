@@ -16,4 +16,6 @@ class ServerCredentials extends Model
 
     protected $table = 'server_credentials';
 
+    protected $fillable = ['is_enabled'];
+
 }

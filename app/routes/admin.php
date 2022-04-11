@@ -11,6 +11,7 @@ Route::group(['as' => 'panel.', 'prefix' => 'panel', 'middleware' => ['web', 'ro
     Route::resource('menu', 'MenuController');
     Route::any('/settings/remove', 'SettingsController@remove')->name('settings.remove');
     Route::resource('payments', 'PaymentsController');
+    Route::get('/changePaymentStatus/{id}','PaymentsController@changeStatus');
     Route::resource('settings', 'SettingsController');
     Route::resource('orders', 'OrdersController');
     Route::resource('home', 'HomeController');

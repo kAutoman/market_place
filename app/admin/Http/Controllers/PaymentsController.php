@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Models\Listing;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Modules\Panel\Forms\PaymentForm;
 use Crypt;
@@ -129,6 +130,19 @@ class PaymentsController extends Controller
         $payment_provider->save();
 
         return redirect()->route('panel.payments.index');
+    }
+
+    public function changeStatus($id){
+        $record = ServerCredentials::find($id);
+        $updateStatus = 0;
+        if($record->is_enabled){
+            $updateStatus = 0;
+        }
+        else {
+            $updateStatus = 1;
+        }
+        ServerCredentials::find($id)->update(['is_enabled'=>$updateStatus]);
+        return redirect()->back();
     }
 
     /**

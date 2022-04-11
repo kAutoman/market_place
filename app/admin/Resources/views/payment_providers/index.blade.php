@@ -40,7 +40,7 @@
                         <p class="small text-muted">Hostname/port : {{$payment_provider->host}} / {{$payment_provider->port}}</p>
                         <a href="/panel/payments/{{$payment_provider->id}}/edit" class="btn btn-primary btn-sm">Enter payment details <i class="fa fa-angle-right" aria-hidden="true"></i>
                         </a>
-                        <a href="/panel/payments/{{$payment_provider->id}}/edit" class="btn btn-primary btn-sm">{{$payment_provider->is_enabled? 'Disable' : 'Enable'}} <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <a href="/panel/changePaymentStatus/{{$payment_provider->id}}" class="btn btn-primary btn-sm">{{$payment_provider->is_enabled? 'Disable' : 'Enable'}} <i class="fa fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <br />
                         <br />
